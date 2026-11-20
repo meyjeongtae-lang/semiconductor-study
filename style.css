@@ -1,0 +1,33 @@
+:root{--fg:#1f2328;--muted:#5b6470;--bg:#ffffff;--card:#f6f7f9;--border:#d8dce1;--accent:#185FA5;--accent-bg:#E6F1FB;--accent-border:#85B7EB;--hl:#FF8A00}
+@media (prefers-color-scheme:dark){:root{--fg:#e6e8eb;--muted:#a0a8b3;--bg:#16181c;--card:#1f2227;--border:#343941;--accent:#85B7EB;--accent-bg:#1d2f45;--accent-border:#378ADD}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.8;font-size:16px}
+main{max-width:760px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:26px;font-weight:600;margin:8px 0 6px;line-height:1.35}
+h2{font-size:20px;font-weight:600;margin:40px 0 8px;line-height:1.4}
+h3{font-size:17px;font-weight:600;margin:24px 0 6px}
+p{margin:10px 0}
+a{color:var(--accent)}
+.nav{font-size:14px;margin:0}
+.lead{color:var(--muted);font-size:17px}
+code{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-size:.92em}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--card);font-weight:600}
+.note{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:16px 0;font-size:15px}
+.fig{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin:18px 0}
+.fig svg{display:block;width:100%;height:auto}
+.fig button{font:inherit;font-size:13px;padding:4px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer}
+.fig button:disabled{opacity:.4;cursor:default}
+.fig .row{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px;align-items:center}
+.fig .lab{font-size:13px;color:var(--muted)}
+.fig .cap{font-size:15px;line-height:1.65;min-height:5.4em;margin-top:2px}
+.fig .legend{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.6}
+.ts{font-size:12px;fill:var(--muted)}
+.th{font-size:14px;font-weight:600;fill:var(--fg)}
+.list{list-style:none;padding:0;margin:16px 0}
+.list li{border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:10px 0;background:var(--card)}
+.list a{font-weight:600;text-decoration:none}
+.list .sub{color:var(--muted);font-size:14px;margin-top:2px}
+.soon{opacity:.55}

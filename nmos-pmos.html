@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NMOS와 PMOS | 반도체 회로 쉽게 이해하기</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<p class="nav"><a href="index.html">← 목차</a></p>
+<h1>NMOS와 PMOS</h1>
+<p class="lead">트랜지스터를 "게이트 전압으로 켜고 끄는 스위치"로 이해하는 페이지입니다.</p>
+
+<h2>먼저 약속 두 가지</h2>
+<ul>
+<li><b>1 = 높은 전압</b> (전원 VDD 근처), <b>0 = 낮은 전압</b> (GND, 0 V 근처)</li>
+<li>스위치가 <b>켜졌다(ON)</b> = 두 단자가 <b>연결</b>됐다, <b>꺼졌다(OFF)</b> = <b>끊겼다</b></li>
+</ul>
+
+<h2>MOS 트랜지스터의 구조</h2>
+<p>단자는 세 개입니다. <b>소스(S)</b>와 <b>드레인(D)</b>은 전류가 드나드는 양쪽 끝이고, <b>게이트(G)</b>는 스위치를 켜고 끄는 단자입니다. 게이트는 아래의 기판과 얇은 절연막(산화막)으로 막혀 있어서, 전류가 들어가지 못하고 <b>전압(전기장)만 전달</b>합니다.</p>
+<p>소스와 드레인 사이에는 평소에 길이 없습니다. 게이트에 알맞은 전압을 가하면 게이트 바로 아래에 길이 생기고, 이 길을 <b>채널</b>이라고 부릅니다.</p>
+
+<h2>그림으로 한 단계씩</h2>
+<p>"다음"을 눌러 한 단계씩 넘겨 보세요. 단계마다 <b>주황색</b>으로 표시된 부분만 새로 바뀐 것입니다.</p>
+
+<div class="fig" id="mo">
+<div class="row"><span class="lab">종류</span><button data-sc="n">NMOS</button><button data-sc="p">PMOS</button></div>
+<svg viewBox="0 0 680 330" role="img" aria-label="NMOS와 PMOS의 단면. 게이트 전압에 따라 게이트 아래에 채널이 생기면 소스와 드레인이 연결된다.">
+<text class="th" x="165" y="26" text-anchor="middle">소스 S</text>
+<text class="th" x="340" y="26" text-anchor="middle">게이트 G</text>
+<text class="th" x="515" y="26" text-anchor="middle">드레인 D</text>
+<line x1="165" y1="70" x2="165" y2="170" stroke="var(--fg)" stroke-width="2"/>
+<line x1="340" y1="70" x2="340" y2="118" stroke="var(--fg)" stroke-width="2"/>
+<line x1="515" y1="70" x2="515" y2="170" stroke="var(--fg)" stroke-width="2"/>
+<rect id="body" x="60" y="170" width="560" height="110" stroke-width="1"/>
+<rect id="sS" x="110" y="170" width="110" height="50" stroke-width="1"/>
+<rect id="sD" x="460" y="170" width="110" height="50" stroke-width="1"/>
+<rect x="220" y="158" width="240" height="12" fill="#B4B2A9" fill-opacity="0.7" stroke="#888780" stroke-width="1"/>
+<rect id="gate" x="220" y="118" width="240" height="40" fill="#E24B4A" fill-opacity="0.8" stroke="#A32D2D" stroke-width="1"/>
+<text class="ts" x="340" y="136" text-anchor="middle" style="fill:#fff">poly 게이트</text>
+<g id="gcs"></g>
+<rect id="ch" x="220" y="170" width="240" height="12" fill="#378ADD" fill-opacity="0.85" stroke="#185FA5" stroke-width="1"/>
+<g id="chs"></g>
+<g id="car"></g>
+<polygon id="arr" points="240,196 418,196 418,187 446,200 418,213 418,204 240,204" stroke-linejoin="round"/>
+<text id="arrT" class="ts" x="340" y="224" text-anchor="middle">전자 이동</text>
+<text id="tS" class="ts" x="165" y="213" text-anchor="middle">n+</text>
+<text id="tD" class="ts" x="515" y="213" text-anchor="middle">n+</text>
+<text id="tB" class="ts" x="72" y="272">p형 기판</text>
+<circle id="cS" cx="165" cy="56" r="14" stroke-width="1.5"/>
+<text id="nS" class="th" x="165" y="61" text-anchor="middle" style="fill:#fff">0</text>
+<circle id="cG" cx="340" cy="56" r="14" stroke-width="1.5"/>
+<text id="nG" class="th" x="340" y="61" text-anchor="middle" style="fill:#fff">0</text>
+<circle id="cD" cx="515" cy="56" r="14" stroke-width="1.5"/>
+<text id="nD" class="th" x="515" y="61" text-anchor="middle" style="fill:#fff">0</text>
+<text id="tSt" class="th" x="340" y="306" text-anchor="middle">소스와 드레인: 끊김</text>
+</svg>
+<div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
+<div id="cap" class="cap" aria-live="polite"></div>
+<div class="legend">+ 는 정공, − 는 전자입니다. 파란 띠는 채널(연결된 길), 주황은 이번 단계에서 바뀐 부분입니다. 숫자는 각 단자의 전압(1 = 높음, 0 = 낮음)입니다.</div>
+</div>
+
+<h2>NMOS와 PMOS 비교</h2>
+<p>둘은 구조가 거울상입니다. 모든 단계는 "게이트의 전하가 반대 전하를 끌어당기고, 같은 전하를 밀어낸다"는 하나의 원리로 설명됩니다.</p>
+<table>
+<tr><th></th><th>NMOS</th><th>PMOS</th></tr>
+<tr><td>소스, 드레인</td><td>n+ (전자가 많음)</td><td>p+ (정공이 많음)</td></tr>
+<tr><td>사이 영역</td><td>p형 기판</td><td>n형 웰</td></tr>
+<tr><td>켜는 방법</td><td>게이트를 <b>높게</b></td><td>게이트를 <b>낮게</b> (소스보다)</td></tr>
+<tr><td>게이트에 모이는 전하</td><td>+</td><td>−</td></tr>
+<tr><td>채널을 만드는 입자</td><td>전자</td><td>정공</td></tr>
+</table>
+
+<h2>소스는 어느 쪽인가</h2>
+<p>소스는 <b>채널을 흐르는 입자가 출발하는 쪽 단자</b>입니다.</p>
+<ul>
+<li><b>NMOS</b>: 입자가 전자이고 전자는 전압이 낮은 쪽에서 높은 쪽으로 움직이므로, 두 단자 중 <b>전압이 낮은 쪽</b>이 소스입니다.</li>
+<li><b>PMOS</b>: 입자가 정공이고 정공은 전압이 높은 쪽에서 낮은 쪽으로 움직이므로, 두 단자 중 <b>전압이 높은 쪽</b>이 소스입니다.</li>
+</ul>
+<p>인버터 같은 기본 회로에서는 NMOS 소스가 GND에, PMOS 소스가 VDD에 연결됩니다. 하지만 직렬로 쌓은 트랜지스터나 SRAM의 접근 트랜지스터처럼 소스와 드레인의 역할이 바뀌는 경우도 있어서, "GND/VDD에 연결된 쪽"이 아니라 <b>전압으로 정해진다</b>고 기억하는 것이 정확합니다.</p>
+
+<h2>그림에서 단순화한 것</h2>
+<div class="note">
+<ul style="margin:0;padding-left:20px">
+<li>게이트 전압이 일정 값(문턱전압, Vth)을 넘어야 채널이 생기는데, 그림에서는 "1이 되면 생긴다"로 줄였습니다.</li>
+<li>채널은 게이트 아래에 균일하게 그렸지만, 실제로는 드레인 쪽이 좁아지는 등 모양이 달라집니다.</li>
+<li>밀려난 정공(전자)은 개수는 그대로이고 위치만 깊은 쪽으로 옮겨 가는 것으로 그렸습니다. 실제 기판에서는 표면에 움직이지 못하는 이온이 남는 공핍층도 생깁니다.</li>
+<li>기판과 웰을 GND, VDD에 묶는 연결은 생략했습니다.</li>
+</ul>
+</div>
+
+<p class="nav" style="margin-top:36px"><a href="index.html">← 목차로</a></p>
+</main>
+
+<script>
+(function(){
+var root=document.getElementById('mo');
+function $(i){return root.querySelector('#'+i)}
+var HI='#378ADD',ON='#FF8A00',AR='#185FA5';
+function S(c,g,s,d,gc,ch,fl,f){return {c:c,g:g,s:s,d:d,gc:gc,ch:ch,fl:fl,f:f}}
+var CFG={
+n:{body:['#EF9F27','0.22','#854F0B'],sd:['#97C459','0.6','#3B6D11'],sdSign:'−',bodySign:'+',chSign:'−',gcSign:'+',tS:'n+',tD:'n+',tB:'p형 기판',arrT:'전자 이동',
+steps:[
+S('NMOS의 단면입니다. 소스와 드레인은 전자(−)가 많은 n+ 영역이고, 그 사이의 기판은 정공(+)이 많은 p형입니다. 게이트 전압이 0이라 소스와 드레인 사이는 끊겨 있습니다.',0,0,0,0,0,0,[]),
+S('드레인에 높은 전압(1)을 걸어도 전자는 지나가지 못합니다. 사이에 있는 p형 영역이 길을 막고 있기 때문입니다. 끊김(OFF) 상태입니다.',0,0,1,0,0,0,['cD']),
+S('게이트에 높은 전압(1)을 가합니다. 게이트 쪽에 + 전하가 모입니다. 전하는 얇은 절연막을 뚫고 지나가지 못하고, 전기장만 아래로 전달됩니다.',1,0,1,1,0,0,['cG','gate']),
+S('게이트의 + 전하가 기판 표면의 정공(+)을 아래쪽으로 밀어냅니다. 개수가 줄어드는 것이 아니라 위치만 깊은 쪽으로 옮겨 갑니다. 대신 전자(−)는 끌려와서 게이트 바로 아래에 모이고, 이 길이 채널입니다.',1,0,1,1,1,0,['ch']),
+S('채널이 소스의 n+와 드레인의 n+를 이어 줍니다. 전자가 소스에서 드레인 쪽으로 움직입니다. 연결(ON) 상태입니다. 전류의 방향은 전자와 반대인 드레인에서 소스입니다.',1,0,1,1,1,1,['arr']),
+S('게이트를 다시 0으로 내리면 + 전하가 사라지고 채널의 전자도 흩어져서 길이 없어집니다. 밀려났던 정공은 제자리로 돌아오고, 다시 끊김(OFF)입니다.',0,0,1,0,0,0,['cG'])]},
+p:{body:['#5DCAA5','0.28','#0F6E56'],sd:['#EF9F27','0.6','#854F0B'],sdSign:'+',bodySign:'−',chSign:'+',gcSign:'−',tS:'p+',tD:'p+',tB:'n형 웰',arrT:'정공 이동',
+steps:[
+S('PMOS의 단면입니다. 소스와 드레인은 정공(+)이 많은 p+ 영역이고, 그 사이는 전자(−)가 많은 n형 웰입니다. 소스는 VDD(1)에 연결돼 있고 게이트도 1이라 소스와 같은 전압입니다. 끊겨 있습니다.',1,1,1,0,0,0,[]),
+S('드레인을 낮은 전압(0)으로 해도 정공은 지나가지 못합니다. 사이에 있는 n형 영역이 길을 막고 있기 때문입니다. 끊김(OFF) 상태입니다.',1,1,0,0,0,0,['cD']),
+S('게이트를 0으로 내립니다. 소스(1)보다 게이트 전압이 낮아져서 게이트 쪽에 − 전하가 모입니다.',0,1,0,1,0,0,['cG','gate']),
+S('게이트의 − 전하가 웰 표면의 전자(−)를 아래쪽으로 밀어냅니다. 개수가 줄어드는 것이 아니라 위치만 깊은 쪽으로 옮겨 갑니다. 대신 정공(+)은 끌려와서 게이트 바로 아래에 모이고, 이 길이 채널입니다.',0,1,0,1,1,0,['ch']),
+S('채널이 소스의 p+와 드레인의 p+를 이어 줍니다. 정공이 소스에서 드레인 쪽으로 움직입니다. 연결(ON) 상태입니다. 전류의 방향도 정공과 같은 소스에서 드레인입니다.',0,1,0,1,1,1,['arr']),
+S('게이트를 다시 1로 올리면 − 전하가 사라지고 채널의 정공도 흩어져서 길이 없어집니다. 밀려났던 전자는 제자리로 돌아오고, 다시 끊김(OFF)입니다.',1,1,0,0,0,0,['cG'])]}
+};
+var sc='n',i=0;
+function signs(xs,y,sign,fill){var h='';xs.forEach(function(x){h+='<text class="ts" x="'+x+'" y="'+y+'" text-anchor="middle" style="fill:'+fill+'">'+sign+'</text>'});return h}
+var XA=[250,290,330,370,410],XB=[270,310,350,390,430];
+function render(){
+var c=CFG[sc],s=c.steps[i],n=c.steps.length;
+var b=$('body');b.setAttribute('fill',c.body[0]);b.setAttribute('fill-opacity',c.body[1]);b.setAttribute('stroke',c.body[2]);
+['sS','sD'].forEach(function(k){var e=$(k);e.setAttribute('fill',c.sd[0]);e.setAttribute('fill-opacity',c.sd[1]);e.setAttribute('stroke',c.sd[2])});
+$('tS').textContent=c.tS;$('tD').textContent=c.tD;$('tB').textContent=c.tB;$('arrT').textContent=c.arrT;
+var ys=s.ch?[248,270]:[198,222];
+var car=signs([135,165,195,485,515,545],195,c.sdSign,'var(--muted)');
+car+=signs(XA,ys[0],c.bodySign,'var(--muted)')+signs(XB,ys[1],c.bodySign,'var(--muted)');
+$('car').innerHTML=car;
+$('chs').innerHTML=s.ch?signs([240,280,320,360,400,440],180,c.chSign,'#fff'):'';
+$('gcs').innerHTML=s.gc?signs([245,275,305,335,365,395,425],153,c.gcSign,'#fff'):'';
+$('ch').style.display=s.ch?'':'none';
+$('arr').style.display=s.fl?'':'none';
+$('arrT').style.display=s.fl?'':'none';
+[['cS','nS',s.s],['cG','nG',s.g],['cD','nD',s.d]].forEach(function(p){var e=$(p[0]);e.setAttribute('fill',HI);e.setAttribute('stroke',HI);e.setAttribute('stroke-width','1.5');$(p[1]).textContent=p[2]});
+var g=$('gate');g.setAttribute('stroke','#A32D2D');g.setAttribute('stroke-width','1');
+$('ch').setAttribute('stroke','#185FA5');$('ch').setAttribute('stroke-width','1');
+var a=$('arr');a.setAttribute('fill',AR);a.setAttribute('stroke',AR);a.setAttribute('stroke-width','2');
+s.f.forEach(function(k){var e=$(k);e.setAttribute('stroke',ON);e.setAttribute('stroke-width',k==='arr'?'2':'5');if(k==='arr')e.setAttribute('fill',ON)});
+$('tSt').textContent=s.ch?'소스와 드레인: 채널로 연결':'소스와 드레인: 끊김';
+$('ct').textContent='단계 '+(i+1)+' / '+n;
+$('cap').textContent=s.c;
+$('pv').disabled=i===0;$('nx').disabled=i===n-1;
+root.querySelectorAll('button[data-sc]').forEach(function(b){var on=b.getAttribute('data-sc')===sc;b.style.background=on?'var(--accent-bg)':'';b.style.color=on?'var(--accent)':'';b.style.borderColor=on?'var(--accent-border)':''});
+}
+$('pv').addEventListener('click',function(){if(i>0){i--;render()}});
+$('nx').addEventListener('click',function(){if(i<CFG[sc].steps.length-1){i++;render()}});
+$('rs').addEventListener('click',function(){i=0;render()});
+root.querySelectorAll('button[data-sc]').forEach(function(b){b.addEventListener('click',function(){sc=b.getAttribute('data-sc');i=0;render()})});
+render();
+})();
+</script>
+</body>
+</html>
