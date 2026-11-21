@@ -11,6 +11,7 @@
 .sg.on line,.sg.on circle:not(.dot),.sg.on path{stroke:#FF8A00;stroke-width:4}
 .sg.on rect.bx{stroke:#FF8A00;stroke-width:4}
 .sg.on line.ht{stroke:transparent;stroke-width:14px}
+.hq{background:var(--accent-bg);color:var(--accent);font-weight:600}
 .sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-2px}
 </style>
 </head>
@@ -24,10 +25,11 @@
 <p>SRAM 한 칸은 <b>0 또는 1 한 개</b>를 저장합니다. 전원이 켜져 있는 동안에는 값이 그대로 유지되고, 필요할 때 <b>읽거나 새 값으로 쓸 수 있습니다.</b></p>
 <p>저장된 값은 <b>Q라는 지점의 전압</b>으로 정합니다. Q가 높은 전압이면 1, 낮은 전압이면 0이 저장된 것입니다. 이 셀에는 Q와 반대 값을 갖는 지점 <b>QB</b>도 있습니다. 앞 페이지와 같은 약속을 씁니다. <b>1 = 높은 전압(VDD 근처)</b>, <b>0 = 낮은 전압(GND 근처)</b>이고, 스위치가 켜지면 두 단자가 <b>연결</b>, 꺼지면 <b>끊김</b>입니다.</p>
 <table>
-<tr><th>저장된 값</th><th>Q</th><th>QB</th></tr>
-<tr><td>1</td><td>1 (높은 전압)</td><td>0 (낮은 전압)</td></tr>
-<tr><td>0</td><td>0 (낮은 전압)</td><td>1 (높은 전압)</td></tr>
+<tr><th class="hq">저장된 값</th><th class="hq">Q</th><th>QB</th></tr>
+<tr><td class="hq">1</td><td class="hq">1 (높은 전압)</td><td>0 (낮은 전압)</td></tr>
+<tr><td class="hq">0</td><td class="hq">0 (낮은 전압)</td><td>1 (높은 전압)</td></tr>
 </table>
+<p>색칠한 두 열은 항상 같은 값입니다. 저장된 값은 곧 Q의 값이고, QB는 그 반대입니다.</p>
 
 <h2>구조</h2>
 <p>트랜지스터가 6개라서 <b>6T</b>(six transistor)라고 부릅니다.</p>
