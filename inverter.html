@@ -40,9 +40,6 @@
 
 <div class="fig" id="iv">
 <div class="row"><span class="lab">시나리오</span><button data-sc="a">IN: 1 → 0</button><button data-sc="b">IN: 0 → 1</button></div>
-<div class="lab" style="text-align:center;margin:6px 0 2px">인버터 기호로 본 모습</div>
-<svg id="sym" style="max-width:420px;margin:0 auto" viewBox="0 0 300 100" role="img" aria-label="인버터 기호. 삼각형 뒤에 동그라미가 붙어 있고, 입력 IN이 들어가 반대 값이 OUT으로 나온다."></svg>
-<div class="lab" style="text-align:center;margin:10px 0 2px">같은 회로를 스위치로 그린 모습 (위 기호 안쪽)</div>
 <svg viewBox="0 0 680 330" role="img" aria-label="CMOS 인버터를 스위치로 그린 그림. 위쪽 PMOS는 VDD와 OUT 사이, 아래쪽 NMOS는 OUT과 GND 사이의 스위치이다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
 <line id="wT1" x1="340" y1="40" x2="340" y2="80" stroke-width="3"/>
 <line id="wT2" x1="340" y1="124" x2="340" y2="170" stroke-width="3"/>
@@ -76,9 +73,11 @@
 <text id="nO" class="th" x="474" y="175" text-anchor="middle" style="fill:#fff">0</text>
 <text class="th" x="496" y="175">OUT</text>
 </svg>
+<div class="lab" style="text-align:center;margin:6px 0 0">위 회로 전체를 인버터 기호 하나로 그리면</div>
+<svg id="sym" style="max-width:280px;margin:0 auto" viewBox="0 0 300 100" role="img" aria-label="인버터 기호. 삼각형 뒤에 동그라미가 붙어 있고, 입력 IN이 들어가 반대 값이 OUT으로 나온다."></svg>
 <div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
 <div id="cap" class="cap" aria-live="polite"></div>
-<div class="legend">위 그림 — 삼각형에 ○가 붙은 기호가 인버터 · 파란 선 : 1, 진한 회색 선 : 0<br>아래 그림 — 파란 선 : 연결, 점선 : 끊김</div>
+<div class="legend">스위치 그림 — 파란 선 : 연결, 점선 : 끊김<br>인버터 기호 — 삼각형에 ○가 붙은 기호 · 파란 선 : 1, 진한 회색 선 : 0</div>
 </div>
 
 <h2>같은 입력인데 왜 반대로 반응하나</h2>
