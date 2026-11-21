@@ -128,6 +128,9 @@
 <rect class="hl" data-hl="out" x="548" y="242" width="72" height="24" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
 <rect class="hl" data-hl="in" x="348" y="251" width="138" height="24" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
 <rect class="hl" data-hl="vdd" x="341" y="64" width="298" height="30" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
+<g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="6 4"><line x1="372" y1="162" x2="600" y2="162"/><line x1="372" y1="337" x2="600" y2="337"/></g>
+<text class="ts" x="366" y="166" text-anchor="end">A</text><text class="ts" x="606" y="166">A′</text>
+<text class="ts" x="366" y="341" text-anchor="end">B</text><text class="ts" x="606" y="341">B′</text>
 <rect class="hl" data-hl="gnd" x="341" y="416" width="298" height="30" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
 <g fill="transparent">
 <rect data-k="pmos" x="396" y="121" width="188" height="83"/>
@@ -139,6 +142,33 @@
 <rect data-k="gnd" x="341" y="416" width="298" height="30"/>
 </g>
 </svg>
+<div class="lab" style="margin:10px 0 2px">단면 (위 레이아웃의 점선 A–A\′, B–B\′를 따라 자른 모습) · 위의 마스크 버튼을 누르면 한 층씩 쌓입니다</div>
+<svg viewBox="0 0 680 400" role="img" aria-label="레이아웃의 A-A와 B-B 선을 따라 자른 PMOS와 NMOS 단면. 마스크 층이 추가될 때마다 well, STI, 게이트, contact, 금속 배선이 한 겹씩 쌓인다.">
+<text class="ts" x="60" y="16" style="fill:var(--fg)">위: PMOS 단면 (A–A′)</text>
+<g transform="translate(0,-42)">
+<rect id="pBody" x="60" y="140" width="560" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
+<text class="ts" x="70" y="232">p-substrate</text>
+<g id="pWell"><rect x="100" y="140" width="480" height="64" fill="#5DCAA5" fill-opacity="0.35" stroke="#0F6E56" stroke-width="1" stroke-dasharray="5 4"/><text class="ts" x="110" y="196">N-well</text></g>
+<g id="pImp"><rect x="178" y="140" width="144" height="24" fill="#EF9F27" fill-opacity="0.6" stroke="#854F0B" stroke-width="1"/><rect x="358" y="140" width="144" height="24" fill="#EF9F27" fill-opacity="0.6" stroke="#854F0B" stroke-width="1"/><text class="ts" x="250" y="157" text-anchor="middle" style="fill:var(--fg)">소스 p+</text><text class="ts" x="430" y="157" text-anchor="middle" style="fill:var(--fg)">드레인 p+</text></g>
+<g id="pSTI"><rect x="60" y="140" width="118" height="36" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"/><rect x="502" y="140" width="118" height="36" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"/><text class="ts" x="119" y="162" text-anchor="middle" style="fill:var(--fg)">STI</text><text class="ts" x="561" y="162" text-anchor="middle" style="fill:var(--fg)">STI</text></g>
+<g id="pILD"><rect x="60" y="90" width="560" height="50" fill="#B5D4F4" fill-opacity="0.35" stroke="#85B7EB" stroke-width="1"/><text class="ts" x="70" y="112">절연막</text></g>
+<g id="pGate"><rect x="322" y="136" width="36" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="322" y="100" width="36" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="340" y="123" text-anchor="middle" style="fill:#fff">G</text></g>
+<g id="pCon" fill="#2C2C2A" stroke="#D3D1C7" stroke-width="1"><rect x="244" y="92" width="12" height="50"/><rect x="424" y="92" width="12" height="50"/></g>
+<g id="pMet"><g fill="#378ADD" fill-opacity="0.6" stroke="#185FA5" stroke-width="1"><rect x="228" y="76" width="44" height="14"/><rect x="408" y="76" width="44" height="14"/></g><text class="ts" x="250" y="71" text-anchor="middle">VDD</text><text class="ts" x="430" y="71" text-anchor="middle">OUT</text></g>
+</g>
+<text class="ts" x="60" y="212" style="fill:var(--fg)">아래: NMOS 단면 (B–B′)</text>
+<g transform="translate(0,154)">
+<rect id="nBody" x="60" y="140" width="560" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
+<text class="ts" x="70" y="232">p-substrate</text>
+<g id="nImp"><rect x="178" y="140" width="144" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><rect x="358" y="140" width="144" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><text class="ts" x="250" y="157" text-anchor="middle" style="fill:var(--fg)">소스 n+</text><text class="ts" x="430" y="157" text-anchor="middle" style="fill:var(--fg)">드레인 n+</text></g>
+<g id="nSTI"><rect x="60" y="140" width="118" height="36" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"/><rect x="502" y="140" width="118" height="36" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"/><text class="ts" x="119" y="162" text-anchor="middle" style="fill:var(--fg)">STI</text><text class="ts" x="561" y="162" text-anchor="middle" style="fill:var(--fg)">STI</text></g>
+<g id="nILD"><rect x="60" y="90" width="560" height="50" fill="#B5D4F4" fill-opacity="0.35" stroke="#85B7EB" stroke-width="1"/><text class="ts" x="70" y="112">절연막</text></g>
+<g id="nGate"><rect x="322" y="136" width="36" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="322" y="100" width="36" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="340" y="123" text-anchor="middle" style="fill:#fff">G</text></g>
+<g id="nCon" fill="#2C2C2A" stroke="#D3D1C7" stroke-width="1"><rect x="244" y="92" width="12" height="50"/><rect x="424" y="92" width="12" height="50"/></g>
+<g id="nMet"><g fill="#378ADD" fill-opacity="0.6" stroke="#185FA5" stroke-width="1"><rect x="228" y="76" width="44" height="14"/><rect x="408" y="76" width="44" height="14"/></g><text class="ts" x="250" y="71" text-anchor="middle">GND</text><text class="ts" x="430" y="71" text-anchor="middle">OUT</text></g>
+</g>
+</svg>
+<div id="xsCap" class="cap" style="min-height:6em" aria-live="polite"></div>
 <div class="legend">
 <span style="margin-right:14px"><i class="sw" style="background:#5DCAA5;opacity:.6"></i>N-well</span>
 <span style="margin-right:14px"><i class="sw" style="background:#EF9F27;opacity:.8"></i>p+ active (PMOS)</span>
@@ -227,7 +257,20 @@ g.addEventListener('mouseleave',function(){hover=null;refresh()});
 g.addEventListener('click',function(){pinned=(pinned&&pinned.join()===ks.join())?null:ks;refresh()});
 });
 var btns=root.querySelectorAll('button[data-s]');
-function show(n){for(var i=1;i<=5;i++){root.querySelector('#L'+i).style.display=i<=n?'':'none'}
+var XCAP={
+1:'N-well 마스크: 기판에 n형 불순물을 넣어 n-well을 만듭니다. 위쪽 PMOS 단면(A–A′)에만 나타나고, 아래쪽 NMOS 단면(B–B′)은 p형 기판 그대로입니다.',
+2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지 기판에는 홈을 파서 절연체(STI)를 채웁니다. 위쪽은 n-well 안, 아래쪽은 p형 기판 위입니다.',
+3:'Poly 마스크: 얇은 게이트 산화막 위에 poly 게이트가 놓입니다. 이어서 위쪽 PMOS에는 p+, 아래쪽 NMOS에는 n+ 불순물을 넣는데, poly가 가림막이 되어 게이트 양옆의 active만 소스와 드레인이 됩니다. 위아래 게이트는 레이아웃에서 하나로 이어진 같은 poly입니다(IN). (불순물 주입용 마스크는 따로 있지만 위 레이아웃 그림에는 그리지 않았습니다.)',
+4:'Contact 마스크: 전체를 절연막으로 덮고, 소스와 드레인 위에 구멍을 뚫어 금속 플러그로 채웁니다. 게이트 contact는 이 단면의 앞쪽에 있어서 여기에는 보이지 않습니다.',
+5:'Metal 1 마스크: contact 위에 금속 배선이 놓입니다. PMOS의 소스는 VDD에, NMOS의 소스는 GND에 연결되고, 두 드레인은 세로 Metal 1로 묶여 OUT이 됩니다.'
+};
+function xs(n){
+function sw(id,on){root.querySelector('#'+id).style.display=on?'':'none'}
+sw('pWell',n>=1);
+['p','n'].forEach(function(P){sw(P+'STI',n>=2);sw(P+'Imp',n>=3);sw(P+'Gate',n>=3);sw(P+'ILD',n>=4);sw(P+'Con',n>=4);sw(P+'Met',n>=5)});
+root.querySelector('#xsCap').textContent=XCAP[n];
+}
+function show(n){xs(n);for(var i=1;i<=5;i++){root.querySelector('#L'+i).style.display=i<=n?'':'none'}
 btns.forEach(function(b){var a=+b.getAttribute('data-s')===n;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''})}
 btns.forEach(function(b){b.addEventListener('click',function(){show(+b.getAttribute('data-s'))})});
 show(5);
