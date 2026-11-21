@@ -146,6 +146,7 @@
 <rect x="20" y="140" width="640" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
 <text class="ts" x="30" y="232">p-substrate</text>
 <g id="xWell"><rect x="36" y="140" width="308" height="64" fill="#5DCAA5" fill-opacity="0.35" stroke="#0F6E56" stroke-width="1" stroke-dasharray="5 4"/><text class="ts" x="46" y="196">N-well</text></g>
+<g id="xAct"><rect x="60" y="140" width="240" height="24" fill="var(--card)" fill-opacity="0.9" stroke="#5F5E5A" stroke-width="1.5"/><rect x="380" y="140" width="240" height="24" fill="var(--card)" fill-opacity="0.9" stroke="#5F5E5A" stroke-width="1.5"/><text class="ts" x="180" y="157" text-anchor="middle" style="fill:var(--fg)">active</text><text class="ts" x="500" y="157" text-anchor="middle" style="fill:var(--fg)">active</text></g>
 <g id="xImp"><rect x="60" y="140" width="100" height="24" fill="#EF9F27" fill-opacity="0.6" stroke="#854F0B" stroke-width="1"/><rect x="200" y="140" width="100" height="24" fill="#EF9F27" fill-opacity="0.6" stroke="#854F0B" stroke-width="1"/><rect x="380" y="140" width="100" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><rect x="520" y="140" width="100" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/>
 <text class="ts" x="110" y="157" text-anchor="middle" style="fill:var(--fg)">소스 p+</text><text class="ts" x="250" y="157" text-anchor="middle" style="fill:var(--fg)">드레인 p+</text><text class="ts" x="430" y="157" text-anchor="middle" style="fill:var(--fg)">드레인 n+</text><text class="ts" x="570" y="157" text-anchor="middle" style="fill:var(--fg)">소스 n+</text></g>
 <g id="xSTI" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"><rect x="20" y="140" width="40" height="36"/><rect x="300" y="140" width="80" height="36"/><rect x="620" y="140" width="40" height="36"/><text class="ts" x="340" y="162" text-anchor="middle" style="fill:var(--fg);stroke:none">STI</text></g>
@@ -250,14 +251,14 @@ g.addEventListener('click',function(){pinned=(pinned&&pinned.join()===ks.join())
 var btns=root.querySelectorAll('button[data-s]');
 var XCAP={
 1:'N-well 마스크: 기판에 n형 불순물을 넣어 n-well을 만듭니다. PMOS가 들어갈 왼쪽만 n-well이고, NMOS가 들어갈 오른쪽은 p형 기판 그대로입니다.',
-2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지 기판에는 홈을 파서 절연체(STI)를 채웁니다. 가운데 STI가 n-well과 p형 기판의 경계 위에서 PMOS와 NMOS를 갈라놓습니다.',
+2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지 기판에는 홈을 파서 절연체(STI)를 채웁니다. 가운데 STI가 n-well과 p형 기판의 경계 위에서 PMOS와 NMOS를 갈라놓습니다. STI 사이에 표면이 드러난 곳이 active이고, 아직 소스와 드레인 불순물은 넣기 전입니다.',
 3:'Poly 마스크: 얇은 게이트 산화막 위에 poly 게이트가 놓입니다. 이어서 PMOS 쪽에는 p+, NMOS 쪽에는 n+ 불순물을 넣는데, poly가 가림막이 되어 게이트 양옆의 active만 소스와 드레인이 됩니다. 두 게이트는 레이아웃에서 poly로 이어진 하나(IN)입니다. (불순물 주입용 마스크는 따로 있지만 위 레이아웃 그림에는 그리지 않았습니다.)',
 4:'Contact 마스크: 전체를 절연막으로 덮고, 소스와 드레인 위에 구멍을 뚫어 금속 플러그로 채웁니다.',
 5:'Metal 1 마스크: contact 위에 금속 배선이 놓입니다. 왼쪽 PMOS의 소스는 VDD에, 오른쪽 NMOS의 소스는 GND에 연결되고, 두 드레인은 Metal 1 하나로 묶여 OUT이 됩니다. 한 줄로 보면 PMOS와 NMOS가 바로 옆에서 OUT으로 이어진 모습입니다.'
 };
 function xs(n){
 function sw(id,on){root.querySelector('#'+id).style.display=on?'':'none'}
-sw('xWell',n>=1);sw('xSTI',n>=2);sw('xImp',n>=3);sw('xGate',n>=3);sw('xILD',n>=4);sw('xCon',n>=4);sw('xMet',n>=5);
+sw('xWell',n>=1);sw('xSTI',n>=2);sw('xAct',n===2);sw('xImp',n>=3);sw('xGate',n>=3);sw('xILD',n>=4);sw('xCon',n>=4);sw('xMet',n>=5);
 root.querySelector('#xsCap').textContent=XCAP[n];
 }
 function show(n){xs(n);for(var i=1;i<=5;i++){root.querySelector('#L'+i).style.display=i<=n?'':'none'}
