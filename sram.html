@@ -71,7 +71,7 @@
 <p>WL이 0이면 접근1, 접근2가 꺼져 있어서 셀이 BL, BLB와 끊겨 있습니다. 그래서 바깥에서 어떤 일이 일어나도 저장된 값은 그대로입니다. 위의 그림에서도 읽기, 쓰기 시나리오의 첫 단계와 마지막 단계가 이 상태입니다.</p>
 
 <h2>마스크 레이아웃으로 보면</h2>
-<p>아래 그림은 왼쪽이 회로도, 오른쪽이 같은 셀을 위에서 본 <b>마스크 레이아웃</b>입니다. 도형이나 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조되고, 위쪽 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다. 그림 밑의 단면도는 점선 A–A′를 따라 자른 모습입니다.</p>
+<p>아래 그림은 왼쪽이 회로도, 오른쪽이 같은 셀을 위에서 본 <b>마스크 레이아웃</b>입니다. 도형이나 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조되고, 위쪽 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다.</p>
 
 <div class="fig" id="lay">
 <div class="row"><span class="lab">마스크 순서</span><button data-s="1">1 N-well</button><button data-s="2">2 Active</button><button data-s="3">3 Poly</button><button data-s="4">4 Contact</button><button data-s="5">5 Metal 1</button></div>
@@ -90,8 +90,6 @@
 <text class="ts" x="406" y="414">N-well (PMOS 자리)</text>
 <text class="ts" x="366" y="50" text-anchor="middle">BL</text><text class="ts" x="614" y="50" text-anchor="middle">BLB</text>
 <text class="ts" x="334" y="132">WL</text>
-<g stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="6 4"><line x1="366" y1="62" x2="366" y2="312"/></g>
-<text class="ts" x="350" y="68" text-anchor="end">A</text><text class="ts" x="350" y="316" text-anchor="end">A′</text>
 
 <g id="lh">
 <rect class="hl" data-hl="pg1" x="346" y="96" width="40" height="28" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
@@ -130,19 +128,6 @@
 <rect data-k="wl" x="386" y="98" width="254" height="20"/>
 </g>
 </svg>
-<div class="lab" style="margin:10px 0 2px">단면 (위 레이아웃의 점선 A–A′을 따라 자른 모습) · 위의 마스크 버튼을 누르면 한 층씩 쌓입니다</div>
-<svg viewBox="0 50 680 200" role="img" aria-label="레이아웃의 A-A 선을 따라 자른 단면. 왼쪽 NMOS 줄 하나에 접근1과 NMOS1이 들어 있고, 둘 사이의 n+가 Q 노드로 공유된다.">
-<rect x="20" y="140" width="640" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
-<text class="ts" x="30" y="232">p-substrate</text>
-<g id="xImp"><rect x="69" y="140" width="75" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><rect x="181" y="140" width="192" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><rect x="410" y="140" width="196" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/>
-<text class="ts" x="106" y="157" text-anchor="middle" style="fill:var(--fg)">BL n+</text><text class="ts" x="277" y="157" text-anchor="middle" style="fill:var(--fg)">Q n+ (공유)</text><text class="ts" x="508" y="157" text-anchor="middle" style="fill:var(--fg)">GND n+</text></g>
-<g id="xSTI" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"><rect x="20" y="140" width="49" height="36"/><rect x="606" y="140" width="54" height="36"/><text class="ts" x="44" y="162" text-anchor="middle" style="fill:var(--fg);stroke:none">STI</text><text class="ts" x="633" y="162" text-anchor="middle" style="fill:var(--fg);stroke:none">STI</text></g>
-<g id="xILD"><rect x="20" y="90" width="640" height="50" fill="#B5D4F4" fill-opacity="0.35" stroke="#85B7EB" stroke-width="1"/><text class="ts" x="30" y="112">절연막</text></g>
-<g id="xGate"><rect x="144" y="136" width="37" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="144" y="100" width="37" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="162" y="123" text-anchor="middle" style="fill:#fff">접근1</text><rect x="373" y="136" width="37" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="373" y="100" width="37" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="391" y="123" text-anchor="middle" style="fill:#fff;font-size:10px">NMOS1</text></g>
-<g id="xCon" fill="#2C2C2A" stroke="#D3D1C7" stroke-width="1"><rect x="94" y="92" width="16" height="50"/><rect x="255" y="92" width="16" height="50"/><rect x="500" y="92" width="16" height="50"/></g>
-<g id="xMet"><g fill="#378ADD" fill-opacity="0.6" stroke="#185FA5" stroke-width="1"><rect x="80" y="76" width="44" height="14"/><rect x="241" y="76" width="44" height="14"/><rect x="486" y="76" width="44" height="14"/></g><text class="ts" x="102" y="70" text-anchor="middle">BL</text><text class="ts" x="263" y="70" text-anchor="middle">Q</text><text class="ts" x="508" y="70" text-anchor="middle">GND</text></g>
-</svg>
-<div id="xsCap" class="cap" style="min-height:7em" aria-live="polite"></div>
 <div class="legend">
 <span style="margin-right:14px"><i class="sw" style="background:#5DCAA5;opacity:.6"></i>N-well</span>
 <span style="margin-right:14px"><i class="sw" style="background:#EF9F27;opacity:.8"></i>p+ active (PMOS)</span>
@@ -156,7 +141,7 @@
 <p>레이아웃에서 눈여겨볼 점은 다음과 같습니다.</p>
 <ul>
 <li><b>NMOS가 양쪽 가장자리에, PMOS 둘이 가운데 n-well 안에 있습니다.</b> 왼쪽 NMOS 줄에는 접근1과 NMOS1이, 오른쪽 NMOS 줄에는 접근2와 NMOS2가 들어 있습니다.</li>
-<li><b>NMOS 줄 하나에 트랜지스터 두 개가 이어집니다.</b> 왼쪽 줄은 위에서 아래로 BL 쪽 n+, 접근1, Q n+, NMOS1, GND 쪽 n+ 순서입니다. 접근1과 NMOS1 사이의 n+ 하나를 둘이 함께 쓰는데, 이것이 바로 Q 노드입니다. 단면도에서 확인할 수 있습니다.</li>
+<li><b>NMOS 줄 하나에 트랜지스터 두 개가 이어집니다.</b> 왼쪽 줄은 위에서 아래로 BL 쪽 n+, 접근1, Q n+, NMOS1, GND 쪽 n+ 순서입니다. 접근1과 NMOS1 사이의 n+ 하나를 둘이 함께 쓰는데, 이것이 바로 Q 노드입니다.</li>
 <li><b>WL은 가로로 지나가는 poly 하나입니다.</b> 이 poly가 두 NMOS 줄을 가로지르는 두 곳이 접근1과 접근2입니다.</li>
 <li><b>맞물림은 poly와 Metal 1로 만듭니다.</b> 왼쪽 인버터의 게이트 poly는 contact를 통해 오른쪽 QB 배선에, 오른쪽 인버터의 게이트 poly는 contact를 통해 왼쪽 Q 배선에 이어집니다.</li>
 </ul>
@@ -277,20 +262,8 @@ el.addEventListener('mouseleave',function(){hover=null;refresh()});
 el.addEventListener('click',function(){pinned=(pinned&&pinned.join()===ks.join())?null:ks;refresh()});
 }
 root.querySelectorAll('[data-k]').forEach(bind);
-var XCAP={
-1:'N-well 마스크: 이 단면선(A–A′)은 왼쪽 NMOS 줄을 따라 지나가므로 n-well 바깥, 즉 p형 기판 위입니다. 그래서 이 단면에는 n-well이 나타나지 않습니다. n-well은 가운데에 있는 PMOS 두 개를 위한 것입니다.',
-2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지에는 홈을 파서 절연체(STI)를 채웁니다. 왼쪽 NMOS 자리는 위에서 아래로 길게 이어진 active 하나이고, 여기에 트랜지스터 두 개(접근1, NMOS1)가 들어갑니다.',
-3:'Poly 마스크: 이 active를 poly가 두 번 가로지릅니다. 위쪽은 WL이 연결된 접근1의 게이트, 아래쪽은 QB가 연결된 NMOS1의 게이트입니다. n+ 불순물을 넣으면 두 게이트 사이의 가운데 n+는 두 트랜지스터가 함께 씁니다. 이것이 Q 노드입니다. (n+ 주입용 마스크는 따로 있지만 위 레이아웃 그림에는 그리지 않았습니다.)',
-4:'Contact 마스크: 전체를 절연막으로 덮고, BL 쪽 n+, 가운데 Q n+, GND 쪽 n+ 위에 구멍을 뚫어 금속 플러그로 채웁니다.',
-5:'Metal 1 마스크: contact 위에 BL, Q, GND 배선이 놓입니다. Q 배선은 옆으로 이어져서 PMOS1의 드레인과 오른쪽 인버터의 게이트(poly)에 연결됩니다.'
-};
-function xs(n){
-function sw(id,on){root.querySelector('#'+id).style.display=on?'':'none'}
-sw('xSTI',n>=2);sw('xImp',n>=3);sw('xGate',n>=3);sw('xILD',n>=4);sw('xCon',n>=4);sw('xMet',n>=5);
-root.querySelector('#xsCap').textContent=XCAP[n];
-}
 var btns=root.querySelectorAll('button[data-s]');
-function show(n){xs(n);for(var i=1;i<=5;i++){root.querySelector('#L'+i).style.display=i<=n?'':'none'}
+function show(n){for(var i=1;i<=5;i++){root.querySelector('#L'+i).style.display=i<=n?'':'none'}
 btns.forEach(function(b){var a=+b.getAttribute('data-s')===n;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''})}
 btns.forEach(function(b){b.addEventListener('click',function(){show(+b.getAttribute('data-s'))})});
 show(5);
