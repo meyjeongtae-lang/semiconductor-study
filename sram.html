@@ -40,10 +40,19 @@
 <p>새로 생긴 세 선의 뜻은 다음과 같습니다.</p>
 <table>
 <tr><th>선</th><th>뜻</th></tr>
-<tr><td>WL (word line)</td><td>접근1과 접근2의 게이트에 연결된 선입니다. 1이 되면 두 스위치가 켜져서 셀이 BL, BLB와 연결됩니다. 이것을 셀이 "선택된다"고 말합니다. 실제 메모리에는 셀이 격자로 많이 깔려 있고, 같은 줄의 셀들이 WL을 함께 씁니다.</td></tr>
+<tr><td>WL (word line)</td><td>접근1과 접근2의 게이트에 연결된 선입니다. 1이 되면 두 스위치가 켜져서 셀이 BL, BLB와 연결됩니다. 이것을 셀이 "선택된다"고 말합니다.</td></tr>
 <tr><td>BL (bit line)</td><td>값을 읽고 쓰기 위한 선으로, Q 쪽과 연결됩니다.</td></tr>
 <tr><td>BLB (bit line bar)</td><td>BL과 짝을 이루는 선으로, QB 쪽과 연결됩니다. BL의 반대 값을 전달합니다.</td></tr>
 </table>
+
+<p>실제 메모리에는 셀이 하나만 있는 것이 아니라 <b>격자로 많이 깔려 있습니다.</b> 같은 줄의 셀들은 WL을 함께 쓰고, 같은 열의 셀들은 BL, BLB를 함께 씁니다. 아래 그림에서 WL을 골라 보세요.</p>
+
+<div class="fig" id="arr">
+<div class="row"><span class="lab">1로 올릴 WL</span><button data-w="0">WL0</button><button data-w="1">WL1</button><button data-w="2">WL2</button><button data-w="3">WL3</button></div>
+<svg viewBox="0 0 680 320" role="img" aria-label="셀 16개가 4줄 4열 격자로 놓인 그림. 줄마다 WL이 가로로 지나가고, 열마다 BL과 BLB가 세로로 지나간다. 고른 WL의 줄에 있는 셀만 초록색으로 선택된다."></svg>
+<div id="arrcap" class="cap" style="min-height:5.2em" aria-live="polite"></div>
+<div class="legend">셀 하나가 앞에서 본 6T 회로 한 개입니다. 그림에서는 작은 상자로 줄여 그렸습니다. 초록색 : 선택된 셀(접근 스위치가 켜짐)</div>
+</div>
 
 <h2>그림으로 한 단계씩</h2>
 <p>시나리오를 고르고 "다음"을 눌러 보세요. 파란 선은 연결, 점선은 끊김입니다. 단계마다 주황색으로 표시된 부분이 그 단계에서 주목할 곳입니다.</p>
@@ -213,6 +222,29 @@ add('bl',T(110,46,'middle','BL','th'));add('blb',T(610,46,'middle','BLB','th'));
 if(!hov)return out;
 Object.keys(G).forEach(function(k){out+='<g class="sg" data-k="'+k+'">'+G[k].join('')+'</g>'});
 return out}
+
+/* ---- 셀 격자 그림 ---- */
+(function(){
+var root=document.getElementById('arr'),svg=root.querySelector('svg'),sel=2;
+var CX=[190,310,430,550],RY=[70,130,190,250];
+function draw(){
+var o='';
+RY.forEach(function(y,i){var on=i===sel;
+CX.forEach(function(x){o+='<rect x="'+(x-42)+'" y="'+(y-22)+'" width="84" height="44" rx="5" fill="'+(on?'#97C459':'var(--card)')+'" fill-opacity="'+(on?'0.55':'1')+'" stroke="'+(on?'#3B6D11':'var(--border)')+'" stroke-width="1.5"/><text class="th" x="'+x+'" y="'+(y+14)+'" text-anchor="middle">셀</text>'})});
+CX.forEach(function(x){
+o+='<line x1="'+(x-30)+'" y1="40" x2="'+(x-30)+'" y2="290" stroke="var(--muted)" stroke-width="2"/><line x1="'+(x+30)+'" y1="40" x2="'+(x+30)+'" y2="290" stroke="var(--muted)" stroke-width="2"/>';
+o+='<text class="ts" x="'+(x-30)+'" y="30" text-anchor="middle">BL</text><text class="ts" x="'+(x+30)+'" y="30" text-anchor="middle">BLB</text>'});
+RY.forEach(function(y,i){var on=i===sel;
+o+='<line x1="118" y1="'+(y-8)+'" x2="624" y2="'+(y-8)+'" stroke="'+(on?'#FF8A00':'var(--muted)')+'" stroke-width="'+(on?4:2)+'"/>';
+o+='<text class="th" x="108" y="'+(y-3)+'" text-anchor="end" style="'+(on?'fill:#FF8A00':'')+'">WL'+i+'</text>';
+o+='<rect data-r="'+i+'" x="100" y="'+(y-24)+'" width="530" height="48" fill="transparent" style="cursor:pointer"/>'});
+svg.innerHTML=o;
+svg.querySelectorAll('[data-r]').forEach(function(r){r.addEventListener('click',function(){sel=+r.getAttribute('data-r');draw()})});
+root.querySelectorAll('button[data-w]').forEach(function(b){var a=+b.getAttribute('data-w')===sel;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''});
+root.querySelector('#arrcap').textContent='WL'+sel+'이 1이 되었습니다. 이 줄의 셀 4개(초록색)는 접근 스위치가 켜져서, 각자 자기 열의 BL, BLB와 연결됩니다. 다른 줄의 셀은 접근 스위치가 꺼져 있어서 BL, BLB와 끊겨 있고, 저장된 값이 그대로 유지됩니다. 같은 열의 셀들은 BL, BLB를 함께 쓰지만, 이어지는 것은 WL이 1인 줄의 셀뿐입니다.'}
+root.querySelectorAll('button[data-w]').forEach(function(b){b.addEventListener('click',function(){sel=+b.getAttribute('data-w');draw()})});
+draw();
+})();
 
 /* 인버터 기호로 그린 6T 그림 */
 function INV(s){
