@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NMOS와 PMOS | 반도체 회로 쉽게 이해하기</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.hl{opacity:0;pointer-events:none;transition:opacity .15s}
+.hl.on{opacity:1}
+.sg.on line,.sg.on circle:not(.dot),.sg.on path{stroke:#FF8A00;stroke-width:3}
+.sw{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-2px}
+</style>
 </head>
 <body>
 <main>
@@ -61,6 +67,71 @@
 <div id="cap" class="cap" aria-live="polite"></div>
 <div class="legend">+ : 정공, − : 전자, 파란 띠 : 채널(연결)</div>
 </div>
+
+<h2>회로도와 마스크 레이아웃으로 보면</h2>
+<p>같은 트랜지스터 하나를 <b>회로도 기호</b>와 <b>마스크 레이아웃</b>(칩을 위에서 본 도형)으로 나란히 그렸습니다. 회로도는 "무엇이 어디에 연결됐는지"만 알려 주고, 레이아웃은 실제 칩 위의 위치와 크기를 가진 도형입니다. 이 도형 하나하나가 포토마스크의 패턴이 됩니다.</p>
+<p>도형에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조됩니다. 아래 버튼은 마스크를 한 층씩 쌓는 순서입니다.</p>
+
+<div class="fig" id="lay2">
+<div class="row"><span class="lab">종류</span><button data-t="n">NMOS</button><button data-t="p">PMOS</button></div>
+<div class="row"><span class="lab">마스크 순서</span><span id="lyBtns" style="display:contents"></span></div>
+<svg viewBox="0 0 680 400" role="img" aria-label="트랜지스터 하나의 회로도 기호와 마스크 레이아웃을 나란히 보여 주는 그림">
+<text class="ts" x="60" y="24">회로도</text>
+<text class="ts" x="340" y="24">레이아웃 (위에서 본 모습)</text>
+
+<text id="lyTopT" class="th" x="170" y="50" text-anchor="middle">드레인 D</text>
+<text id="lyBotT" class="th" x="170" y="226" text-anchor="middle">소스 S</text>
+<text class="th" x="92" y="135" text-anchor="end">게이트 G</text>
+<g class="sg" id="lyTopG" data-k="d"><line x1="170" y1="60" x2="170" y2="112" stroke="var(--fg)" stroke-width="2"/><line x1="170" y1="112" x2="164" y2="112" stroke="var(--fg)" stroke-width="2"/><rect x="158" y="56" width="24" height="60" fill="transparent"/></g>
+<g class="sg" id="lyBotG" data-k="s"><line x1="170" y1="148" x2="170" y2="200" stroke="var(--fg)" stroke-width="2"/><line x1="170" y1="148" x2="164" y2="148" stroke="var(--fg)" stroke-width="2"/><rect x="158" y="144" width="24" height="60" fill="transparent"/></g>
+<g class="sg" data-k="ch"><line x1="164" y1="108" x2="164" y2="152" stroke="var(--fg)" stroke-width="2.5"/><rect x="161" y="116" width="8" height="28" fill="transparent"/></g>
+<g class="sg" data-k="g"><line x1="158" y1="108" x2="158" y2="152" stroke="var(--fg)" stroke-width="2.5"/><line id="lyGwN" x1="158" y1="130" x2="100" y2="130" stroke="var(--fg)" stroke-width="2"/><line id="lyGwP" x1="152" y1="130" x2="100" y2="130" stroke="var(--fg)" stroke-width="2"/><circle id="lyBub" cx="155" cy="130" r="3" fill="none" stroke="var(--fg)" stroke-width="1.5"/><rect x="96" y="118" width="62" height="24" fill="transparent"/></g>
+<text id="lyNote" class="ts" x="60" y="266">NMOS는 소스를 아래쪽(GND 쪽)에 그립니다.</text>
+
+<rect x="330" y="30" width="320" height="350" rx="6" fill="var(--card)" stroke="var(--border)" stroke-width="0.5"/>
+<g id="lyL1"><rect x="345" y="48" width="290" height="250" rx="4" fill="#5DCAA5" fill-opacity="0.28" stroke="#0F6E56" stroke-width="1" stroke-dasharray="5 4"/></g>
+<g id="lyL2"><rect id="lyAct" x="400" y="130" width="180" height="90" rx="2" fill-opacity="0.6" stroke-width="1"/></g>
+<g id="lyL3"><rect x="480" y="100" width="20" height="150" fill="#E24B4A" fill-opacity="0.8" stroke="#A32D2D" stroke-width="1"/><rect x="466" y="240" width="44" height="24" fill="#E24B4A" fill-opacity="0.8" stroke="#A32D2D" stroke-width="1"/></g>
+<g id="lyL4" fill="#2C2C2A" stroke="#D3D1C7" stroke-width="1"><rect x="434" y="169" width="12" height="12"/><rect x="534" y="169" width="12" height="12"/><rect x="482" y="246" width="12" height="12"/></g>
+<g id="lyL5" fill="#378ADD" fill-opacity="0.5" stroke="#185FA5" stroke-width="1"><rect x="428" y="110" width="24" height="80"/><rect x="528" y="110" width="24" height="80"/><rect x="470" y="240" width="44" height="24"/></g>
+
+<text id="lyWellT" class="ts" x="352" y="64">N-well (PMOS 자리)</text>
+<text id="lySubT" class="ts" x="352" y="368">p-substrate (NMOS 자리)</text>
+<line x1="392" y1="130" x2="392" y2="220" stroke="var(--muted)" stroke-width="1"/>
+<text class="ts" x="386" y="179" text-anchor="end">W</text>
+<text class="ts" x="490" y="92" text-anchor="middle">L</text>
+<text class="ts" x="440" y="104" text-anchor="middle">S</text>
+<text class="ts" x="540" y="104" text-anchor="middle">D</text>
+<text class="ts" x="488" y="284" text-anchor="middle">G</text>
+
+<rect class="hl" data-hl="g" x="462" y="96" width="56" height="172" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
+<rect class="hl" data-hl="ch" x="476" y="126" width="28" height="98" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
+<rect class="hl" data-hl="s" x="394" y="104" width="86" height="122" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
+<rect class="hl" data-hl="d" x="500" y="104" width="86" height="122" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
+<g fill="transparent">
+<rect data-k="s" x="394" y="104" width="86" height="122"/>
+<rect data-k="d" x="500" y="104" width="86" height="122"/>
+<rect data-k="g" x="462" y="96" width="56" height="172"/>
+<rect data-k="ch" x="476" y="126" width="28" height="98"/>
+</g>
+</svg>
+<div class="legend">
+<span id="lyLgWell" style="margin-right:14px"><i class="sw" style="background:#5DCAA5;opacity:.6"></i>N-well</span>
+<span style="margin-right:14px"><i id="lyLgSw" class="sw" style="background:#97C459;opacity:.8"></i><span id="lyLgAct">n+ active (NMOS)</span></span>
+<span style="margin-right:14px"><i class="sw" style="background:#E24B4A;opacity:.85"></i>Poly (게이트)</span>
+<span style="margin-right:14px"><i class="sw" style="background:#2C2C2A;border:1px solid #888"></i>Contact</span>
+<span><i class="sw" style="background:#378ADD;opacity:.6"></i>Metal 1</span>
+</div>
+</div>
+
+<table>
+<tr><th>회로도</th><th>레이아웃에서의 모습</th></tr>
+<tr><td>게이트 (G)</td><td>세로 <b>poly</b> 띠. 아래쪽의 넓은 부분에 contact와 Metal 1을 올려 바깥으로 연결합니다.</td></tr>
+<tr><td>채널</td><td><b>poly와 active가 겹치는 곳</b>. 이 교차점이 트랜지스터 1개입니다.</td></tr>
+<tr><td>소스 (S), 드레인 (D)</td><td>poly 양옆의 <b>active</b>. 각각 contact를 지나 Metal 1로 연결됩니다.</td></tr>
+<tr><td>NMOS와 PMOS의 차이</td><td>NMOS는 p형 기판 위에 n+ active를 바로 만들고, PMOS는 먼저 <b>n-well</b>을 만든 뒤 그 안에 p+ active를 만듭니다.</td></tr>
+</table>
+<p>poly의 폭이 <b>채널 길이 L</b>이고, active를 가로지르는 길이가 <b>채널 폭 W</b>입니다. L이 짧을수록 빠르고, W가 넓을수록 전류가 많이 흐릅니다. 이 트랜지스터 두 개를 하나로 묶은 회로가 다음 페이지의 <a href="inverter.html">CMOS 인버터</a>입니다.</p>
 
 <h2>NMOS와 PMOS 비교</h2>
 <p>둘은 구조가 거울상입니다. 모든 단계는 "게이트의 전하가 반대 전하를 끌어당기고, 같은 전하를 밀어낸다"는 하나의 원리로 설명됩니다.</p>
@@ -141,6 +212,59 @@ $('nx').addEventListener('click',function(){if(i<CFG[sc].steps.length-1){i++;ren
 $('rs').addEventListener('click',function(){i=0;render()});
 root.querySelectorAll('button[data-sc]').forEach(function(b){b.addEventListener('click',function(){sc=b.getAttribute('data-sc');i=0;render()})});
 render();
+})();
+</script>
+<script>
+(function(){
+var root=document.getElementById('lay2');
+function $(i){return root.querySelector('#'+i)}
+var type='n',hover=null,pinned=null;
+var NAMES={1:'N-well',2:'Active',3:'Poly',4:'Contact',5:'Metal 1'};
+function layers(){return type==='p'?[1,2,3,4,5]:[2,3,4,5]}
+function refresh(){
+root.querySelectorAll('.on').forEach(function(e){e.classList.remove('on')});
+var ks=hover||pinned;if(!ks)return;
+ks.forEach(function(k){root.querySelectorAll('[data-hl~="'+k+'"],.sg[data-k~="'+k+'"]').forEach(function(e){e.classList.add('on')})});
+}
+function keys(el){return el.getAttribute('data-k').split(' ')}
+function bind(el){
+el.addEventListener('mouseenter',function(){hover=keys(el);refresh()});
+el.addEventListener('mouseleave',function(){hover=null;refresh()});
+el.addEventListener('click',function(){var k=keys(el);pinned=(pinned&&pinned.join()===k.join())?null:k;refresh()});
+}
+root.querySelectorAll('[data-k]').forEach(bind);
+function show(k){
+var L=layers();
+for(var i=1;i<=5;i++){var idx=L.indexOf(i);$('lyL'+i).style.display=(idx>=0&&idx<k)?'':'none'}
+root.querySelectorAll('button[data-n]').forEach(function(b){var a=+b.getAttribute('data-n')===k;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''});
+}
+function buildBtns(){
+var h='';layers().forEach(function(l,i){h+='<button data-n="'+(i+1)+'">'+(i+1)+' '+NAMES[l]+'</button>'});
+$('lyBtns').innerHTML=h;
+root.querySelectorAll('button[data-n]').forEach(function(b){b.addEventListener('click',function(){show(+b.getAttribute('data-n'))})});
+}
+function setType(t){
+type=t;var P=t==='p';
+var a=$('lyAct');a.setAttribute('fill',P?'#EF9F27':'#97C459');a.setAttribute('stroke',P?'#854F0B':'#3B6D11');
+$('lyLgSw').style.background=P?'#EF9F27':'#97C459';
+$('lyLgAct').textContent=P?'p+ active (PMOS)':'n+ active (NMOS)';
+$('lyLgWell').style.display=P?'':'none';
+$('lyTopG').setAttribute('data-k',P?'s':'d');
+$('lyBotG').setAttribute('data-k',P?'d':'s');
+$('lyTopT').textContent=P?'소스 S':'드레인 D';
+$('lyBotT').textContent=P?'드레인 D':'소스 S';
+$('lyBub').style.display=P?'':'none';
+$('lyGwP').style.display=P?'':'none';
+$('lyGwN').style.display=P?'none':'';
+$('lyNote').textContent=P?'PMOS는 소스를 위쪽(VDD 쪽)에 그립니다.':'NMOS는 소스를 아래쪽(GND 쪽)에 그립니다.';
+$('lyWellT').style.display=P?'':'none';
+$('lySubT').style.display=P?'none':'';
+hover=null;pinned=null;refresh();
+buildBtns();show(layers().length);
+root.querySelectorAll('button[data-t]').forEach(function(b){var on=b.getAttribute('data-t')===t;b.style.background=on?'var(--accent-bg)':'';b.style.color=on?'var(--accent)':'';b.style.borderColor=on?'var(--accent-border)':''});
+}
+root.querySelectorAll('button[data-t]').forEach(function(b){b.addEventListener('click',function(){setType(b.getAttribute('data-t'))})});
+setType('n');
 })();
 </script>
 </body>
