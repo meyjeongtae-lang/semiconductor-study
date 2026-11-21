@@ -55,12 +55,12 @@
 <p>시나리오를 고르고 "다음"을 눌러 보세요. 파란 선은 연결, 점선은 끊김입니다. 단계마다 주황색으로 표시된 부분이 그 단계에서 주목할 곳입니다.</p>
 
 <div class="fig" id="sr">
-<div class="row"><span class="lab">시나리오</span><button data-sc="a">읽기 (Q=1이 저장됨)</button><button data-sc="b">쓰기 (Q=0 → 1)</button></div>
+<div class="row"><span class="lab">시나리오</span><button data-sc="b">쓰기 (Q=0 → 1)</button><button data-sc="a">읽기 (Q=1이 저장됨)</button></div>
 <div class="lab" style="text-align:center;margin:6px 0 2px">인버터 기호로 본 회로</div>
 <svg id="iv" style="max-width:360px;margin:0 auto" viewBox="0 -8 300 246" role="img" aria-label="6T SRAM을 인버터 기호로 그린 그림. 인버터 두 개가 서로의 출력을 입력으로 받고, 양쪽의 접근 스위치가 BL, BLB와 이어 준다."></svg>
 <div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
 <div id="cap" class="cap" style="min-height:6.5em" aria-live="polite"></div>
-<div class="lab" style="text-align:center;margin:10px 0 2px;padding-top:12px;border-top:1px dashed var(--border)">같은 회로를 스위치로 그린 모습</div>
+<div class="lab" style="text-align:center;margin:10px 0 2px;padding-top:12px;border-top:1px dashed var(--border)">같은 회로를 스위치로 그린 모습 (인버터1 = PMOS1 + NMOS1, 인버터2 = PMOS2 + NMOS2)</div>
 <svg style="max-width:600px;margin:0 auto" viewBox="80 20 570 430" role="img" aria-label="6T SRAM을 스위치로 그린 그림. 가운데에 인버터 두 개가 서로 맞물려 있고, 양쪽의 접근1과 접근2가 Q와 BL, QB와 BLB를 이어 준다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
 <g id="sg"></g>
 </svg>
@@ -242,10 +242,10 @@ function P(i){return 's_'+i}
 function S(c,wl,bl,blb,q,qb,f,o){return {c:c,wl:wl,bl:bl,blb:blb,q:q,qb:qb,f:f,o:o||{}}}
 var SC={
 a:[
-S('시작: 이 셀에는 Q=1이 저장되어 있습니다. Q가 1이라서 NMOS2가 켜져 QB를 0으로 잡고, QB가 0이라서 PMOS1이 켜져 Q를 1로 잡고 있습니다. WL이 0이라 접근1, 접근2는 꺼져 있고, BL과 BLB는 아직 정해진 값이 없습니다.',0,'–','–',1,0,['cQ','cQB']),
+S('시작: 이 셀에는 Q=1이 저장되어 있습니다. 인버터2는 입력 Q=1을 받아 출력 QB를 0으로 만들고, 인버터1은 입력 QB=0을 받아 출력 Q를 1로 만들어서, 둘이 서로를 붙잡고 있습니다. WL이 0이라 접근1, 접근2는 꺼져 있고, BL과 BLB는 아직 정해진 값이 없습니다.',0,'–','–',1,0,['cQ','cQB']),
 S('읽기 준비: BL과 BLB를 둘 다 1(높은 전압)로 만들어 둡니다. 이것을 프리차지(precharge)라고 합니다. WL이 아직 0이라 셀과는 연결되지 않습니다.',0,1,1,1,0,['cBL','cBLB','bl','blb']),
 S('WL을 1로 올립니다. 접근1, 접근2가 켜져서 BL이 Q에, BLB가 QB에 연결됩니다.',1,1,1,1,0,['cWL','wl','wg1','wg2','bPG1','bPG2']),
-S('BLB는 접근2와 켜져 있는 NMOS2를 거쳐 GND와 이어집니다. 그래서 BLB의 전압이 조금씩 내려갑니다. BL은 Q(=1) 쪽이고 NMOS1이 꺼져 있어 GND로 가는 길이 없으므로 높은 채로 있습니다.',1,1,'↓',1,0,['pc','pd','r3','r4','cBLB']),
+S('BLB는 접근2를 거쳐 QB(=0) 쪽과 이어져서, 인버터2의 낮은 출력이 BLB를 끌어내립니다. 그래서 BLB의 전압이 조금씩 내려갑니다. BL은 접근1을 거쳐 Q(=1) 쪽과 이어져 있어서 높은 채로 있습니다.',1,1,'↓',1,0,['pc','pd','r3','r4','cBLB']),
 S('센스 앰프라는 회로가 BL이 BLB보다 높은 것을 알아채고 "Q=1이 저장되어 있다"고 읽습니다. 읽는 동안에도 셀의 값은 바뀌지 않습니다.',1,1,'↓',1,0,['cBL','cBLB']),
 S('WL을 0으로 내려 접근1, 접근2를 끕니다. 셀은 BL, BLB와 분리되고 Q=1을 그대로 유지합니다. BL과 BLB는 다음 동작을 위해 다시 1로 만들어 두게 됩니다.',0,'–','–',1,0,['cWL','bPG1','bPG2'])
 ],
@@ -253,12 +253,12 @@ b:[
 S('시작: 이 셀에는 Q=0이 저장되어 있습니다. 여기에 1을 써 보겠습니다. 쓰기도 Q를 기준으로 봅니다. Q가 1이 되면 1이 써진 것입니다.',0,'–','–',0,1,['cQ','cQB']),
 S('쓰려는 값이 1이므로 BL을 1로, BLB를 0으로 만듭니다. 쓰는 회로가 두 선에 전압을 걸어 주는 것입니다. WL이 0이라 아직 셀에는 영향이 없습니다.',0,1,0,0,1,['cBL','cBLB','bl','blb']),
 S('WL을 1로 올립니다. 접근1, 접근2가 켜져서 BL이 Q에, BLB가 QB에 연결됩니다.',1,1,0,0,1,['cWL','wl','wg1','wg2','bPG1','bPG2']),
-S('QB는 지금 1이지만, BLB가 0이라서 접근2를 거쳐 QB를 끌어내립니다. PMOS2는 QB를 VDD 쪽으로 붙잡고 있어서 힘겨루기가 되는데, 쓰기가 되도록 접근2가 이기게 크기를 정해 둡니다. 그 결과 QB가 0으로 내려갑니다.',1,1,0,0,0,['pc','pd','r2','cQB']),
-S('QB가 0이 되자 PMOS1이 켜지고 NMOS1이 꺼집니다. Q가 VDD 쪽으로 이어져 1이 됩니다. BL=1도 접근1을 거쳐 Q를 올려 줍니다.',1,1,0,1,0,['q1','q2','pa','pb','cQ'],{pu2:1,pd2:0}),
-S('Q가 1이 되었으므로 NMOS2가 켜지고 PMOS2가 꺼집니다. QB가 GND와 이어져 0으로 단단히 잡힙니다. 이제 두 인버터가 새 값(Q=1, QB=0)을 서로 붙잡고 있습니다.',1,1,0,1,0,['r3','r4','cQB']),
+S('QB는 지금 1(인버터2의 출력)이지만, BLB가 0이라서 접근2를 거쳐 QB를 끌어내립니다. 인버터2는 QB를 1로 붙잡으려 하므로 힘겨루기가 되는데, 쓰기가 되도록 접근2가 이기게 크기를 정해 둡니다. 그 결과 QB가 0으로 내려갑니다. 이 순간에는 Q도 아직 0이라서, Q와 QB가 모두 0인 짧은 중간 상태입니다.',1,1,0,0,0,['pc','pd','r2','cQB']),
+S('QB가 0이 되면 인버터1의 입력이 0이 되어, 인버터1이 출력 Q를 1로 올립니다. BL=1도 접근1을 거쳐 Q를 올려 줍니다.',1,1,0,1,0,['q1','q2','pa','pb','cQ'],{pu2:1,pd2:0}),
+S('Q가 1이 되었으므로 인버터2의 입력이 1이 되어, 인버터2가 출력 QB를 0으로 단단히 잡습니다. 이제 두 인버터가 새 값(Q=1, QB=0)을 서로 붙잡고 있습니다.',1,1,0,1,0,['r3','r4','cQB']),
 S('WL을 0으로 내려 접근1, 접근2를 끕니다. BL, BLB가 분리되어도 Q=1이 그대로 저장됩니다. 쓰기가 끝났습니다.',0,'–','–',1,0,['cWL','bPG1','bPG2'])
 ]};
-var sc='a',i=0;
+var sc='b',i=0;
 function dash(e,on){e.setAttribute('stroke-dasharray',on?'5 4':'0')}
 function seg(id,off){var e=$(P(id));e.setAttribute('stroke',off?OFF:HI);dash(e,off);e.setAttribute('stroke-width','3')}
 function render(){
