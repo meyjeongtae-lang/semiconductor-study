@@ -57,7 +57,7 @@
 <div class="fig" id="sr">
 <div class="row"><span class="lab">시나리오</span><button data-sc="a">읽기 (Q=1이 저장됨)</button><button data-sc="b">쓰기 (Q=0 → 1)</button></div>
 <div class="lab" style="text-align:center;margin:6px 0 2px">인버터 기호로 본 회로</div>
-<svg id="iv" style="max-width:360px;margin:0 auto" viewBox="0 -8 300 346" role="img" aria-label="6T SRAM을 인버터 기호로 그린 그림. 인버터 두 개가 서로의 출력을 입력으로 받고, 양쪽의 접근 스위치가 BL, BLB와 이어 준다."></svg>
+<svg id="iv" style="max-width:360px;margin:0 auto" viewBox="0 -8 300 246" role="img" aria-label="6T SRAM을 인버터 기호로 그린 그림. 인버터 두 개가 서로의 출력을 입력으로 받고, 양쪽의 접근 스위치가 BL, BLB와 이어 준다."></svg>
 <div class="lab" style="text-align:center;margin:10px 0 2px">같은 회로를 스위치로 그린 모습</div>
 <svg style="max-width:600px;margin:0 auto" viewBox="80 20 570 430" role="img" aria-label="6T SRAM을 스위치로 그린 그림. 가운데에 인버터 두 개가 서로 맞물려 있고, 양쪽의 접근1과 접근2가 Q와 BL, QB와 BLB를 이어 준다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
 <g id="sg"></g>
@@ -216,20 +216,20 @@ function L(x1,y1,x2,y2,v){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="
 function N(x,y,v){return '<circle cx="'+x+'" cy="'+y+'" r="11" fill="'+c(v)+'"/><text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" class="th" style="fill:#fff">'+v+'</text>'}
 function T(x,y,t,a){return '<text class="th" x="'+x+'" y="'+y+'" text-anchor="'+(a||'middle')+'">'+t+'</text>'}
 var q=s.q,qb=s.qb,bl=s.bl,blb=s.blb,wl=s.wl,on=wl===1,o='';
-o+=L(80,60,80,240,qb)+L(80,60,118,60,qb)+L(80,240,144,240,qb);
-o+=L(220,60,220,240,q)+L(164,60,220,60,q)+L(190,240,220,240,q);
-o+=L(18,38,18,150,blb)+L(18,150,34,150,blb)+L(68,150,80,150,qb);
-o+=L(282,38,282,150,bl)+L(266,150,282,150,bl)+L(220,150,232,150,q);
-o+=L(51,166,51,300,wl)+L(249,166,249,300,wl)+L(51,300,249,300,wl);
+o+=L(80,52,80,148,qb)+L(80,52,118,52,qb)+L(80,148,144,148,qb);
+o+=L(220,52,220,148,q)+L(164,52,220,52,q)+L(190,148,220,148,q);
+o+=L(18,38,18,100,blb)+L(18,100,34,100,blb)+L(68,100,80,100,qb);
+o+=L(282,38,282,100,bl)+L(266,100,282,100,bl)+L(220,100,232,100,q);
+o+=L(51,116,51,204,wl)+L(249,116,249,204,wl)+L(51,204,249,204,wl);
 var F='stroke="var(--fg)" stroke-width="1.8" fill="var(--card)"';
-o+='<polygon points="118,42 118,78 154,60" '+F+'/><circle cx="159" cy="60" r="5" '+F+'/>';
-o+='<polygon points="190,222 190,258 154,240" '+F+'/><circle cx="149" cy="240" r="5" '+F+'/>';
-o+='<circle cx="80" cy="150" r="3.5" fill="var(--fg)"/><circle cx="220" cy="150" r="3.5" fill="var(--fg)"/>';
+o+='<polygon points="118,34 118,70 154,52" '+F+'/><circle cx="159" cy="52" r="5" '+F+'/>';
+o+='<polygon points="190,130 190,166 154,148" '+F+'/><circle cx="149" cy="148" r="5" '+F+'/>';
+o+='<circle cx="80" cy="100" r="3.5" fill="var(--fg)"/><circle cx="220" cy="100" r="3.5" fill="var(--fg)"/>';
 [[34,'접근2'],[232,'접근1']].forEach(function(b){
-o+='<rect x="'+b[0]+'" y="134" width="34" height="32" rx="4" fill="'+(on?'#97C459':'var(--card)')+'" fill-opacity="'+(on?'0.6':'1')+'" stroke="'+(on?'#3B6D11':'var(--fg)')+'" stroke-width="1.5"/>';
-o+='<text x="'+(b[0]+17)+'" y="148" text-anchor="middle" class="th" style="font-size:10px">'+b[1]+'</text><text x="'+(b[0]+17)+'" y="161" text-anchor="middle" class="ts" style="font-size:10px">'+(on?'ON':'OFF')+'</text>'});
-o+=N(220,60,q)+N(80,240,qb)+N(282,26,bl)+N(18,26,blb)+N(150,300,wl);
-o+=T(220,40,'Q')+T(80,266,'QB')+T(282,10,'BL')+T(18,10,'BLB')+T(150,328,'WL')+T(136,34,'인버터1')+T(172,278,'인버터2');
+o+='<rect x="'+b[0]+'" y="84" width="34" height="32" rx="4" fill="'+(on?'#97C459':'var(--card)')+'" fill-opacity="'+(on?'0.6':'1')+'" stroke="'+(on?'#3B6D11':'var(--fg)')+'" stroke-width="1.5"/>';
+o+='<text x="'+(b[0]+17)+'" y="98" text-anchor="middle" class="th" style="font-size:10px">'+b[1]+'</text><text x="'+(b[0]+17)+'" y="111" text-anchor="middle" class="ts" style="font-size:10px">'+(on?'ON':'OFF')+'</text>'});
+o+=N(220,52,q)+N(80,148,qb)+N(282,26,bl)+N(18,26,blb)+N(150,204,wl);
+o+=T(220,34,'Q')+T(80,174,'QB')+T(282,10,'BL')+T(18,10,'BLB')+T(150,230,'WL')+T(136,28,'인버터1')+T(176,182,'인버터2');
 return o}
 
 /* ---- 단계 그림 ---- */
