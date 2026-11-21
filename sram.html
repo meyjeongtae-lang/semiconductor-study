@@ -36,18 +36,17 @@
 <li><b>스위치(NMOS) 두 개를 더합니다.</b> 하나는 Q와 <b>BL</b>을, 다른 하나는 QB와 <b>BLB</b>를 이어 줍니다. 두 스위치의 게이트는 모두 <b>WL</b>에 연결됩니다.</li>
 </ul>
 <table>
-<tr><th>이름</th><th>종류</th><th>역할</th><th>게이트에 들어오는 것</th></tr>
-<tr><td>PU1</td><td>PMOS</td><td>Q를 VDD 쪽으로 올림</td><td>QB</td></tr>
-<tr><td>PD1</td><td>NMOS</td><td>Q를 GND 쪽으로 내림</td><td>QB</td></tr>
-<tr><td>PU2</td><td>PMOS</td><td>QB를 VDD 쪽으로 올림</td><td>Q</td></tr>
-<tr><td>PD2</td><td>NMOS</td><td>QB를 GND 쪽으로 내림</td><td>Q</td></tr>
-<tr><td>PG1</td><td>NMOS</td><td>BL과 Q를 잇는 스위치</td><td>WL</td></tr>
-<tr><td>PG2</td><td>NMOS</td><td>BLB와 QB를 잇는 스위치</td><td>WL</td></tr>
+<tr><th>이름</th><th>역할</th><th>게이트에 들어오는 것</th></tr>
+<tr><td>PMOS1</td><td>Q를 VDD 쪽으로 올림</td><td>QB</td></tr>
+<tr><td>NMOS1</td><td>Q를 GND 쪽으로 내림</td><td>QB</td></tr>
+<tr><td>PMOS2</td><td>QB를 VDD 쪽으로 올림</td><td>Q</td></tr>
+<tr><td>NMOS2</td><td>QB를 GND 쪽으로 내림</td><td>Q</td></tr>
+<tr><td>접근1 (NMOS)</td><td>BL과 Q를 잇는 스위치</td><td>WL</td></tr>
+<tr><td>접근2 (NMOS)</td><td>BLB와 QB를 잇는 스위치</td><td>WL</td></tr>
 </table>
-<p>PU, PD, PG는 각각 pull-up(위로 끌어올림), pull-down(아래로 끌어내림), pass-gate(통과시키는 문)의 약자입니다.</p>
-<table>
+<p>NMOS가 네 개라서 구분이 필요합니다. 셀 안의 인버터를 이루는 것은 NMOS1, NMOS2, 바깥 선(BL, BLB)과 이어 주는 스위치는 접근1, 접근2라고 부르겠습니다. 접근1, 접근2도 NMOS입니다.</p>
 <tr><th>선</th><th>뜻</th></tr>
-<tr><td>WL (word line)</td><td>이 칸을 선택하는 선입니다. 1이 되면 PG1과 PG2가 켜져서 셀이 BL, BLB와 연결됩니다.</td></tr>
+<tr><td>WL (word line)</td><td>이 칸을 선택하는 선입니다. 1이 되면 접근1과 접근2가 켜져서 셀이 BL, BLB와 연결됩니다.</td></tr>
 <tr><td>BL (bit line)</td><td>값을 읽고 쓰기 위한 선으로, Q 쪽과 연결됩니다.</td></tr>
 <tr><td>BLB (bit line bar)</td><td>BL과 짝을 이루는 선으로, QB 쪽과 연결됩니다. BL의 반대 값을 전달합니다.</td></tr>
 </table>
@@ -57,19 +56,19 @@
 
 <div class="fig" id="sr">
 <div class="row"><span class="lab">시나리오</span><button data-sc="a">읽기 (Q=1이 저장됨)</button><button data-sc="b">쓰기 (Q=0 → 1)</button></div>
-<svg viewBox="80 20 570 430" role="img" aria-label="6T SRAM을 스위치로 그린 그림. 가운데에 인버터 두 개가 서로 맞물려 있고, 양쪽의 PG1과 PG2가 Q와 BL, QB와 BLB를 이어 준다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
+<svg viewBox="80 20 570 430" role="img" aria-label="6T SRAM을 스위치로 그린 그림. 가운데에 인버터 두 개가 서로 맞물려 있고, 양쪽의 접근1과 접근2가 Q와 BL, QB와 BLB를 이어 준다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
 <g id="sg"></g>
 </svg>
 <div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
 <div id="cap" class="cap" style="min-height:6.5em" aria-live="polite"></div>
-<div class="legend">파란 선 : 연결, 점선 : 끊김 · PU는 PMOS, PD와 PG는 NMOS</div>
+<div class="legend">파란 선 : 연결, 점선 : 끊김 · 접근1, 접근2는 접근용 NMOS</div>
 </div>
 
 <div class="note"><b>용어를 이렇게 통일합니다.</b> 선이나 노드를 "1로 만든다"는 것은 그곳에 <b>높은 전압이 걸리게 한다</b>는 뜻입니다. 저장되는 값은 항상 <b>Q를 기준으로</b> 말합니다. Q가 1이 되면 "1이 써졌다", Q가 1인 셀을 읽으면 "1을 읽었다"고 합니다. BLB는 BL의 반대 값만 전달하는 선이라서, 1을 쓸 때는 BL=1, BLB=0이 됩니다.</div>
 
 <h2>왜 값이 유지되나</h2>
-<p>Q가 1이라고 해 봅시다. Q는 PU2, PD2의 게이트에 들어가므로 <b>PD2가 켜지고 PU2가 꺼집니다.</b> 그러면 QB가 GND와 이어져 0이 됩니다. QB는 PU1, PD1의 게이트에 들어가므로 <b>PU1이 켜지고 PD1이 꺼져서</b> Q가 VDD와 이어져 계속 1입니다. 두 지점이 서로를 "그대로 있어라" 하고 붙잡는 셈입니다. Q=0, QB=1인 반대 상태도 같은 이유로 안정합니다.</p>
-<p>WL이 0이면 PG1, PG2가 꺼져 있어서 셀이 BL, BLB와 끊겨 있습니다. 그래서 바깥에서 어떤 일이 일어나도 저장된 값은 그대로입니다. 위의 그림에서도 읽기, 쓰기 시나리오의 첫 단계와 마지막 단계가 이 상태입니다.</p>
+<p>Q가 1이라고 해 봅시다. Q는 PMOS2, NMOS2의 게이트에 들어가므로 <b>NMOS2가 켜지고 PMOS2가 꺼집니다.</b> 그러면 QB가 GND와 이어져 0이 됩니다. QB는 PMOS1, NMOS1의 게이트에 들어가므로 <b>PMOS1이 켜지고 NMOS1이 꺼져서</b> Q가 VDD와 이어져 계속 1입니다. 두 지점이 서로를 "그대로 있어라" 하고 붙잡는 셈입니다. Q=0, QB=1인 반대 상태도 같은 이유로 안정합니다.</p>
+<p>WL이 0이면 접근1, 접근2가 꺼져 있어서 셀이 BL, BLB와 끊겨 있습니다. 그래서 바깥에서 어떤 일이 일어나도 저장된 값은 그대로입니다. 위의 그림에서도 읽기, 쓰기 시나리오의 첫 단계와 마지막 단계가 이 상태입니다.</p>
 
 <h2>마스크 레이아웃으로 보면</h2>
 <p>아래 그림은 왼쪽이 회로도, 오른쪽이 같은 셀을 위에서 본 <b>마스크 레이아웃</b>입니다. 도형이나 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조되고, 위쪽 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다. 그림 밑의 단면도는 점선 A–A′를 따라 자른 모습입니다.</p>
@@ -132,14 +131,14 @@
 </g>
 </svg>
 <div class="lab" style="margin:10px 0 2px">단면 (위 레이아웃의 점선 A–A′을 따라 자른 모습) · 위의 마스크 버튼을 누르면 한 층씩 쌓입니다</div>
-<svg viewBox="0 50 680 200" role="img" aria-label="레이아웃의 A-A 선을 따라 자른 단면. 왼쪽 NMOS 줄 하나에 PG1과 PD1이 들어 있고, 둘 사이의 n+가 Q 노드로 공유된다.">
+<svg viewBox="0 50 680 200" role="img" aria-label="레이아웃의 A-A 선을 따라 자른 단면. 왼쪽 NMOS 줄 하나에 접근1과 NMOS1이 들어 있고, 둘 사이의 n+가 Q 노드로 공유된다.">
 <rect x="20" y="140" width="640" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
 <text class="ts" x="30" y="232">p-substrate</text>
 <g id="xImp"><rect x="69" y="140" width="75" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><rect x="181" y="140" width="192" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/><rect x="410" y="140" width="196" height="24" fill="#97C459" fill-opacity="0.6" stroke="#3B6D11" stroke-width="1"/>
 <text class="ts" x="106" y="157" text-anchor="middle" style="fill:var(--fg)">BL n+</text><text class="ts" x="277" y="157" text-anchor="middle" style="fill:var(--fg)">Q n+ (공유)</text><text class="ts" x="508" y="157" text-anchor="middle" style="fill:var(--fg)">GND n+</text></g>
 <g id="xSTI" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"><rect x="20" y="140" width="49" height="36"/><rect x="606" y="140" width="54" height="36"/><text class="ts" x="44" y="162" text-anchor="middle" style="fill:var(--fg);stroke:none">STI</text><text class="ts" x="633" y="162" text-anchor="middle" style="fill:var(--fg);stroke:none">STI</text></g>
 <g id="xILD"><rect x="20" y="90" width="640" height="50" fill="#B5D4F4" fill-opacity="0.35" stroke="#85B7EB" stroke-width="1"/><text class="ts" x="30" y="112">절연막</text></g>
-<g id="xGate"><rect x="144" y="136" width="37" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="144" y="100" width="37" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="162" y="123" text-anchor="middle" style="fill:#fff">PG1</text><rect x="373" y="136" width="37" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="373" y="100" width="37" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="391" y="123" text-anchor="middle" style="fill:#fff">PD1</text></g>
+<g id="xGate"><rect x="144" y="136" width="37" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="144" y="100" width="37" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="162" y="123" text-anchor="middle" style="fill:#fff">접근1</text><rect x="373" y="136" width="37" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="373" y="100" width="37" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="391" y="123" text-anchor="middle" style="fill:#fff;font-size:10px">NMOS1</text></g>
 <g id="xCon" fill="#2C2C2A" stroke="#D3D1C7" stroke-width="1"><rect x="94" y="92" width="16" height="50"/><rect x="255" y="92" width="16" height="50"/><rect x="500" y="92" width="16" height="50"/></g>
 <g id="xMet"><g fill="#378ADD" fill-opacity="0.6" stroke="#185FA5" stroke-width="1"><rect x="80" y="76" width="44" height="14"/><rect x="241" y="76" width="44" height="14"/><rect x="486" y="76" width="44" height="14"/></g><text class="ts" x="102" y="70" text-anchor="middle">BL</text><text class="ts" x="263" y="70" text-anchor="middle">Q</text><text class="ts" x="508" y="70" text-anchor="middle">GND</text></g>
 </svg>
@@ -156,9 +155,9 @@
 
 <p>레이아웃에서 눈여겨볼 점은 다음과 같습니다.</p>
 <ul>
-<li><b>NMOS가 양쪽 가장자리에, PMOS 둘이 가운데 n-well 안에 있습니다.</b> 왼쪽 NMOS 줄에는 PG1과 PD1이, 오른쪽 NMOS 줄에는 PG2와 PD2가 들어 있습니다.</li>
-<li><b>NMOS 줄 하나에 트랜지스터 두 개가 이어집니다.</b> 왼쪽 줄은 위에서 아래로 BL 쪽 n+, PG1, Q n+, PD1, GND 쪽 n+ 순서입니다. PG1과 PD1 사이의 n+ 하나를 둘이 함께 쓰는데, 이것이 바로 Q 노드입니다. 단면도에서 확인할 수 있습니다.</li>
-<li><b>WL은 가로로 지나가는 poly 하나입니다.</b> 이 poly가 두 NMOS 줄을 가로지르는 두 곳이 PG1과 PG2입니다.</li>
+<li><b>NMOS가 양쪽 가장자리에, PMOS 둘이 가운데 n-well 안에 있습니다.</b> 왼쪽 NMOS 줄에는 접근1과 NMOS1이, 오른쪽 NMOS 줄에는 접근2와 NMOS2가 들어 있습니다.</li>
+<li><b>NMOS 줄 하나에 트랜지스터 두 개가 이어집니다.</b> 왼쪽 줄은 위에서 아래로 BL 쪽 n+, 접근1, Q n+, NMOS1, GND 쪽 n+ 순서입니다. 접근1과 NMOS1 사이의 n+ 하나를 둘이 함께 쓰는데, 이것이 바로 Q 노드입니다. 단면도에서 확인할 수 있습니다.</li>
+<li><b>WL은 가로로 지나가는 poly 하나입니다.</b> 이 poly가 두 NMOS 줄을 가로지르는 두 곳이 접근1과 접근2입니다.</li>
 <li><b>맞물림은 poly와 Metal 1로 만듭니다.</b> 왼쪽 인버터의 게이트 poly는 contact를 통해 오른쪽 QB 배선에, 오른쪽 인버터의 게이트 poly는 contact를 통해 왼쪽 Q 배선에 이어집니다.</li>
 </ul>
 <div class="note">이 그림은 원리를 보기 위해 단순화했습니다. well과 기판을 전원에 묶는 탭, 불순물 주입용 마스크, WL을 이어 주는 contact는 그리지 않았습니다. 실제 SRAM에서는 BL과 BLB가 위쪽 금속층에서 셀 여러 개를 세로로 지나가고, 셀을 최대한 작게 만들기 위해 배치도 훨씬 빽빽합니다.</div>
@@ -180,7 +179,7 @@ var WIRES=[
 ['bl',110,84,110,330,'bl',0],['blb',610,84,610,330,'blb',0],
 ['wg1',190,220,190,405,'wl',0],['wg2',530,220,530,405,'wl',0],['wl',164,405,530,405,'wl',0]
 ];
-var BOXES=[['bPU1',272,100,'PU1','pu1'],['bPD1',272,260,'PD1','pd1'],['bPU2',392,100,'PU2','pu2'],['bPD2',392,260,'PD2','pd2'],['bPG1',160,180,'PG1','pg1'],['bPG2',500,180,'PG2','pg2']];
+var BOXES=[['bPU1',272,100,'PMOS1','pu1'],['bPD1',272,260,'NMOS1','pd1'],['bPU2',392,100,'PMOS2','pu2'],['bPD2',392,260,'NMOS2','pd2'],['bPG1',160,180,'접근1','pg1'],['bPG2',500,180,'접근2','pg2']];
 var CIRC=[['cQ',300,200,12,'q'],['cQB',420,200,12,'qb'],['cBL',110,70,14,'bl'],['cBLB',610,70,14,'blb'],['cWL',150,405,14,'wl']];
 function SCH(P,hov){
 var G={},out='';
@@ -194,7 +193,7 @@ add('qb','<circle class="dot" cx="345" cy="209" r="3.5" fill="var(--fg)"/>');
 BOXES.forEach(function(b){
 var s='<rect '+(hov?'class="bx" ':'id="'+P+b[0]+'" ')+'x="'+b[1]+'" y="'+b[2]+'" width="'+(b[0].indexOf('PG')>0?60:56)+'" height="40" rx="4" stroke-width="1.5"'+(hov?' fill="var(--card)" stroke="var(--fg)"':'')+'/>';
 var cx=b[1]+(b[0].indexOf('PG')>0?30:28);
-if(hov){s+='<text x="'+cx+'" y="'+(b[2]+26)+'" text-anchor="middle" style="font-size:19px;font-weight:600;fill:var(--fg)">'+b[3]+'</text>'}
+if(hov){s+='<text x="'+cx+'" y="'+(b[2]+26)+'" text-anchor="middle" style="font-size:14px;font-weight:600;fill:var(--fg)">'+b[3]+'</text>'}
 else{s+='<text class="th" x="'+cx+'" y="'+(b[2]+16)+'" text-anchor="middle">'+b[3]+'</text><text id="'+P+'t'+b[0]+'" class="ts" x="'+cx+'" y="'+(b[2]+32)+'" text-anchor="middle"></text>'}
 add(b[4],s)});
 CIRC.forEach(function(c){
@@ -219,21 +218,21 @@ function P(i){return 's_'+i}
 function S(c,wl,bl,blb,q,qb,f,o){return {c:c,wl:wl,bl:bl,blb:blb,q:q,qb:qb,f:f,o:o||{}}}
 var SC={
 a:[
-S('시작: 이 셀에는 Q=1이 저장되어 있습니다. Q가 1이라서 PD2가 켜져 QB를 0으로 잡고, QB가 0이라서 PU1이 켜져 Q를 1로 잡고 있습니다. WL이 0이라 PG1, PG2는 꺼져 있고, BL과 BLB는 아직 정해진 값이 없습니다.',0,'–','–',1,0,['cQ','cQB']),
+S('시작: 이 셀에는 Q=1이 저장되어 있습니다. Q가 1이라서 NMOS2가 켜져 QB를 0으로 잡고, QB가 0이라서 PMOS1이 켜져 Q를 1로 잡고 있습니다. WL이 0이라 접근1, 접근2는 꺼져 있고, BL과 BLB는 아직 정해진 값이 없습니다.',0,'–','–',1,0,['cQ','cQB']),
 S('읽기 준비: BL과 BLB를 둘 다 1(높은 전압)로 만들어 둡니다. 이것을 프리차지(precharge)라고 합니다. WL이 아직 0이라 셀과는 연결되지 않습니다.',0,1,1,1,0,['cBL','cBLB','bl','blb']),
-S('WL을 1로 올립니다. PG1, PG2가 켜져서 BL이 Q에, BLB가 QB에 연결됩니다.',1,1,1,1,0,['cWL','wl','wg1','wg2','bPG1','bPG2']),
-S('BLB는 PG2와 켜져 있는 PD2를 거쳐 GND와 이어집니다. 그래서 BLB의 전압이 조금씩 내려갑니다. BL은 Q(=1) 쪽이고 PD1이 꺼져 있어 GND로 가는 길이 없으므로 높은 채로 있습니다.',1,1,'↓',1,0,['pc','pd','r3','r4','cBLB']),
+S('WL을 1로 올립니다. 접근1, 접근2가 켜져서 BL이 Q에, BLB가 QB에 연결됩니다.',1,1,1,1,0,['cWL','wl','wg1','wg2','bPG1','bPG2']),
+S('BLB는 접근2와 켜져 있는 NMOS2를 거쳐 GND와 이어집니다. 그래서 BLB의 전압이 조금씩 내려갑니다. BL은 Q(=1) 쪽이고 NMOS1이 꺼져 있어 GND로 가는 길이 없으므로 높은 채로 있습니다.',1,1,'↓',1,0,['pc','pd','r3','r4','cBLB']),
 S('센스 앰프라는 회로가 BL이 BLB보다 높은 것을 알아채고 "Q=1이 저장되어 있다"고 읽습니다. 읽는 동안에도 셀의 값은 바뀌지 않습니다.',1,1,'↓',1,0,['cBL','cBLB']),
-S('WL을 0으로 내려 PG1, PG2를 끕니다. 셀은 BL, BLB와 분리되고 Q=1을 그대로 유지합니다. BL과 BLB는 다음 동작을 위해 다시 1로 만들어 두게 됩니다.',0,'–','–',1,0,['cWL','bPG1','bPG2'])
+S('WL을 0으로 내려 접근1, 접근2를 끕니다. 셀은 BL, BLB와 분리되고 Q=1을 그대로 유지합니다. BL과 BLB는 다음 동작을 위해 다시 1로 만들어 두게 됩니다.',0,'–','–',1,0,['cWL','bPG1','bPG2'])
 ],
 b:[
 S('시작: 이 셀에는 Q=0이 저장되어 있습니다. 여기에 1을 써 보겠습니다. 쓰기도 Q를 기준으로 봅니다. Q가 1이 되면 1이 써진 것입니다.',0,'–','–',0,1,['cQ','cQB']),
 S('쓰려는 값이 1이므로 BL을 1로, BLB를 0으로 만듭니다. 쓰는 회로가 두 선에 전압을 걸어 주는 것입니다. WL이 0이라 아직 셀에는 영향이 없습니다.',0,1,0,0,1,['cBL','cBLB','bl','blb']),
-S('WL을 1로 올립니다. PG1, PG2가 켜져서 BL이 Q에, BLB가 QB에 연결됩니다.',1,1,0,0,1,['cWL','wl','wg1','wg2','bPG1','bPG2']),
-S('QB는 지금 1이지만, BLB가 0이라서 PG2를 거쳐 QB를 끌어내립니다. PU2는 QB를 VDD 쪽으로 붙잡고 있어서 힘겨루기가 되는데, 쓰기가 되도록 PG2가 이기게 크기를 정해 둡니다. 그 결과 QB가 0으로 내려갑니다.',1,1,0,0,0,['pc','pd','r2','cQB']),
-S('QB가 0이 되자 PU1이 켜지고 PD1이 꺼집니다. Q가 VDD 쪽으로 이어져 1이 됩니다. BL=1도 PG1을 거쳐 Q를 올려 줍니다.',1,1,0,1,0,['q1','q2','pa','pb','cQ'],{pu2:1,pd2:0}),
-S('Q가 1이 되었으므로 PD2가 켜지고 PU2가 꺼집니다. QB가 GND와 이어져 0으로 단단히 잡힙니다. 이제 두 인버터가 새 값(Q=1, QB=0)을 서로 붙잡고 있습니다.',1,1,0,1,0,['r3','r4','cQB']),
-S('WL을 0으로 내려 PG1, PG2를 끕니다. BL, BLB가 분리되어도 Q=1이 그대로 저장됩니다. 쓰기가 끝났습니다.',0,'–','–',1,0,['cWL','bPG1','bPG2'])
+S('WL을 1로 올립니다. 접근1, 접근2가 켜져서 BL이 Q에, BLB가 QB에 연결됩니다.',1,1,0,0,1,['cWL','wl','wg1','wg2','bPG1','bPG2']),
+S('QB는 지금 1이지만, BLB가 0이라서 접근2를 거쳐 QB를 끌어내립니다. PMOS2는 QB를 VDD 쪽으로 붙잡고 있어서 힘겨루기가 되는데, 쓰기가 되도록 접근2가 이기게 크기를 정해 둡니다. 그 결과 QB가 0으로 내려갑니다.',1,1,0,0,0,['pc','pd','r2','cQB']),
+S('QB가 0이 되자 PMOS1이 켜지고 NMOS1이 꺼집니다. Q가 VDD 쪽으로 이어져 1이 됩니다. BL=1도 접근1을 거쳐 Q를 올려 줍니다.',1,1,0,1,0,['q1','q2','pa','pb','cQ'],{pu2:1,pd2:0}),
+S('Q가 1이 되었으므로 NMOS2가 켜지고 PMOS2가 꺼집니다. QB가 GND와 이어져 0으로 단단히 잡힙니다. 이제 두 인버터가 새 값(Q=1, QB=0)을 서로 붙잡고 있습니다.',1,1,0,1,0,['r3','r4','cQB']),
+S('WL을 0으로 내려 접근1, 접근2를 끕니다. BL, BLB가 분리되어도 Q=1이 그대로 저장됩니다. 쓰기가 끝났습니다.',0,'–','–',1,0,['cWL','bPG1','bPG2'])
 ]};
 var sc='a',i=0;
 function dash(e,on){e.setAttribute('stroke-dasharray',on?'5 4':'0')}
@@ -280,10 +279,10 @@ el.addEventListener('click',function(){pinned=(pinned&&pinned.join()===ks.join()
 root.querySelectorAll('[data-k]').forEach(bind);
 var XCAP={
 1:'N-well 마스크: 이 단면선(A–A′)은 왼쪽 NMOS 줄을 따라 지나가므로 n-well 바깥, 즉 p형 기판 위입니다. 그래서 이 단면에는 n-well이 나타나지 않습니다. n-well은 가운데에 있는 PMOS 두 개를 위한 것입니다.',
-2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지에는 홈을 파서 절연체(STI)를 채웁니다. 왼쪽 NMOS 자리는 위에서 아래로 길게 이어진 active 하나이고, 여기에 트랜지스터 두 개(PG1, PD1)가 들어갑니다.',
-3:'Poly 마스크: 이 active를 poly가 두 번 가로지릅니다. 위쪽은 WL이 연결된 PG1의 게이트, 아래쪽은 QB가 연결된 PD1의 게이트입니다. n+ 불순물을 넣으면 두 게이트 사이의 가운데 n+는 두 트랜지스터가 함께 씁니다. 이것이 Q 노드입니다. (n+ 주입용 마스크는 따로 있지만 위 레이아웃 그림에는 그리지 않았습니다.)',
+2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지에는 홈을 파서 절연체(STI)를 채웁니다. 왼쪽 NMOS 자리는 위에서 아래로 길게 이어진 active 하나이고, 여기에 트랜지스터 두 개(접근1, NMOS1)가 들어갑니다.',
+3:'Poly 마스크: 이 active를 poly가 두 번 가로지릅니다. 위쪽은 WL이 연결된 접근1의 게이트, 아래쪽은 QB가 연결된 NMOS1의 게이트입니다. n+ 불순물을 넣으면 두 게이트 사이의 가운데 n+는 두 트랜지스터가 함께 씁니다. 이것이 Q 노드입니다. (n+ 주입용 마스크는 따로 있지만 위 레이아웃 그림에는 그리지 않았습니다.)',
 4:'Contact 마스크: 전체를 절연막으로 덮고, BL 쪽 n+, 가운데 Q n+, GND 쪽 n+ 위에 구멍을 뚫어 금속 플러그로 채웁니다.',
-5:'Metal 1 마스크: contact 위에 BL, Q, GND 배선이 놓입니다. Q 배선은 옆으로 이어져서 PMOS PU1의 드레인과 오른쪽 인버터의 게이트(poly)에 연결됩니다.'
+5:'Metal 1 마스크: contact 위에 BL, Q, GND 배선이 놓입니다. Q 배선은 옆으로 이어져서 PMOS1의 드레인과 오른쪽 인버터의 게이트(poly)에 연결됩니다.'
 };
 function xs(n){
 function sw(id,on){root.querySelector('#'+id).style.display=on?'':'none'}
