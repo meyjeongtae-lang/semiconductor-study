@@ -32,21 +32,13 @@
 <p>색칠한 두 열은 항상 같은 값입니다. 저장된 값은 곧 Q의 값이고, QB는 그 반대입니다.</p>
 
 <h2>구조</h2>
-<p>트랜지스터가 6개라서 <b>6T</b>(six transistor)라고 부릅니다.</p>
+<p>트랜지스터가 6개라서 <b>6T</b>(six transistor)라고 부릅니다. 앞 페이지의 인버터와 달라진 점은 두 가지입니다.</p>
 <ul>
-<li><b>인버터 두 개를 맞물립니다.</b> 첫째 인버터의 출력이 Q, 둘째 인버터의 출력이 QB입니다. Q는 둘째 인버터의 입력으로, QB는 첫째 인버터의 입력으로 들어갑니다. 서로의 입력을 만들어 주기 때문에, 한 번 정해진 값이 서로를 붙잡아 유지됩니다.</li>
-<li><b>스위치(NMOS) 두 개를 더합니다.</b> 하나는 Q와 <b>BL</b>을, 다른 하나는 QB와 <b>BLB</b>를 이어 줍니다. 두 스위치의 게이트는 모두 <b>WL</b>에 연결됩니다.</li>
+<li><b>인버터 두 개를 서로 맞물립니다.</b> 첫째 인버터의 출력이 Q, 둘째 인버터의 출력이 QB입니다. Q는 둘째 인버터의 입력으로, QB는 첫째 인버터의 입력으로 들어갑니다. 서로의 입력을 만들어 주기 때문에, 한 번 정해진 값이 서로를 붙잡아 유지됩니다.</li>
+<li><b>접근 스위치(NMOS) 두 개를 더합니다.</b> 접근1은 Q와 <b>BL</b>을, 접근2는 QB와 <b>BLB</b>를 이어 줍니다. 두 스위치의 게이트는 모두 <b>WL</b>에 연결됩니다. 셀 바깥에서 값을 읽고 쓰기 위한 통로입니다.</li>
 </ul>
+<p>새로 생긴 세 선의 뜻은 다음과 같습니다.</p>
 <table>
-<tr><th>이름</th><th>역할</th><th>게이트에 들어오는 것</th></tr>
-<tr><td>PMOS1</td><td>Q를 VDD 쪽으로 올림</td><td>QB</td></tr>
-<tr><td>NMOS1</td><td>Q를 GND 쪽으로 내림</td><td>QB</td></tr>
-<tr><td>PMOS2</td><td>QB를 VDD 쪽으로 올림</td><td>Q</td></tr>
-<tr><td>NMOS2</td><td>QB를 GND 쪽으로 내림</td><td>Q</td></tr>
-<tr><td>접근1 (NMOS)</td><td>BL과 Q를 잇는 스위치</td><td>WL</td></tr>
-<tr><td>접근2 (NMOS)</td><td>BLB와 QB를 잇는 스위치</td><td>WL</td></tr>
-</table>
-<p>NMOS가 네 개라서 구분이 필요합니다. 셀 안의 인버터를 이루는 것은 NMOS1, NMOS2, 바깥 선(BL, BLB)과 이어 주는 스위치는 접근1, 접근2라고 부르겠습니다. 접근1, 접근2도 NMOS입니다.</p>
 <tr><th>선</th><th>뜻</th></tr>
 <tr><td>WL (word line)</td><td>이 칸을 선택하는 선입니다. 1이 되면 접근1과 접근2가 켜져서 셀이 BL, BLB와 연결됩니다.</td></tr>
 <tr><td>BL (bit line)</td><td>값을 읽고 쓰기 위한 선으로, Q 쪽과 연결됩니다.</td></tr>
@@ -70,6 +62,18 @@
 </div>
 
 <div class="note"><b>용어를 이렇게 통일합니다.</b> 선이나 노드를 "1로 만든다"는 것은 그곳에 <b>높은 전압이 걸리게 한다</b>는 뜻입니다. 저장되는 값은 항상 <b>Q를 기준으로</b> 말합니다. Q가 1이 되면 "1이 써졌다", Q가 1인 셀을 읽으면 "1을 읽었다"고 합니다. BLB는 BL의 반대 값만 전달하는 선이라서, 1을 쓸 때는 BL=1, BLB=0이 됩니다.</div>
+
+<h2>트랜지스터 6개 정리</h2>
+<p>위 스위치 그림의 이름표를 정리한 표입니다. 인버터1은 PMOS1과 NMOS1, 인버터2는 PMOS2와 NMOS2로 이루어집니다.</p>
+<table>
+<tr><th>이름</th><th>역할</th><th>게이트에 들어오는 것</th></tr>
+<tr><td>PMOS1</td><td>Q를 VDD 쪽으로 올림</td><td>QB</td></tr>
+<tr><td>NMOS1</td><td>Q를 GND 쪽으로 내림</td><td>QB</td></tr>
+<tr><td>PMOS2</td><td>QB를 VDD 쪽으로 올림</td><td>Q</td></tr>
+<tr><td>NMOS2</td><td>QB를 GND 쪽으로 내림</td><td>Q</td></tr>
+<tr><td>접근1 (NMOS)</td><td>BL과 Q를 잇는 스위치</td><td>WL</td></tr>
+<tr><td>접근2 (NMOS)</td><td>BLB와 QB를 잇는 스위치</td><td>WL</td></tr>
+</table>
 
 <h2>왜 값이 유지되나</h2>
 <p>Q가 1이라고 해 봅시다. Q는 PMOS2, NMOS2의 게이트에 들어가므로 <b>NMOS2가 켜지고 PMOS2가 꺼집니다.</b> 그러면 QB가 GND와 이어져 0이 됩니다. QB는 PMOS1, NMOS1의 게이트에 들어가므로 <b>PMOS1이 켜지고 NMOS1이 꺼져서</b> Q가 VDD와 이어져 계속 1입니다. 두 지점이 서로를 "그대로 있어라" 하고 붙잡는 셈입니다. Q=0, QB=1인 반대 상태도 같은 이유로 안정합니다.</p>
@@ -196,7 +200,7 @@ BOXES.forEach(function(b){
 var s='<rect '+(hov?'class="bx" ':'id="'+P+b[0]+'" ')+'x="'+b[1]+'" y="'+b[2]+'" width="'+(b[0].indexOf('PG')>0?60:56)+'" height="40" rx="4" stroke-width="1.5"'+(hov?' fill="var(--card)" stroke="var(--fg)"':'')+'/>';
 var cx=b[1]+(b[0].indexOf('PG')>0?30:28);
 if(hov){s+='<text x="'+cx+'" y="'+(b[2]+26)+'" text-anchor="middle" style="font-size:14px;font-weight:600;fill:var(--fg)">'+b[3]+'</text>'}
-else{s+='<text class="th" x="'+cx+'" y="'+(b[2]+16)+'" text-anchor="middle">'+b[3]+'</text><text id="'+P+'t'+b[0]+'" class="ts" x="'+cx+'" y="'+(b[2]+32)+'" text-anchor="middle"></text>'}
+else{s+='<text class="th" x="'+cx+'" y="'+(b[2]+16)+'" text-anchor="middle">'+b[3]+'</text><text id="'+P+'t'+b[0]+'" class="ts" x="'+cx+'" y="'+(b[2]+32)+'" text-anchor="middle"></text>'+(b[0].indexOf('PG')>0?'<text class="ts" x="'+cx+'" y="'+(b[2]-5)+'" text-anchor="middle">(NMOS)</text>':'')}
 add(b[4],s)});
 CIRC.forEach(function(c){
 var s='<circle '+(hov?'':'id="'+P+c[0]+'" ')+'cx="'+c[1]+'" cy="'+c[2]+'" r="'+c[3]+'" stroke-width="1.5"'+(hov?' fill="var(--card)" stroke="var(--fg)"':'')+'/>';
@@ -229,7 +233,7 @@ o+='<polygon points="190,130 190,166 154,148" '+F+'/><circle cx="149" cy="148" r
 o+='<circle cx="80" cy="100" r="3.5" fill="var(--fg)"/><circle cx="220" cy="100" r="3.5" fill="var(--fg)"/>';
 [[34,'접근2'],[232,'접근1']].forEach(function(b){
 o+='<rect x="'+b[0]+'" y="84" width="34" height="32" rx="4" fill="'+(on?'#97C459':'var(--card)')+'" fill-opacity="'+(on?'0.6':'1')+'" stroke="'+(on?'#3B6D11':'var(--fg)')+'" stroke-width="1.5"/>';
-o+='<text x="'+(b[0]+17)+'" y="98" text-anchor="middle" class="th" style="font-size:10px">'+b[1]+'</text><text x="'+(b[0]+17)+'" y="111" text-anchor="middle" class="ts" style="font-size:10px">'+(on?'ON':'OFF')+'</text>'});
+o+='<text x="'+(b[0]+17)+'" y="98" text-anchor="middle" class="th" style="font-size:10px">'+b[1]+'</text><text x="'+(b[0]+17)+'" y="111" text-anchor="middle" class="ts" style="font-size:10px">'+(on?'ON':'OFF')+'</text><text x="'+(b[0]+17)+'" y="79" text-anchor="middle" class="ts" style="font-size:9px">(NMOS)</text>'});
 o+=N(220,52,q)+N(80,148,qb)+N(282,26,bl)+N(18,26,blb)+N(150,204,wl);
 o+=T(220,34,'Q')+T(80,174,'QB')+T(282,10,'BL')+T(18,10,'BLB')+T(150,230,'WL')+T(136,28,'인버터1')+T(176,182,'인버터2');
 return o}
