@@ -92,8 +92,7 @@
 <p>전류가 크게 흐르는 순간은 입력이 바뀔 때입니다. 출력 쪽 배선과 다음 회로의 게이트를 새 전압으로 채우거나 비우는 전류가 흐르고, 바뀌는 아주 짧은 순간에는 두 트랜지스터가 함께 조금 켜져서 VDD에서 GND로 전류가 잠깐 흐르기도 합니다. 그림에서는 이해를 위해 "하나가 꺼지고 나서 다른 하나가 켜진다"로 순서를 나눠 보여 주었습니다.</p>
 
 <h2>마스크 레이아웃으로 보면</h2>
-<p>지금까지 본 것은 <b>회로도</b>입니다. 회로도는 지하철 노선도처럼 "어디와 어디가 연결됐는지"만 알려 주고, 크기나 위치는 의미가 없습니다. 실제 칩을 만들려면 같은 회로를 <b>실제 지도</b>처럼 위치와 크기가 있는 도형으로 옮겨야 하고, 이것이 <b>마스크 레이아웃</b>입니다. 이 도형 하나하나가 포토마스크의 패턴이 됩니다.</p>
-<p>아래 그림은 왼쪽이 회로도, 오른쪽이 같은 인버터를 위에서 본 레이아웃입니다. 오른쪽의 도형이나 왼쪽의 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조됩니다. 위쪽 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다.</p>
+<p>지금까지 본 것은 <b>회로도</b>입니다. 아래 그림은 왼쪽이 회로도, 오른쪽이 같은 인버터를 위에서 본 <b>마스크 레이아웃</b>입니다. 도형이나 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조되고, 위쪽 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다.</p>
 
 <div class="fig" id="lay">
 <div class="row"><span class="lab">마스크 순서</span><button data-s="1">1 N-well</button><button data-s="2">2 Active</button><button data-s="3">3 Poly</button><button data-s="4">4 Contact</button><button data-s="5">5 Metal 1</button></div>
@@ -150,24 +149,12 @@
 </div>
 </div>
 
-<h3>회로 기호가 레이아웃 도형으로 바뀌는 규칙</h3>
-<ol>
-<li><b>트랜지스터가 만들어질 땅은 active(활성영역)입니다.</b> n-well 안의 p+ active는 PMOS 자리이고, 바깥 p-substrate 위의 n+ active는 NMOS 자리입니다. PMOS는 n형 바탕 위에 p+ 소스와 드레인을 만들어야 해서, 먼저 n-well을 파 둡니다. 그래서 마스크 1번이 well입니다.</li>
-<li><b>poly가 active를 가로지르는 교차점이 트랜지스터 1개입니다.</b> 이 교차 부분이 게이트이고, 교차점 양옆의 active가 소스와 드레인입니다. poly의 폭이 채널 길이(L), active를 가로지르는 poly의 길이가 채널 폭(W)입니다.</li>
-<li><b>같은 신호는 같은 도형으로 잇습니다.</b> poly 하나가 두 active를 모두 지나가서 PMOS와 NMOS의 게이트가 공통 IN이 됩니다. 두 드레인은 세로 Metal 1 하나로 묶어 OUT으로 뺍니다.</li>
-<li><b>contact는 아래층(active, poly)과 Metal 1 사이를 뚫는 구멍입니다.</b> 소스에서 VDD나 GND 레일로 가는 길, 게이트에서 IN으로 가는 길이 모두 contact를 거칩니다.</li>
-<li><b>전원선은 가로 Metal 1 레일입니다.</b> VDD는 위에, GND는 아래에 둡니다. 그래서 PMOS는 위쪽(well 안), NMOS는 아래쪽에 놓입니다.</li>
-</ol>
-<table>
-<tr><th>회로도</th><th>레이아웃에서의 모습</th></tr>
-<tr><td>PMOS</td><td>n-well 안의 p+ active와 poly의 교차점</td></tr>
-<tr><td>NMOS</td><td>p-substrate 위 n+ active와 poly의 교차점</td></tr>
-<tr><td>게이트 (IN)</td><td>가운데 세로 poly (위아래 트랜지스터 공통)</td></tr>
-<tr><td>소스</td><td>게이트 왼쪽 active, contact를 지나 VDD 또는 GND 레일</td></tr>
-<tr><td>드레인 (OUT)</td><td>게이트 오른쪽 active 둘, contact를 지나 세로 Metal 1</td></tr>
-<tr><td>VDD / GND</td><td>위, 아래 가로 Metal 1 레일</td></tr>
-</table>
-<p>레이아웃이 회로도와 같은 회로인지 검사하는 것을 <b>LVS</b>라고 합니다. 레이아웃에서 "poly와 active의 교차점은 트랜지스터"처럼 회로를 뽑아내서 회로도와 비교합니다. 도형의 최소 폭, 간격 같은 규칙을 지켰는지 검사하는 것은 <b>DRC</b>입니다.</p>
+<p>트랜지스터 하나가 레이아웃 도형으로 바뀌는 기본 규칙(active, poly의 교차점, contact, LVS와 DRC)은 <a href="nmos-pmos.html">NMOS와 PMOS 페이지</a>에서 설명했습니다. 인버터에서는 다음 세 가지만 더 보면 됩니다.</p>
+<ul>
+<li><b>poly 하나가 두 active를 모두 지나갑니다.</b> 그래서 PMOS와 NMOS의 게이트가 공통 IN이 됩니다.</li>
+<li><b>두 드레인은 세로 Metal 1 하나로 묶습니다.</b> 이것이 OUT입니다.</li>
+<li><b>전원선은 가로 Metal 1 레일입니다.</b> VDD는 위, GND는 아래에 두어서, PMOS는 위쪽(n-well 안), NMOS는 아래쪽에 놓입니다.</li>
+</ul>
 
 <h2>다음 페이지에서</h2>
 <p>이 인버터 두 개를 서로 맞물려서 값을 저장하는 <b>6T SRAM</b>을 같은 방식으로 봅니다.</p>
