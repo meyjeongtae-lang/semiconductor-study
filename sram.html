@@ -56,13 +56,15 @@
 
 <div class="fig" id="sr">
 <div class="row"><span class="lab">시나리오</span><button data-sc="a">읽기 (Q=1이 저장됨)</button><button data-sc="b">쓰기 (Q=0 → 1)</button></div>
+<div class="row"><span class="lab">그림 모양</span><button data-v="sym">회로 기호</button><button data-v="sw">스위치(상자)</button></div>
 <svg viewBox="80 20 570 430" role="img" aria-label="6T SRAM을 스위치로 그린 그림. 가운데에 인버터 두 개가 서로 맞물려 있고, 양쪽의 접근1과 접근2가 Q와 BL, QB와 BLB를 이어 준다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
 <g id="sg"></g>
 </svg>
 <div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
 <div id="cap" class="cap" style="min-height:6.5em" aria-live="polite"></div>
-<div class="legend">파란 선 : 연결, 점선 : 끊김 · 접근1, 접근2는 접근용 NMOS</div>
+<div class="legend" id="lg"></div>
 </div>
+<div class="note"><b>회로 기호 읽는 법.</b> 세로로 그려진 트랜지스터는 위아래 선이 소스와 드레인이고, 옆에서 들어오는 선이 게이트입니다. <b>PMOS는 게이트에 작은 동그라미(○)가 붙고, NMOS는 없습니다.</b> 화살표는 소스 쪽에 그렸습니다(PMOS는 안쪽, NMOS는 바깥쪽을 향함). 다만 교재에 따라 화살표 방향이나 그리는 방식이 다를 수 있습니다. 접근1, 접근2는 양쪽이 대칭이라 어느 쪽이 소스인지는 전류 방향에 따라 달라지는데, 그림에서는 셀 안쪽을 소스로 그렸습니다.</div>
 
 <div class="note"><b>용어를 이렇게 통일합니다.</b> 선이나 노드를 "1로 만든다"는 것은 그곳에 <b>높은 전압이 걸리게 한다</b>는 뜻입니다. 저장되는 값은 항상 <b>Q를 기준으로</b> 말합니다. Q가 1이 되면 "1이 써졌다", Q가 1인 셀을 읽으면 "1을 읽었다"고 합니다. BLB는 BL의 반대 값만 전달하는 선이라서, 1을 쓸 때는 BL=1, BLB=0이 됩니다.</div>
 
@@ -178,7 +180,29 @@ var WIRES=[
 ];
 var BOXES=[['bPU1',272,100,'PMOS1','pu1'],['bPD1',272,260,'NMOS1','pd1'],['bPU2',392,100,'PMOS2','pu2'],['bPD2',392,260,'NMOS2','pd2'],['bPG1',160,180,'접근1','pg1'],['bPG2',500,180,'접근2','pg2']];
 var CIRC=[['cQ',300,200,12,'q'],['cQB',420,200,12,'qb'],['cBL',110,70,14,'bl'],['cBLB',610,70,14,'blb'],['cWL',150,405,14,'wl']];
-function SCH(P,hov){
+/* 표준 회로 기호: 세로 트랜지스터는 위가 드레인(NMOS)/소스(PMOS), 접근용 NMOS는 가로 */
+function MOS(b,P){
+var id=b[0],x=b[1],y=b[2],pg=id.indexOf('PG')>0,pm=id.indexOf('PU')>0,s='',F='stroke="var(--fg)" stroke-width="1.8" fill="none"',A='fill="var(--fg)" stroke="none"';
+var bgw=pg?60:56;
+s+='<rect class="symbg" id="'+P+id+'" x="'+x+'" y="'+y+'" width="'+bgw+'" height="40" rx="4" stroke-width="3"/>';
+if(!pg){
+var cx=x+28,d=x<300?1:-1;
+var X=function(o){return (cx+d*o)};
+s+='<path '+F+' d="M'+cx+' '+y+'V'+(y+8)+'H'+X(6)+'M'+cx+' '+(y+40)+'V'+(y+32)+'H'+X(6)+'M'+X(6)+' '+(y+4)+'V'+(y+12)+'M'+X(6)+' '+(y+16)+'V'+(y+24)+'M'+X(6)+' '+(y+28)+'V'+(y+36)+'M'+X(12)+' '+(y+6)+'V'+(y+34)+'"/>';
+if(pm){s+='<circle cx="'+X(16)+'" cy="'+(y+20)+'" r="4" '+F+'/><path '+F+' d="M'+X(20)+' '+(y+20)+'H'+X(28)+'"/>';
+s+='<polygon '+A+' points="'+X(5.5)+','+(y+8)+' '+X(1.5)+','+(y+5)+' '+X(1.5)+','+(y+11)+'"/>'}
+else{s+='<path '+F+' d="M'+X(12)+' '+(y+20)+'H'+X(28)+'"/>';
+s+='<polygon '+A+' points="'+X(1)+','+(y+32)+' '+X(5.5)+','+(y+29)+' '+X(5.5)+','+(y+35)+'"/>'}
+var tx=d>0?x-6:x+bgw+6,an=d>0?'end':'start';
+s+='<text class="th" x="'+tx+'" y="'+(y+16)+'" text-anchor="'+an+'">'+b[3]+'</text><text id="'+P+'t'+id+'" class="ts" x="'+tx+'" y="'+(y+32)+'" text-anchor="'+an+'"></text>';
+}else{
+var cx2=x+30,right=x<300;
+s+='<path '+F+' d="M'+x+' '+(y+20)+'H'+(cx2-16)+'V'+(y+26)+'M'+(x+bgw)+' '+(y+20)+'H'+(cx2+16)+'V'+(y+26)+'M'+(cx2-18)+' '+(y+26)+'H'+(cx2-10)+'M'+(cx2-6)+' '+(y+26)+'H'+(cx2+6)+'M'+(cx2+10)+' '+(y+26)+'H'+(cx2+18)+'M'+(cx2-18)+' '+(y+32)+'H'+(cx2+18)+'M'+cx2+' '+(y+32)+'V'+(y+40)+'"/>';
+s+=right?'<polygon '+A+' points="'+(x+bgw-1)+','+(y+20)+' '+(x+bgw-9)+','+(y+17)+' '+(x+bgw-9)+','+(y+23)+'"/>':'<polygon '+A+' points="'+(x+1)+','+(y+20)+' '+(x+9)+','+(y+17)+' '+(x+9)+','+(y+23)+'"/>';
+s+='<text class="th" x="'+cx2+'" y="'+(y-8)+'" text-anchor="middle">'+b[3]+'</text><text id="'+P+'t'+id+'" class="ts" x="'+(cx2+8)+'" y="'+(y+62)+'"></text>';
+}
+return s}
+function SCH(P,hov,sym){
 var G={},out='';
 function add(t,s){if(hov){(G[t]=G[t]||[]).push(s)}else{out+=s}}
 WIRES.forEach(function(w){
@@ -188,6 +212,7 @@ add(w[5],s)});
 add('q','<circle class="dot" cx="375" cy="191" r="3.5" fill="var(--fg)"/>');
 add('qb','<circle class="dot" cx="345" cy="209" r="3.5" fill="var(--fg)"/>');
 BOXES.forEach(function(b){
+if(!hov&&sym){add(b[4],MOS(b,P));return}
 var s='<rect '+(hov?'class="bx" ':'id="'+P+b[0]+'" ')+'x="'+b[1]+'" y="'+b[2]+'" width="'+(b[0].indexOf('PG')>0?60:56)+'" height="40" rx="4" stroke-width="1.5"'+(hov?' fill="var(--card)" stroke="var(--fg)"':'')+'/>';
 var cx=b[1]+(b[0].indexOf('PG')>0?30:28);
 if(hov){s+='<text x="'+cx+'" y="'+(b[2]+26)+'" text-anchor="middle" style="font-size:14px;font-weight:600;fill:var(--fg)">'+b[3]+'</text>'}
@@ -209,7 +234,9 @@ return out}
 (function(){
 var root=document.getElementById('sr');
 function $(i){return root.querySelector('#'+i)}
-$('sg').innerHTML=SCH('s_',false);
+var view='sym';
+function setView(v){view=v;$('sg').innerHTML=SCH('s_',false,v==='sym');root.querySelectorAll('button[data-v]').forEach(function(b){var on=b.getAttribute('data-v')===v;b.style.background=on?'var(--accent-bg)':'';b.style.color=on?'var(--accent)':'';b.style.borderColor=on?'var(--accent-border)':''});$('lg').innerHTML=v==='sym'?'파란 선 : 연결, 점선 : 끊김 · 초록 배경 : 켜진 트랜지스터 · ○가 게이트에 붙은 것이 PMOS, 없는 것이 NMOS':'파란 선 : 연결, 점선 : 끊김 · 접근1, 접근2는 접근용 NMOS';if(typeof render==='function'&&SC)render()}
+root.querySelectorAll('button[data-v]').forEach(function(b){b.addEventListener('click',function(){setView(b.getAttribute('data-v'))})});
 var HI='#378ADD',OFF='#B4B2A9',ON='#FF8A00';
 function P(i){return 's_'+i}
 function S(c,wl,bl,blb,q,qb,f,o){return {c:c,wl:wl,bl:bl,blb:blb,q:q,qb:qb,f:f,o:o||{}}}
@@ -243,7 +270,7 @@ CIRC.forEach(function(c){var e=$(P(c[0]));e.setAttribute('fill',HI);e.setAttribu
 var val={cQ:s.q,cQB:s.qb,cBL:s.bl,cBLB:s.blb,cWL:s.wl};
 for(var c in val)$(P('n'+c)).textContent=val[c];
 var bs={bPU1:st.pu1,bPD1:st.pd1,bPU2:st.pu2,bPD2:st.pd2,bPG1:st.pg,bPG2:st.pg};
-for(var b in bs){var e=$(P(b)),on=bs[b];e.setAttribute('fill',on?'#97C459':'var(--card)');e.setAttribute('fill-opacity',on?'0.6':'1');e.setAttribute('stroke',on?'#3B6D11':'var(--fg)');e.setAttribute('stroke-width','1.5');$(P('t'+b)).textContent=on?'ON':'OFF'}
+for(var b in bs){var e=$(P(b)),on=bs[b];e.setAttribute('fill',on?'#97C459':'var(--card)');e.setAttribute('fill-opacity',on?'0.6':'1');var sy=e.getAttribute('class')==='symbg';e.setAttribute('fill',sy&&!on?'transparent':(on?'#97C459':'var(--card)'));e.setAttribute('stroke',sy?'none':(on?'#3B6D11':'var(--fg)'));e.setAttribute('stroke-width','1.5');$(P('t'+b)).textContent=on?'ON':'OFF'}
 s.f.forEach(function(k){var e=$(P(k));e.setAttribute('stroke',ON);e.setAttribute('stroke-width',e.tagName.toLowerCase()==='line'?'5':'4')});
 $('ct').textContent='단계 '+(i+1)+' / '+n;
 $('cap').textContent=s.c;
@@ -254,7 +281,7 @@ $('pv').addEventListener('click',function(){if(i>0){i--;render()}});
 $('nx').addEventListener('click',function(){if(i<SC[sc].length-1){i++;render()}});
 $('rs').addEventListener('click',function(){i=0;render()});
 root.querySelectorAll('button[data-sc]').forEach(function(b){b.addEventListener('click',function(){sc=b.getAttribute('data-sc');i=0;render()})});
-render();
+setView('sym');
 })();
 
 /* ---- 레이아웃 ---- */
