@@ -19,43 +19,40 @@
 <main>
 <p class="nav"><a href="index.html">← 목차</a></p>
 <h1>6T SRAM</h1>
-<p class="lead">값 1비트를 저장하는 메모리 한 칸, 즉 <b>셀(cell)</b>입니다. 앞 페이지의 인버터 두 개를 서로 맞물려 놓고, 그 값을 읽고 쓰기 위한 스위치 두 개를 더한 모양입니다.</p>
+<p class="lead">값 1비트(0 또는 1)를 저장하는 메모리 한 칸, 즉 <b>셀(cell)</b>입니다. 앞 페이지의 인버터 두 개로 만듭니다.</p>
 
-<h2>하는 일</h2>
-<p>SRAM 셀 하나는 <b>0 또는 1 한 개</b>를 저장합니다. 전원이 켜져 있는 동안에는 값이 그대로 유지되고, 필요할 때 <b>읽거나 새 값으로 쓸 수 있습니다.</b></p>
-<p>저장된 값은 <b>Q라는 지점의 전압</b>으로 정합니다. Q가 높은 전압이면 1, 낮은 전압이면 0이 저장된 것입니다. 이 셀에는 Q와 반대 값을 갖는 지점 <b>QB</b>도 있습니다. 앞 페이지와 같은 약속을 씁니다. <b>1 = 높은 전압(VDD 근처)</b>, <b>0 = 낮은 전압(GND 근처)</b>이고, 스위치가 켜지면 두 단자가 <b>연결</b>, 꺼지면 <b>끊김</b>입니다.</p>
-<table>
-<tr><th class="hq">저장된 값</th><th class="hq">Q</th><th>QB</th></tr>
-<tr><td class="hq">1</td><td class="hq">1 (높은 전압)</td><td>0 (낮은 전압)</td></tr>
-<tr><td class="hq">0</td><td class="hq">0 (낮은 전압)</td><td>1 (높은 전압)</td></tr>
-</table>
-<p>셀에 저장된 값은 Q의 값으로 정하므로, Q가 1이면 1이 저장된 것이고 Q가 0이면 0이 저장된 것입니다. QB는 항상 Q의 반대 값입니다.</p>
+<h2>인버터 두 개를 맞물리면</h2>
+<p>인버터 두 개의 출력을 서로의 입력에 연결합니다. 인버터1의 출력이 <b>Q</b>, 인버터2의 출력이 <b>QB</b>입니다. 앞 페이지와 같은 약속을 씁니다. <b>1 = 높은 전압, 0 = 낮은 전압</b>입니다.</p>
 
-<h2>구조</h2>
-<p>트랜지스터가 6개라서 <b>6T</b>(six transistor)라고 부릅니다. 앞 페이지의 인버터와 달라진 점은 두 가지입니다.</p>
-<ul>
-<li><b>인버터 두 개를 서로 맞물립니다.</b> 첫째 인버터의 출력이 Q, 둘째 인버터의 출력이 QB입니다. Q는 둘째 인버터의 입력으로, QB는 첫째 인버터의 입력으로 들어갑니다. 서로의 입력을 만들어 주기 때문에, 한 번 정해진 값이 서로를 붙잡아 유지됩니다.</li>
-<li><b>접근 스위치(NMOS) 두 개를 더합니다.</b> 접근1은 Q와 <b>BL</b>을, 접근2는 QB와 <b>BLB</b>를 이어 줍니다. 두 스위치의 게이트는 모두 <b>WL</b>에 연결됩니다. 셀 바깥에서 값을 읽고 쓰기 위한 통로입니다.</li>
-</ul>
-<p>새로 생긴 세 선의 뜻은 다음과 같습니다.</p>
-<table>
-<tr><th>선</th><th>뜻</th></tr>
-<tr><td>WL (word line)</td><td>셀을 선택하는 선입니다. 1이 되면 셀이 BL, BLB와 연결되고, 0이면 끊어집니다.</td></tr>
-<tr><td>BL (bit line)</td><td>값을 읽고 쓰기 위한 선으로, Q 쪽과 연결됩니다.</td></tr>
-<tr><td>BLB (bit line bar)</td><td>BL과 짝을 이루는 선으로, QB 쪽과 연결됩니다. BL의 반대 값을 전달합니다.</td></tr>
-</table>
-
-<p>실제 메모리에는 셀이 하나만 있는 것이 아니라 <b>격자로 많이 깔려 있습니다.</b> 같은 줄의 셀들은 WL을 함께 쓰고, 같은 열의 셀들은 BL, BLB를 함께 씁니다. 아래 그림에서 WL을 골라 보세요.</p>
-
-<div class="fig" id="arr">
-<div class="row"><span class="lab">1로 올릴 WL</span><button data-w="0">WL0</button><button data-w="1">WL1</button><button data-w="2">WL2</button><button data-w="3">WL3</button></div>
-<svg viewBox="0 0 680 320" role="img" aria-label="셀 16개가 4줄 4열 격자로 놓인 그림. 줄마다 WL이 가로로 지나가고, 열마다 BL과 BLB가 세로로 지나간다. 고른 WL의 줄에 있는 셀만 초록색으로 선택된다."></svg>
-<div id="arrcap" class="cap" style="min-height:5.2em" aria-live="polite"></div>
-<div class="legend">셀 하나가 앞에서 본 6T 회로 한 개입니다. 그림에서는 작은 상자로 줄여 그렸습니다. 초록색 : 선택된 셀(BL, BLB와 연결됨)</div>
+<div class="fig" id="f1">
+<div class="row"><span class="lab">상태</span><button data-q="1">Q=1인 상태</button><button data-q="0">Q=0인 상태</button></div>
+<svg style="max-width:340px;margin:0 auto" viewBox="0 14 300 180" role="img" aria-label="인버터 두 개가 서로의 출력을 입력으로 받는 그림. 인버터1의 출력이 Q, 인버터2의 출력이 QB이다."></svg>
+<div id="f1cap" class="cap" style="min-height:5.2em" aria-live="polite"></div>
+<div class="legend">파란 선 : 1(높은 전압), 진한 회색 선 : 0(낮은 전압) · 삼각형에 ○가 붙은 기호가 인버터(입력의 반대를 내보냄)</div>
 </div>
 
-<h2>그림으로 한 단계씩</h2>
-<p>시나리오를 고르고 "다음"을 눌러 보세요. 파란 선은 연결, 점선은 끊김입니다. 단계마다 주황색으로 표시된 부분이 그 단계에서 주목할 곳입니다.</p>
+<p>셀에 저장된 값은 Q의 값으로 정하므로, Q가 1이면 1이 저장된 것이고 Q가 0이면 0이 저장된 것입니다. QB는 항상 Q의 반대 값입니다.</p>
+
+<h2>값을 읽고 쓰는 통로 달기</h2>
+<p>그런데 이 상태로는 값이 안쪽에 갇혀 있어서, 바깥에서 읽거나 바꿀 수가 없습니다. 그래서 Q와 QB에 스위치(그림의 접근1, 접근2)를 하나씩 달고, 스위치의 바깥쪽 끝을 <b>BL</b>, <b>BLB</b>라는 선에 연결합니다. 두 스위치는 <b>WL</b>이라는 선으로 켜고 끕니다.</p>
+
+<div class="fig" id="f2">
+<div class="row"><span class="lab">WL</span><button data-wl="0">WL = 0</button><button data-wl="1">WL = 1</button></div>
+<svg style="max-width:360px;margin:0 auto" viewBox="0 -8 300 246" role="img" aria-label="인버터 두 개가 맞물린 셀의 양쪽에 접근1, 접근2 스위치가 달려 있고, 바깥쪽 끝이 BL, BLB에 이어진다. WL이 두 스위치를 켜고 끈다."></svg>
+<div id="f2cap" class="cap" style="min-height:5.2em" aria-live="polite"></div>
+<div class="legend">초록색 : 켜진 스위치, 흰색 : 꺼진 스위치 · 점선 : 정해지지 않은 값</div>
+</div>
+
+<table>
+<tr><th>선</th><th>뜻</th></tr>
+<tr><td>WL (word line)</td><td>두 스위치를 켜고 끄는 선입니다. 1이면 켜져서 셀이 BL, BLB와 연결되고, 0이면 꺼져서 끊어집니다.</td></tr>
+<tr><td>BL (bit line)</td><td>접근1을 거쳐 Q와 이어지는 선입니다. 값을 읽고 쓰는 통로입니다.</td></tr>
+<tr><td>BLB (bit line bar)</td><td>접근2를 거쳐 QB와 이어지는 선입니다. BL의 반대 값을 전달합니다.</td></tr>
+</table>
+<p>인버터 하나는 트랜지스터 2개(PMOS와 NMOS)로 만들고, 스위치도 트랜지스터(NMOS)입니다. 인버터 2개와 스위치 2개를 합치면 트랜지스터가 <b>6개</b>라서, 6T(six transistor) SRAM이라고 부릅니다.</p>
+
+<h2>값을 쓰고 읽기</h2>
+<p>시나리오를 고르고 "다음"을 눌러 보세요. "1로 만든다"는 그곳에 높은 전압이 걸리게 한다는 뜻입니다. 1을 쓸 때는 BL=1, BLB=0이 됩니다.</p>
 
 <div class="fig" id="sr">
 <div class="row"><span class="lab">시나리오</span><button data-sc="b">쓰기 (Q=0 → 1)</button><button data-sc="a">읽기 (Q=1이 저장됨)</button></div>
@@ -70,10 +67,19 @@
 <div class="legend">위 그림 — 삼각형에 ○가 붙은 기호가 인버터(입력의 반대를 내보냄) · 파란 선 : 1, 진한 회색 선 : 0, 점선 : 정해지지 않음<br>아래 그림 — 파란 선 : 연결, 점선 : 끊김 · 접근1, 접근2는 접근용 NMOS</div>
 </div>
 
-<div class="note"><b>용어를 이렇게 통일합니다.</b> 선이나 노드를 "1로 만든다"는 것은 그곳에 <b>높은 전압이 걸리게 한다</b>는 뜻입니다. 저장되는 값은 항상 <b>Q를 기준으로</b> 말합니다. Q가 1이 되면 "1이 써졌다", Q가 1인 셀을 읽으면 "1을 읽었다"고 합니다. BLB는 BL의 반대 값만 전달하는 선이라서, 1을 쓸 때는 BL=1, BLB=0이 됩니다.</div>
+
+<h2>셀이 많이 모이면</h2>
+<p>실제 메모리에는 셀이 하나만 있는 것이 아니라 <b>격자로 많이 깔려 있습니다.</b> 같은 줄의 셀들은 WL을 함께 쓰고, 같은 열의 셀들은 BL, BLB를 함께 씁니다. 아래 그림에서 WL을 골라 보세요.</p>
+
+<div class="fig" id="arr">
+<div class="row"><span class="lab">1로 올릴 WL</span><button data-w="0">WL0</button><button data-w="1">WL1</button><button data-w="2">WL2</button><button data-w="3">WL3</button></div>
+<svg viewBox="0 0 680 320" role="img" aria-label="셀 16개가 4줄 4열 격자로 놓인 그림. 줄마다 WL이 가로로 지나가고, 열마다 BL과 BLB가 세로로 지나간다. 고른 WL의 줄에 있는 셀만 초록색으로 선택된다."></svg>
+<div id="arrcap" class="cap" style="min-height:5.2em" aria-live="polite"></div>
+<div class="legend">셀 하나가 앞에서 본 6T 회로 한 개입니다. 그림에서는 작은 상자로 줄여 그렸습니다. 초록색 : 선택된 셀(BL, BLB와 연결됨)</div>
+</div>
 
 <h2>트랜지스터 6개 정리</h2>
-<p>위 스위치 그림의 이름표를 정리한 표입니다. 인버터1은 PMOS1과 NMOS1, 인버터2는 PMOS2와 NMOS2로 이루어집니다.</p>
+<p>여기부터는 트랜지스터 단위로 더 자세히 봅니다. 위 스위치 그림의 이름표를 정리한 표입니다. 인버터1은 PMOS1과 NMOS1, 인버터2는 PMOS2와 NMOS2로 이루어집니다.</p>
 <table>
 <tr><th>이름</th><th>역할</th><th>게이트에 들어오는 것</th></tr>
 <tr><td>PMOS1</td><td>Q를 VDD 쪽으로 올림</td><td>QB</td></tr>
@@ -247,7 +253,8 @@ draw();
 })();
 
 /* 인버터 기호로 그린 6T 그림 */
-function INV(s){
+function INV(s,acc){
+var A=acc!==false;
 function c(v){return v===1?'#378ADD':v===0?'#5F5E5A':v==='↓'?'#85B7EB':'#B4B2A9'}
 function d(v){return (v===1||v===0)?'':' stroke-dasharray="4 3"'}
 function L(x1,y1,x2,y2,v){return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+c(v)+'" stroke-width="3"'+d(v)+'/>'}
@@ -256,19 +263,44 @@ function T(x,y,t,a){return '<text class="th" x="'+x+'" y="'+y+'" text-anchor="'+
 var q=s.q,qb=s.qb,bl=s.bl,blb=s.blb,wl=s.wl,on=wl===1,o='';
 o+=L(80,52,80,148,qb)+L(80,52,118,52,qb)+L(80,148,144,148,qb);
 o+=L(220,52,220,148,q)+L(164,52,220,52,q)+L(190,148,220,148,q);
+if(A){
 o+=L(18,38,18,100,blb)+L(18,100,34,100,blb)+L(68,100,80,100,qb);
 o+=L(282,38,282,100,bl)+L(266,100,282,100,bl)+L(220,100,232,100,q);
-o+=L(51,116,51,204,wl)+L(249,116,249,204,wl)+L(51,204,249,204,wl);
+o+=L(51,116,51,204,wl)+L(249,116,249,204,wl)+L(51,204,249,204,wl)}
 var F='stroke="var(--fg)" stroke-width="1.8" fill="var(--card)"';
 o+='<polygon points="118,34 118,70 154,52" '+F+'/><circle cx="159" cy="52" r="5" '+F+'/>';
 o+='<polygon points="190,130 190,166 154,148" '+F+'/><circle cx="149" cy="148" r="5" '+F+'/>';
+if(A){
 o+='<circle cx="80" cy="100" r="3.5" fill="var(--fg)"/><circle cx="220" cy="100" r="3.5" fill="var(--fg)"/>';
 [[34,'접근2'],[232,'접근1']].forEach(function(b){
 o+='<rect x="'+b[0]+'" y="84" width="34" height="32" rx="4" fill="'+(on?'#97C459':'var(--card)')+'" fill-opacity="'+(on?'0.6':'1')+'" stroke="'+(on?'#3B6D11':'var(--fg)')+'" stroke-width="1.5"/>';
-o+='<text x="'+(b[0]+17)+'" y="98" text-anchor="middle" class="th" style="font-size:10px">'+b[1]+'</text><text x="'+(b[0]+17)+'" y="111" text-anchor="middle" class="ts" style="font-size:10px">'+(on?'ON':'OFF')+'</text>'});
-o+=N(220,52,q)+N(80,148,qb)+N(282,26,bl)+N(18,26,blb)+N(150,204,wl);
-o+=T(220,34,'Q')+T(80,174,'QB')+T(282,10,'BL')+T(18,10,'BLB')+T(150,230,'WL')+T(136,28,'인버터1')+T(176,182,'인버터2');
+o+='<text x="'+(b[0]+17)+'" y="98" text-anchor="middle" class="th" style="font-size:10px">'+b[1]+'</text><text x="'+(b[0]+17)+'" y="111" text-anchor="middle" class="ts" style="font-size:10px">'+(on?'ON':'OFF')+'</text>'})}
+o+=N(220,52,q)+N(80,148,qb);
+if(A)o+=N(282,26,bl)+N(18,26,blb)+N(150,204,wl);
+o+=T(220,34,'Q')+T(80,174,'QB')+T(136,28,'인버터1')+T(176,182,'인버터2');
+if(A)o+=T(282,10,'BL')+T(18,10,'BLB')+T(150,230,'WL');
 return o}
+
+/* ---- 처음 두 그림: 맞물린 인버터, 읽고 쓰는 통로 ---- */
+(function(){
+function act(root,sel,val){root.querySelectorAll('button['+sel+']').forEach(function(b){var a=+b.getAttribute(sel)===val;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''})}
+var r1=document.getElementById('f1'),s1=r1.querySelector('svg'),q=1;
+function d1(){
+s1.innerHTML=INV({q:q,qb:1-q},false);act(r1,'data-q',q);
+r1.querySelector('#f1cap').textContent=q===1?
+'Q=1입니다. 인버터2는 입력 Q=1의 반대인 0을 내보내 QB를 0으로 만들고, 인버터1은 입력 QB=0의 반대인 1을 내보내 Q를 1로 만듭니다. 서로를 붙잡고 있어서 이 상태가 그대로 유지됩니다.':
+'Q=0입니다. 인버터2는 입력 Q=0의 반대인 1을 내보내 QB를 1로 만들고, 인버터1은 입력 QB=1의 반대인 0을 내보내 Q를 0으로 만듭니다. 서로를 붙잡고 있어서 이 상태도 그대로 유지됩니다.'}
+r1.querySelectorAll('button[data-q]').forEach(function(b){b.addEventListener('click',function(){q=+b.getAttribute('data-q');d1()})});
+d1();
+var r2=document.getElementById('f2'),s2=r2.querySelector('svg'),w=0;
+function d2(){
+s2.innerHTML=INV({q:1,qb:0,bl:'–',blb:'–',wl:w},true);act(r2,'data-wl',w);
+r2.querySelector('#f2cap').textContent=w===0?
+'WL이 0입니다. 접근1, 접근2가 꺼져서(흰색) 셀이 BL, BLB와 끊겨 있습니다. 셀의 값(Q=1, QB=0)은 안쪽에서 그대로 유지됩니다.':
+'WL이 1입니다. 접근1, 접근2가 켜져서(초록색) 셀이 BL, BLB와 연결됩니다. 이 통로로 값을 읽거나 새 값을 쓸 수 있습니다. 어떻게 읽고 쓰는지는 아래 그림에서 단계별로 봅니다.'}
+r2.querySelectorAll('button[data-wl]').forEach(function(b){b.addEventListener('click',function(){w=+b.getAttribute('data-wl');d2()})});
+d2();
+})();
 
 /* ---- 단계 그림 ---- */
 (function(){
