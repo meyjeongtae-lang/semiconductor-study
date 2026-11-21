@@ -58,12 +58,12 @@
 <div class="row"><span class="lab">시나리오</span><button data-sc="a">읽기 (Q=1이 저장됨)</button><button data-sc="b">쓰기 (Q=0 → 1)</button></div>
 <div class="lab" style="text-align:center;margin:6px 0 2px">인버터 기호로 본 회로</div>
 <svg id="iv" style="max-width:360px;margin:0 auto" viewBox="0 -8 300 246" role="img" aria-label="6T SRAM을 인버터 기호로 그린 그림. 인버터 두 개가 서로의 출력을 입력으로 받고, 양쪽의 접근 스위치가 BL, BLB와 이어 준다."></svg>
-<div class="lab" style="text-align:center;margin:10px 0 2px">같은 회로를 스위치로 그린 모습</div>
+<div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
+<div id="cap" class="cap" style="min-height:6.5em" aria-live="polite"></div>
+<div class="lab" style="text-align:center;margin:10px 0 2px;padding-top:12px;border-top:1px dashed var(--border)">같은 회로를 스위치로 그린 모습</div>
 <svg style="max-width:600px;margin:0 auto" viewBox="80 20 570 430" role="img" aria-label="6T SRAM을 스위치로 그린 그림. 가운데에 인버터 두 개가 서로 맞물려 있고, 양쪽의 접근1과 접근2가 Q와 BL, QB와 BLB를 이어 준다. 파란 선은 연결된 구간이고 점선은 끊긴 구간이다.">
 <g id="sg"></g>
 </svg>
-<div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
-<div id="cap" class="cap" style="min-height:6.5em" aria-live="polite"></div>
 <div class="legend">위 그림 — 삼각형에 ○가 붙은 기호가 인버터(입력의 반대를 내보냄) · 파란 선 : 1, 진한 회색 선 : 0, 점선 : 정해지지 않음<br>아래 그림 — 파란 선 : 연결, 점선 : 끊김 · 접근1, 접근2는 접근용 NMOS</div>
 </div>
 
