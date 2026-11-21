@@ -31,47 +31,103 @@
 <p>PMOS는 게이트가 <b>0일 때 켜지고</b>, NMOS는 게이트가 <b>1일 때 켜집니다.</b> 같은 입력이 들어가도 둘의 반응이 반대이므로, 어떤 입력이든 <b>둘 중 하나만 켜지고 다른 하나는 꺼집니다.</b> 켜진 쪽이 OUT을 자기 쪽 전원에 연결해서 출력이 입력의 반대가 됩니다.</p>
 
 <h2>그림으로 한 단계씩</h2>
-<p>시나리오를 고르고 "다음"을 눌러 보세요.</p>
+<p>시나리오를 고르고 "다음"을 눌러 보세요. 왼쪽은 트랜지스터를 스위치로 단순화한 그림이고, 오른쪽은 같은 회로를 실제 회로도 기호로 그린 것입니다. 두 그림은 같이 바뀝니다.</p>
 
 <div class="fig" id="iv">
 <div class="row"><span class="lab">시나리오</span><button data-sc="a">IN: 1 → 0</button><button data-sc="b">IN: 0 → 1</button></div>
-<svg viewBox="0 0 680 330" role="img" aria-label="CMOS 인버터. 위쪽 PMOS는 VDD와 OUT 사이의 스위치, 아래쪽 NMOS는 OUT과 GND 사이의 스위치이다. 파란 선은 연결된 구간이고 회색 점선은 끊긴 구간이다.">
-<line id="wT1" x1="340" y1="40" x2="340" y2="80" stroke-width="3"/>
-<line id="wT2" x1="340" y1="124" x2="340" y2="170" stroke-width="3"/>
-<line id="wB1" x1="340" y1="170" x2="340" y2="216" stroke-width="3"/>
-<line id="wB2" x1="340" y1="260" x2="340" y2="296" stroke-width="3"/>
-<line id="wO" x1="340" y1="170" x2="460" y2="170" stroke-width="3"/>
-<circle cx="340" cy="170" r="3.5" fill="var(--fg)"/>
-<line x1="320" y1="40" x2="360" y2="40" stroke="var(--fg)" stroke-width="2"/>
-<line x1="322" y1="296" x2="358" y2="296" stroke="var(--fg)" stroke-width="2"/>
-<line x1="328" y1="302" x2="352" y2="302" stroke="var(--fg)" stroke-width="2"/>
-<line x1="334" y1="308" x2="346" y2="308" stroke="var(--fg)" stroke-width="2"/>
-<text class="th" x="340" y="28" text-anchor="middle">VDD (1)</text>
-<text class="th" x="340" y="326" text-anchor="middle">GND (0)</text>
-<line id="wIN" x1="126" y1="170" x2="200" y2="170" stroke-width="3"/>
-<line id="gP" x1="200" y1="102" x2="305" y2="102" stroke-width="3"/>
-<line id="gN" x1="200" y1="238" x2="305" y2="238" stroke-width="3"/>
-<line id="bus" x1="200" y1="102" x2="200" y2="238" stroke-width="3"/>
-<circle cx="200" cy="170" r="3.5" fill="var(--fg)"/>
-<rect id="bP" x="305" y="80" width="70" height="44" rx="4" stroke-width="1.5"/>
-<text class="th" x="340" y="98" text-anchor="middle">PMOS</text>
-<text id="tP" class="ts" x="340" y="115" text-anchor="middle">OFF</text>
-<rect id="bN" x="305" y="216" width="70" height="44" rx="4" stroke-width="1.5"/>
-<text class="th" x="340" y="234" text-anchor="middle">NMOS</text>
-<text id="tN" class="ts" x="340" y="251" text-anchor="middle">ON</text>
-<text class="ts" x="390" y="106">게이트가 0이면 켜짐</text>
-<text class="ts" x="390" y="242">게이트가 1이면 켜짐</text>
-<circle id="cIN" cx="112" cy="170" r="14" stroke-width="1.5"/>
-<text id="nIN" class="th" x="112" y="175" text-anchor="middle" style="fill:#fff">1</text>
-<text class="th" x="92" y="175" text-anchor="end">IN</text>
-<circle id="cO" cx="474" cy="170" r="14" stroke-width="1.5"/>
-<text id="nO" class="th" x="474" y="175" text-anchor="middle" style="fill:#fff">0</text>
-<text class="th" x="496" y="175">OUT</text>
+<div class="grid2">
+<div>
+<span class="lab">스위치로 본 그림</span>
+<svg viewBox="0 0 400 330" role="img" aria-label="CMOS 인버터를 스위치로 그린 그림. 위쪽 PMOS는 VDD와 OUT 사이, 아래쪽 NMOS는 OUT과 GND 사이의 스위치이다.">
+<line id="wT1" x1="235" y1="40" x2="235" y2="80" stroke-width="3"/>
+<line id="wT2" x1="235" y1="124" x2="235" y2="170" stroke-width="3"/>
+<line id="wB1" x1="235" y1="170" x2="235" y2="216" stroke-width="3"/>
+<line id="wB2" x1="235" y1="260" x2="235" y2="296" stroke-width="3"/>
+<line id="wO" x1="235" y1="170" x2="330" y2="170" stroke-width="3"/>
+<circle cx="235" cy="170" r="3.5" fill="var(--fg)"/>
+<line x1="215" y1="40" x2="255" y2="40" stroke="var(--fg)" stroke-width="2"/>
+<line x1="217" y1="296" x2="253" y2="296" stroke="var(--fg)" stroke-width="2"/>
+<line x1="223" y1="302" x2="247" y2="302" stroke="var(--fg)" stroke-width="2"/>
+<line x1="229" y1="308" x2="241" y2="308" stroke="var(--fg)" stroke-width="2"/>
+<text class="th" x="235" y="28" text-anchor="middle">VDD (1)</text>
+<text class="th" x="235" y="326" text-anchor="middle">GND (0)</text>
+<line id="wIN" x1="59" y1="170" x2="110" y2="170" stroke-width="3"/>
+<line id="gP" x1="110" y1="102" x2="200" y2="102" stroke-width="3"/>
+<line id="gN" x1="110" y1="238" x2="200" y2="238" stroke-width="3"/>
+<line id="bus" x1="110" y1="102" x2="110" y2="238" stroke-width="3"/>
+<circle cx="110" cy="170" r="3.5" fill="var(--fg)"/>
+<rect id="bP" x="200" y="80" width="70" height="44" rx="4" stroke-width="1.5"/>
+<text class="th" x="235" y="98" text-anchor="middle">PMOS</text>
+<text id="tP" class="ts" x="235" y="115" text-anchor="middle">OFF</text>
+<rect id="bN" x="200" y="216" width="70" height="44" rx="4" stroke-width="1.5"/>
+<text class="th" x="235" y="234" text-anchor="middle">NMOS</text>
+<text id="tN" class="ts" x="235" y="251" text-anchor="middle">ON</text>
+<text class="ts" x="280" y="106">게이트가 0이면 켜짐</text>
+<text class="ts" x="280" y="242">게이트가 1이면 켜짐</text>
+<circle id="cIN" cx="45" cy="170" r="14" stroke-width="1.5"/>
+<text id="nIN" class="th" x="45" y="175" text-anchor="middle" style="fill:#fff">1</text>
+<text class="th" x="45" y="146" text-anchor="middle">IN</text>
+<circle id="cO" cx="344" cy="170" r="14" stroke-width="1.5"/>
+<text id="nO" class="th" x="344" y="175" text-anchor="middle" style="fill:#fff">0</text>
+<text class="th" x="344" y="146" text-anchor="middle">OUT</text>
 </svg>
+</div>
+<div>
+<span class="lab">회로도 기호</span>
+<svg viewBox="0 0 400 330" role="img" aria-label="CMOS 인버터의 회로도 기호. 위쪽은 게이트에 작은 동그라미가 있는 PMOS, 아래쪽은 NMOS이고 두 게이트가 IN으로 묶여 있다.">
+<line id="sT1" x1="235" y1="40" x2="235" y2="92" stroke-width="3"/>
+<line id="sT2" x1="235" y1="128" x2="235" y2="170" stroke-width="3"/>
+<line id="sB1" x1="235" y1="170" x2="235" y2="212" stroke-width="3"/>
+<line id="sB2" x1="235" y1="248" x2="235" y2="296" stroke-width="3"/>
+<line id="sO" x1="235" y1="170" x2="330" y2="170" stroke-width="3"/>
+<circle cx="235" cy="170" r="3.5" fill="var(--fg)"/>
+<line x1="215" y1="40" x2="255" y2="40" stroke="var(--fg)" stroke-width="2"/>
+<line x1="217" y1="296" x2="253" y2="296" stroke="var(--fg)" stroke-width="2"/>
+<line x1="223" y1="302" x2="247" y2="302" stroke="var(--fg)" stroke-width="2"/>
+<line x1="229" y1="308" x2="241" y2="308" stroke="var(--fg)" stroke-width="2"/>
+<text class="th" x="235" y="28" text-anchor="middle">VDD</text>
+<text class="th" x="235" y="326" text-anchor="middle">GND</text>
+<line id="sIN" x1="59" y1="170" x2="150" y2="170" stroke-width="3"/>
+<line id="sBus" x1="150" y1="110" x2="150" y2="230" stroke-width="3"/>
+<line id="sGP" x1="150" y1="110" x2="217" y2="110" stroke-width="3"/>
+<line id="sGN" x1="150" y1="230" x2="223" y2="230" stroke-width="3"/>
+<circle cx="150" cy="170" r="3.5" fill="var(--fg)"/>
+<g id="sP">
+<line x1="229" y1="90" x2="229" y2="130" stroke="var(--fg)" stroke-width="2"/>
+<line x1="235" y1="92" x2="229" y2="92" stroke="var(--fg)" stroke-width="2"/>
+<line x1="235" y1="128" x2="229" y2="128" stroke="var(--fg)" stroke-width="2"/>
+<line x1="223" y1="90" x2="223" y2="130" stroke="var(--fg)" stroke-width="2"/>
+<circle cx="220" cy="110" r="3" fill="none" stroke="var(--fg)" stroke-width="1.5"/>
+</g>
+<g id="sN">
+<line x1="229" y1="210" x2="229" y2="250" stroke="var(--fg)" stroke-width="2"/>
+<line x1="235" y1="212" x2="229" y2="212" stroke="var(--fg)" stroke-width="2"/>
+<line x1="235" y1="248" x2="229" y2="248" stroke="var(--fg)" stroke-width="2"/>
+<line x1="223" y1="210" x2="223" y2="250" stroke="var(--fg)" stroke-width="2"/>
+</g>
+<text class="ts" x="262" y="114">PMOS</text>
+<text class="ts" x="262" y="234">NMOS</text>
+<circle id="sCIN" cx="45" cy="170" r="14" stroke-width="1.5"/>
+<text id="snIN" class="th" x="45" y="175" text-anchor="middle" style="fill:#fff">1</text>
+<text class="th" x="45" y="146" text-anchor="middle">IN</text>
+<circle id="sCO" cx="344" cy="170" r="14" stroke-width="1.5"/>
+<text id="snO" class="th" x="344" y="175" text-anchor="middle" style="fill:#fff">0</text>
+<text class="th" x="344" y="146" text-anchor="middle">OUT</text>
+</svg>
+</div>
+</div>
 <div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
 <div id="cap" class="cap" aria-live="polite"></div>
 <div class="legend">파란 선 : 연결, 점선 : 끊김</div>
 </div>
+
+<h2>회로도 기호 읽는 법</h2>
+<ul>
+<li><b>VDD</b>는 위쪽의 가로 막대, <b>GND</b>는 아래쪽의 세 줄로 그립니다.</li>
+<li>트랜지스터 기호에서 <b>게이트(G)</b>는 가운데 선과 떨어져 있는 막대에 연결된 선입니다. 둘 사이의 간격이 <b>산화막</b>을 나타내서, 게이트로는 전류가 들어가지 않고 전압만 전달된다는 뜻입니다.</li>
+<li><b>PMOS</b>는 게이트에 작은 동그라미가 붙어 있습니다. "게이트가 0일 때 켜진다(반전)"는 표시입니다. 동그라미가 없는 아래쪽이 NMOS입니다.</li>
+<li>두 트랜지스터의 게이트를 하나로 묶은 선이 IN이고, 둘 사이의 가운데 점이 OUT입니다. 점(●)은 선들이 서로 연결됐다는 뜻입니다.</li>
+</ul>
 
 <h2>같은 입력인데 왜 반대로 반응하나</h2>
 <p>트랜지스터는 게이트 전압 자체가 아니라 <b>게이트와 소스의 전압 차이</b>로 켜지고 꺼집니다.</p>
@@ -96,6 +152,7 @@
 var root=document.getElementById('iv');
 function $(i){return root.querySelector('#'+i)}
 var HI='#378ADD',OFF='#B4B2A9',ON='#FF8A00';
+var MAP={bP:'sP',bN:'sN',wT1:'sT1',wT2:'sT2',wB1:'sB1',wB2:'sB2',wIN:'sIN',gP:'sGP',gN:'sGN',bus:'sBus',wO:'sO',cIN:'sCIN',cO:'sCO'};
 function S(c,v,p,n,o,f){return {c:c,v:v,p:p,n:n,o:o,f:f}}
 var SC={
 a:[
@@ -114,14 +171,23 @@ S('OUT이 GND와 연결되어 0(낮은 전압)이 됩니다. 입력 1이 반대 
 var sc='a',i=0;
 function dash(e,on){e.setAttribute('stroke-dasharray',on?'5 4':'0')}
 function seg(id,off){var e=$(id);e.setAttribute('stroke',off?OFF:HI);dash(e,off);e.setAttribute('stroke-width','3')}
+function sym(id,color,w){var g=$(id);g.querySelectorAll('line,circle').forEach(function(e){e.setAttribute('stroke',color);e.setAttribute('stroke-width',w)})}
 function render(){
 var s=SC[sc][i],n=SC[sc].length;
 seg('wT1',!s.p);seg('wT2',!s.p);seg('wB1',!s.n);seg('wB2',!s.n);
 seg('wIN',false);seg('bus',false);seg('gP',false);seg('gN',false);seg('wO',false);
-['cIN','cO'].forEach(function(k){var e=$(k);e.setAttribute('fill',HI);e.setAttribute('stroke',HI);e.setAttribute('stroke-width','1.5')});
-$('nIN').textContent=s.v;$('nO').textContent=s.o;
+seg('sT1',!s.p);seg('sT2',!s.p);seg('sB1',!s.n);seg('sB2',!s.n);
+seg('sIN',false);seg('sBus',false);seg('sGP',false);seg('sGN',false);seg('sO',false);
+sym('sP','var(--fg)','2');sym('sN','var(--fg)','2');$('sP').querySelector('circle').setAttribute('stroke-width','1.5');
+['cIN','cO','sCIN','sCO'].forEach(function(k){var e=$(k);e.setAttribute('fill',HI);e.setAttribute('stroke',HI);e.setAttribute('stroke-width','1.5')});
+$('nIN').textContent=s.v;$('nO').textContent=s.o;$('snIN').textContent=s.v;$('snO').textContent=s.o;
 [['bP',s.p,'tP'],['bN',s.n,'tN']].forEach(function(p){var e=$(p[0]);e.setAttribute('fill',p[1]?'#97C459':'var(--card)');e.setAttribute('fill-opacity',p[1]?'0.6':'1');e.setAttribute('stroke',p[1]?'#3B6D11':'var(--fg)');e.setAttribute('stroke-width','1.5');$(p[2]).textContent=p[1]?'ON':'OFF'});
-s.f.forEach(function(k){var e=$(k);e.setAttribute('stroke',ON);e.setAttribute('stroke-width',e.tagName.toLowerCase()==='line'?'5':'4')});
+s.f.forEach(function(k){
+var e=$(k),t=e.tagName.toLowerCase();
+e.setAttribute('stroke',ON);e.setAttribute('stroke-width',t==='line'?'5':'4');
+var m=$(MAP[k]);
+if(m){if(m.tagName.toLowerCase()==='g'){sym(MAP[k],ON,'4')}else{m.setAttribute('stroke',ON);m.setAttribute('stroke-width',m.tagName.toLowerCase()==='line'?'5':'4')}}
+});
 $('ct').textContent='단계 '+(i+1)+' / '+n;
 $('cap').textContent=s.c;
 $('pv').disabled=i===0;$('nx').disabled=i===n-1;
