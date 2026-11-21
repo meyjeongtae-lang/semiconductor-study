@@ -40,7 +40,7 @@
 <p>새로 생긴 세 선의 뜻은 다음과 같습니다.</p>
 <table>
 <tr><th>선</th><th>뜻</th></tr>
-<tr><td>WL (word line)</td><td>접근1과 접근2의 게이트에 연결된 선입니다. 1이 되면 두 스위치가 켜져서 셀이 BL, BLB와 연결됩니다. 이것을 셀이 "선택된다"고 말합니다.</td></tr>
+<tr><td>WL (word line)</td><td>셀을 선택하는 선입니다. 1이 되면 셀이 BL, BLB와 연결되고, 0이면 끊어집니다.</td></tr>
 <tr><td>BL (bit line)</td><td>값을 읽고 쓰기 위한 선으로, Q 쪽과 연결됩니다.</td></tr>
 <tr><td>BLB (bit line bar)</td><td>BL과 짝을 이루는 선으로, QB 쪽과 연결됩니다. BL의 반대 값을 전달합니다.</td></tr>
 </table>
@@ -51,7 +51,7 @@
 <div class="row"><span class="lab">1로 올릴 WL</span><button data-w="0">WL0</button><button data-w="1">WL1</button><button data-w="2">WL2</button><button data-w="3">WL3</button></div>
 <svg viewBox="0 0 680 320" role="img" aria-label="셀 16개가 4줄 4열 격자로 놓인 그림. 줄마다 WL이 가로로 지나가고, 열마다 BL과 BLB가 세로로 지나간다. 고른 WL의 줄에 있는 셀만 초록색으로 선택된다."></svg>
 <div id="arrcap" class="cap" style="min-height:5.2em" aria-live="polite"></div>
-<div class="legend">셀 하나가 앞에서 본 6T 회로 한 개입니다. 그림에서는 작은 상자로 줄여 그렸습니다. 초록색 : 선택된 셀(접근 스위치가 켜짐)</div>
+<div class="legend">셀 하나가 앞에서 본 6T 회로 한 개입니다. 그림에서는 작은 상자로 줄여 그렸습니다. 초록색 : 선택된 셀(BL, BLB와 연결됨)</div>
 </div>
 
 <h2>그림으로 한 단계씩</h2>
@@ -241,7 +241,7 @@ o+='<rect data-r="'+i+'" x="100" y="'+(y-24)+'" width="530" height="48" fill="tr
 svg.innerHTML=o;
 svg.querySelectorAll('[data-r]').forEach(function(r){r.addEventListener('click',function(){sel=+r.getAttribute('data-r');draw()})});
 root.querySelectorAll('button[data-w]').forEach(function(b){var a=+b.getAttribute('data-w')===sel;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''});
-root.querySelector('#arrcap').textContent='WL'+sel+'이 1이 되었습니다. 이 줄의 셀 4개(초록색)는 접근 스위치가 켜져서, 각자 자기 열의 BL, BLB와 연결됩니다. 다른 줄의 셀은 접근 스위치가 꺼져 있어서 BL, BLB와 끊겨 있고, 저장된 값이 그대로 유지됩니다. 같은 열의 셀들은 BL, BLB를 함께 쓰지만, 이어지는 것은 WL이 1인 줄의 셀뿐입니다.'}
+root.querySelector('#arrcap').textContent='WL'+sel+'이 1이 되었습니다. 이 줄의 셀 4개(초록색)는 각자 자기 열의 BL, BLB와 연결됩니다. 다른 줄의 셀은 BL, BLB와 끊겨 있고, 저장된 값이 그대로 유지됩니다. 같은 열의 셀들은 BL, BLB를 함께 쓰지만, 이어지는 것은 WL이 1인 줄의 셀뿐입니다.'}
 root.querySelectorAll('button[data-w]').forEach(function(b){b.addEventListener('click',function(){sel=+b.getAttribute('data-w');draw()})});
 draw();
 })();
