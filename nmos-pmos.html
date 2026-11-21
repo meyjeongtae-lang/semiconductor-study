@@ -103,6 +103,9 @@
 <text class="ts" x="440" y="104" text-anchor="middle">S</text>
 <text class="ts" x="540" y="104" text-anchor="middle">D</text>
 <text class="ts" x="488" y="284" text-anchor="middle">G</text>
+<line x1="372" y1="175" x2="600" y2="175" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text class="ts" x="366" y="179" text-anchor="end">A</text>
+<text class="ts" x="606" y="179">A'</text>
 
 <rect class="hl" data-hl="g" x="462" y="96" width="56" height="172" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
 <rect class="hl" data-hl="ch" x="476" y="126" width="28" height="98" fill="none" stroke="#FF8A00" stroke-width="2.5"/>
@@ -115,6 +118,19 @@
 <rect data-k="ch" x="476" y="126" width="28" height="98"/>
 </g>
 </svg>
+<div class="lab" style="margin:10px 0 2px">단면 (위 레이아웃의 점선 A–A'을 따라 자른 모습) · 위의 마스크 버튼을 누르면 한 층씩 쌓입니다</div>
+<svg viewBox="0 64 680 186" role="img" aria-label="레이아웃의 A-A' 선을 따라 자른 단면. 마스크 층이 추가될 때마다 well, STI, 게이트, contact, 금속 배선이 한 겹씩 쌓인다.">
+<rect id="xsBody" x="60" y="140" width="560" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
+<text class="ts" x="70" y="232">p-substrate</text>
+<g id="xsWell"><rect x="100" y="140" width="480" height="64" fill="#5DCAA5" fill-opacity="0.35" stroke="#0F6E56" stroke-width="1" stroke-dasharray="5 4"/><text class="ts" x="110" y="196">N-well</text></g>
+<g id="xsImp"><rect id="xsSrc" x="178" y="140" width="144" height="24" fill-opacity="0.6" stroke-width="1"/><rect id="xsDrn" x="358" y="140" width="144" height="24" fill-opacity="0.6" stroke-width="1"/><text id="xsSrcT" class="ts" x="250" y="157" text-anchor="middle" style="fill:var(--fg)">소스 n+</text><text id="xsDrnT" class="ts" x="430" y="157" text-anchor="middle" style="fill:var(--fg)">드레인 n+</text></g>
+<g id="xsSTI"><rect x="60" y="140" width="118" height="36" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"/><rect x="502" y="140" width="118" height="36" fill="#B4B2A9" fill-opacity="0.75" stroke="#888780" stroke-width="1"/><text class="ts" x="119" y="162" text-anchor="middle" style="fill:var(--fg)">STI</text><text class="ts" x="561" y="162" text-anchor="middle" style="fill:var(--fg)">STI</text></g>
+<g id="xsILD"><rect x="60" y="90" width="560" height="50" fill="#B5D4F4" fill-opacity="0.35" stroke="#85B7EB" stroke-width="1"/><text class="ts" x="70" y="112">절연막</text></g>
+<g id="xsGate"><rect x="322" y="136" width="36" height="4" fill="#B4B2A9" stroke="#888780" stroke-width="0.5"/><rect x="322" y="100" width="36" height="36" fill="#E24B4A" fill-opacity="0.85" stroke="#A32D2D" stroke-width="1"/><text class="ts" x="340" y="123" text-anchor="middle" style="fill:#fff">G</text></g>
+<g id="xsCon" fill="#2C2C2A" stroke="#D3D1C7" stroke-width="1"><rect x="244" y="92" width="12" height="50"/><rect x="424" y="92" width="12" height="50"/></g>
+<g id="xsMet" fill="#378ADD" fill-opacity="0.6" stroke="#185FA5" stroke-width="1"><rect x="228" y="76" width="44" height="14"/><rect x="408" y="76" width="44" height="14"/></g>
+</svg>
+<div id="xsCap" class="cap" style="min-height:5em" aria-live="polite"></div>
 <div class="legend">
 <span id="lyLgWell" style="margin-right:14px"><i class="sw" style="background:#5DCAA5;opacity:.6"></i>N-well</span>
 <span style="margin-right:14px"><i id="lyLgSw" class="sw" style="background:#97C459;opacity:.8"></i><span id="lyLgAct">n+ active (NMOS)</span></span>
@@ -235,7 +251,19 @@ el.addEventListener('click',function(){var k=keys(el);pinned=(pinned&&pinned.joi
 root.querySelectorAll('[data-k]').forEach(bind);
 function show(k){
 var L=layers();
-for(var i=1;i<=5;i++){var idx=L.indexOf(i);$('lyL'+i).style.display=(idx>=0&&idx<k)?'':'none'}
+var vis={};
+for(var i=1;i<=5;i++){var idx=L.indexOf(i);vis[i]=(idx>=0&&idx<k);$('lyL'+i).style.display=vis[i]?'':'none'}
+function sw(id,on){$(id).style.display=on?'':'none'}
+sw('xsWell',vis[1]);sw('xsSTI',vis[2]);sw('xsImp',vis[3]);sw('xsGate',vis[3]);sw('xsILD',vis[4]);sw('xsCon',vis[4]);sw('xsMet',vis[5]);
+var P=type==='p',cur=L[k-1],sign=P?'p+':'n+';
+var CAP={
+1:'N-well 마스크: 기판에 n형 불순물을 넣어 n-well을 만듭니다. PMOS는 이 안에 만듭니다.',
+2:'Active 마스크: 트랜지스터를 만들 자리를 정하고, 나머지 기판에는 홈을 파서 절연체(STI)를 채웁니다. 표면이 드러난 가운데가 active입니다.',
+3:'Poly 마스크: 얇은 게이트 산화막 위에 poly 게이트가 놓입니다. 이어서 '+sign+' 불순물을 넣는데, poly가 가림막이 되어 게이트 양옆의 active만 '+sign+'(소스, 드레인)가 됩니다. 게이트 아래는 '+(P?'n':'p')+'형 그대로 남아 채널 자리가 됩니다. ('+sign+' 주입용 마스크가 따로 있지만 위 레이아웃 그림에는 그리지 않았습니다.)',
+4:'Contact 마스크: 전체를 절연막으로 덮고, 소스와 드레인 위에 구멍을 뚫어 금속 플러그로 채웁니다. 게이트 contact는 이 단면의 앞쪽(poly 끝)에 있어서 여기에는 보이지 않습니다.',
+5:'Metal 1 마스크: contact 위에 금속 배선이 놓여서 소스와 드레인이 바깥으로 연결됩니다.'
+};
+$('xsCap').textContent=CAP[cur];
 root.querySelectorAll('button[data-n]').forEach(function(b){var a=+b.getAttribute('data-n')===k;b.style.background=a?'var(--accent-bg)':'';b.style.color=a?'var(--accent)':'';b.style.borderColor=a?'var(--accent-border)':''});
 }
 function buildBtns(){
@@ -247,6 +275,9 @@ function setType(t){
 type=t;var P=t==='p';
 var a=$('lyAct');a.setAttribute('fill',P?'#EF9F27':'#97C459');a.setAttribute('stroke',P?'#854F0B':'#3B6D11');
 $('lyLgSw').style.background=P?'#EF9F27':'#97C459';
+['xsSrc','xsDrn'].forEach(function(id){var e=$(id);e.setAttribute('fill',P?'#EF9F27':'#97C459');e.setAttribute('stroke',P?'#854F0B':'#3B6D11')});
+$('xsSrcT').textContent=P?'소스 p+':'소스 n+';
+$('xsDrnT').textContent=P?'드레인 p+':'드레인 n+';
 $('lyLgAct').textContent=P?'p+ active (PMOS)':'n+ active (NMOS)';
 $('lyLgWell').style.display=P?'':'none';
 $('lyTopG').setAttribute('data-k',P?'s':'d');
