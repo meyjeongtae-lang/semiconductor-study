@@ -288,8 +288,8 @@ var r1=document.getElementById('f1'),s1=r1.querySelector('svg'),q=1;
 function d1(){
 s1.innerHTML=INV({q:q,qb:1-q},false);act(r1,'data-q',q);
 r1.querySelector('#f1cap').textContent=q===1?
-'Q=1입니다. 인버터2는 입력 Q=1의 반대인 0을 내보내 QB를 0으로 만들고, 인버터1은 입력 QB=0의 반대인 1을 내보내 Q를 1로 만듭니다. 서로를 붙잡고 있어서 이 상태가 그대로 유지됩니다.':
-'Q=0입니다. 인버터2는 입력 Q=0의 반대인 1을 내보내 QB를 1로 만들고, 인버터1은 입력 QB=1의 반대인 0을 내보내 Q를 0으로 만듭니다. 서로를 붙잡고 있어서 이 상태도 그대로 유지됩니다.'}
+'Q=1입니다. 인버터2는 입력 "Q=1"의 반대인 "0"을 내보내 "QB=0"을 만들고, 인버터1은 입력 "QB=0"의 반대인 "1"을 내보내 "Q=1"을 만듭니다. "서로를 붙잡고 있어서" 이 상태가 그대로 유지됩니다.':
+'Q=0입니다. 인버터2는 입력 "Q=0"의 반대인 "1"을 내보내 "QB=1"을 만들고, 인버터1은 입력 "QB=1"의 반대인 "0"을 내보내 "Q=0"을 만듭니다. "서로를 붙잡고 있어서" 이 상태도 그대로 유지됩니다.'}
 r1.querySelectorAll('button[data-q]').forEach(function(b){b.addEventListener('click',function(){q=+b.getAttribute('data-q');d1()})});
 d1();
 var r2=document.getElementById('f2'),s2=r2.querySelector('svg'),w=0;
