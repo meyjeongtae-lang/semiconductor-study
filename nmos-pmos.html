@@ -65,7 +65,7 @@
 </svg>
 <div class="row" style="margin-top:8px"><button id="pv">이전</button><button id="nx">다음</button><button id="rs">처음으로</button><span id="ct" class="lab"></span></div>
 <div id="cap" class="cap" aria-live="polite"></div>
-<div class="legend">+ : 정공, − : 전자, 파란 띠 : 채널(연결)</div>
+<div class="legend"><b style="color:#D32F2F">+</b> : 정공, <b style="color:#1565C0">−</b> : 전자, 파란 띠 : 채널(연결)</div>
 </div>
 
 <h2>NMOS와 PMOS 비교</h2>
@@ -198,7 +198,7 @@ S('채널이 소스의 p+와 드레인의 p+를 이어 줍니다. 정공이 소�
 S('게이트를 다시 1로 올리면 − 전하가 사라지고 채널의 정공도 흩어져서 길이 없어집니다. 밀려났던 전자는 제자리로 돌아오고, 다시 끊김(OFF)입니다.',1,1,0,0,0,0,['cG'])]}
 };
 var sc='n',i=0;
-function signs(xs,y,sign,fill){var h='';xs.forEach(function(x){h+='<text class="ts" x="'+x+'" y="'+y+'" text-anchor="middle" style="fill:'+fill+'">'+sign+'</text>'});return h}
+function signs(xs,y,sign,fill){var h='';var col=fill==='#fff'?fill:(sign==='+'?'#D32F2F':'#1565C0');xs.forEach(function(x){h+='<text class="ts" x="'+x+'" y="'+y+'" text-anchor="middle" style="fill:'+col+';font-size:16px;font-weight:700">'+sign+'</text>'});return h}
 var XA=[250,290,330,370,410],XB=[270,310,350,390,430];
 function render(){
 var c=CFG[sc],s=c.steps[i],n=c.steps.length;
