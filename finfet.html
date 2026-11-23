@@ -9,6 +9,13 @@
 .step{display:flex;gap:18px;align-items:flex-start}
 .step>img{flex:none;width:auto;height:auto;max-width:270px;max-height:420px;border-radius:8px;border:1px solid var(--border);background:#fff}
 .step>div{flex:1;min-width:0}
+.pic{flex:none;max-width:270px}
+.pic img{display:block;width:auto;height:auto;max-width:100%;max-height:420px;border-radius:8px;border:1px solid var(--border);background:#fff}
+.pic span{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+.g4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0}
+.g4 figure{margin:0}
+.g4 img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--border)}
+.g4 figcaption{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
 .lay{margin:8px 0 10px}
 .lay img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--border);background:#000}
 .lay figcaption{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.6}
@@ -17,7 +24,7 @@
 .step p{margin:6px 0}
 .tag{display:inline-block;font-size:13px;color:var(--accent);background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:6px;padding:0 8px;margin-bottom:4px}
 .src{font-size:13px;color:var(--muted)}
-@media (max-width:560px){.step{flex-direction:column}.step>img{max-width:100%}.step>div{width:100%}}
+@media (max-width:560px){.step>.pic{max-width:100%}.step{flex-direction:column}.step>img{max-width:100%}.step>div{width:100%}}
 </style>
 </head>
 <body>
@@ -119,11 +126,24 @@
 </div>
 </div>
 
+<div class="fig">
+<span class="tag">마스크 없음</span>
+<h3>⑨ poly에서 fin으로 불순물이 퍼져 웰이 되는 과정</h3>
+<p>웰은 이온을 쏘아 넣는 이온 주입이 아니라, 불순물이 든 poly 막을 fin에 붙여 두고 열을 가해 불순물을 퍼뜨리는 방식으로 만듭니다.</p>
+<p>아래는 fin을 세로로 자른 단면이고, 색은 불순물의 종류와 양입니다. 빨강은 N형, 파랑은 P형, 흰색은 불순물이 거의 없는 곳입니다.</p>
+<div class="g4">
+<figure><img src="img/finfet-5f-doping-a.png" alt="왼쪽 fin은 빨간 poly로, 오른쪽 fin은 파란 막과 빨간 poly로 감싸진 단면"><figcaption>ⓐ poly를 입힌 직후. 왼쪽 fin에는 N형 poly(빨강)가 바로 닿고, 오른쪽 fin에는 P형 poly(파랑)가 닿은 위로 N형 poly가 덮입니다.</figcaption></figure>
+<figure><img src="img/finfet-5f-doping-b.png" alt="fin 옆면에만 poly가 남은 단면"><figcaption>ⓑ 위쪽을 식각하면 fin 옆면에만 poly가 띠처럼 남습니다.</figcaption></figure>
+<figure><img src="img/finfet-5f-doping-c.png" alt="fin과 아래 실리콘으로 빨강과 파랑이 번져 있는 단면"><figcaption>ⓒ 열을 가하면(Well Drive) poly 속 불순물이 fin과 아래 실리콘으로 퍼집니다. 왼쪽은 N형, 오른쪽은 P형이 됩니다.</figcaption></figure>
+<figure><img src="img/finfet-5f-doping-d.png" alt="poly가 없어지고 불순물이 들어간 fin과 기판만 남은 단면"><figcaption>ⓓ poly를 없애면 불순물이 들어간 fin과 아래 실리콘만 남습니다. 이것이 N웰(왼쪽)과 P웰(오른쪽)입니다.</figcaption></figure>
+</div>
+</div>
+
 <div class="fig step">
 <img src="img/finfet-6-sti-fill.png" alt="fin 사이가 하늘색 산화막으로 가득 채워져 평평해진 그림">
 <div>
 <span class="tag">마스크 없음</span>
-<h3>⑨ fin 사이를 산화막(STI)으로 채우기</h3>
+<h3>⑩ fin 사이를 산화막(STI)으로 채우기</h3>
 <p>fin 사이를 산화막(하늘색)으로 채우고 표면을 평평하게 깎아 냅니다. 이 산화막을 STI라고 하며, 이웃한 소자를 전기적으로 떼어 놓는 역할을 합니다.</p>
 <p>평평하게 깎으면 fin 위의 질화막(초록색 선)이 드러납니다.</p>
 </div>
@@ -133,7 +153,7 @@
 <img src="img/finfet-7-sti-recess.png" alt="하늘색 산화막 위로 빨간 fin 두 개의 윗부분이 솟아 있는 그림">
 <div>
 <span class="tag">마스크 없음</span>
-<h3>⑩ 산화막을 낮춰 fin 드러내기</h3>
+<h3>⑪ 산화막을 낮춰 fin 드러내기</h3>
 <p>fin 위의 질화막을 벗겨 내고, 산화막을 더 깎아 내립니다.</p>
 <p>그러면 fin의 윗부분만 산화막 위로 솟아오릅니다. 이 모양이 FinFET의 fin이고, 게이트는 이 fin을 감싸게 됩니다.</p>
 </div>
@@ -146,7 +166,7 @@
 <img src="img/finfet-5-gate.png" alt="보라색 감광액 두 줄이 맨 위에 있고 그 아래에 여러 겹의 막이 쌓인 그림">
 <div>
 <span class="tag">Gate 마스크</span>
-<h3>⑪ 게이트 선 만들기</h3>
+<h3>⑫ 게이트 선 만들기</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-5-gate-layout-v3.png" alt="세로 점선 기둥 위로 가로선이 여러 줄 지나가는 마스크 레이아웃"><figcaption>마스크 레이아웃: 주황색 점선 = Fin 레이어. 그 위를 가로로 지나는 선들이 게이트 선 자리입니다.</figcaption></figure>
 <p>임시 게이트 재료로는 비정질 실리콘을 씁니다.</p>
 <p>Gate 마스크로 감광액에 줄무늬를 만들고(그림의 보라색 두 줄), 이 모양대로 아래를 깎으면 게이트 선이 됩니다.</p>
@@ -157,7 +177,7 @@
 <div class="fig step">
 <img src="img/finfet-5b-gate-lines.png" alt="긴 게이트 선 두 줄이 위에 얹힌 구조 그림">
 <div>
-<h3>⑫ 게이트 선 모양 확인</h3>
+<h3>⑬ 게이트 선 모양 확인</h3>
 <p>Gate 마스크로 깎고 감광액을 벗겨 내면, 위에서 본 줄무늬 모양의 게이트 선이 구조 위에 드러납니다.</p>
 <p>이 선은 아직 끊기지 않고 길게 이어져 있습니다.</p>
 </div>
@@ -167,7 +187,7 @@
 <img src="img/finfet-6-gatecut.png" alt="보라색 감광액에 홈이 파여 있고 그 아래로 게이트 선이 보이는 그림">
 <div>
 <span class="tag">GateCut 마스크</span>
-<h3>⑬ 게이트 선 자르기</h3>
+<h3>⑭ 게이트 선 자르기</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-6-gatecut-layout-v3.png" alt="가로 게이트 선 위에 분홍색 네모가 놓인 마스크 레이아웃"><figcaption>마스크 레이아웃: 분홍색 네모 = GateCut 레이어. 이 네모가 게이트 선을 끊을 자리입니다.</figcaption></figure>
 <p>Gate 마스크로 만든 게이트 선은 길게 이어져 있습니다.</p>
 <p>GateCut 마스크는 이 선을 원하는 곳에서 끊어서, 서로 다른 트랜지스터의 게이트로 나눕니다.</p>
@@ -178,7 +198,7 @@
 <div class="fig step">
 <img src="img/finfet-6b-gatecut-done.png" alt="게이트 선이 세 조각으로 끊어져 있는 구조 그림">
 <div>
-<h3>⑭ 잘린 임시 게이트 확인</h3>
+<h3>⑮ 잘린 임시 게이트 확인</h3>
 <p>GateCut으로 깎고 감광액을 벗겨 내면, 길게 이어졌던 임시 게이트(dummy gate)가 끊어진 모양이 드러납니다.</p>
 <p>이렇게 나뉜 조각 하나하나가 각각 다른 트랜지스터의 게이트 자리가 됩니다.</p>
 </div>
@@ -187,7 +207,7 @@
 <div class="fig step">
 <img src="img/finfet-6c-dummy-fin.png" alt="임시 게이트가 fin을 감싸고 있고 그 위에 청록색 마스크 막이 얹힌 구조 그림">
 <div>
-<h3>⑮ fin을 감싼 임시 게이트</h3>
+<h3>⑯ fin을 감싼 임시 게이트</h3>
 <p>마지막으로 게이트 선 바깥쪽을 아래까지 식각하면, 임시 게이트(dummy gate)가 fin을 타고 넘어 감싼 모양이 됩니다.</p>
 <p>임시 게이트 위의 청록색 막은 이 모양을 깎을 때 쓴 하드마스크입니다.</p>
 </div>
@@ -197,10 +217,9 @@
 <p>트랜지스터에서 전류가 들어오고 나가는 양쪽 끝이 소스와 드레인입니다. 게이트가 덮지 않은 fin의 양쪽 끝에 만듭니다.</p>
 
 <div class="fig step">
-<img src="img/finfet-7a-psd-v2.png" alt="초록색 막이 게이트를 덮고 있고 fin 끝에 보라색 덩어리가 붙어 있는 구조 그림">
+<div class="pic"><img src="img/finfet-7a-psd-v2.png" alt="초록색 막이 게이트를 덮고 있고 fin 끝에 보라색 덩어리가 붙어 있는 구조 그림"><span>뒷면에서 본 모습 (소스·드레인이 보이도록 다른 그림과 반대쪽에서 본 그림)</span></div>
 <div>
-<h3>⑯ PSD: PMOS의 소스·드레인</h3>
-<p><b>(뒷면에서 본 모습)</b> 소스·드레인이 보이도록 다른 그림과 반대쪽에서 본 그림입니다.</p>
+<h3>⑰ PSD: PMOS의 소스·드레인</h3>
 <p>PSD는 P형 소스·드레인(P-type Source/Drain)이라는 뜻으로, PMOS의 소스와 드레인을 만드는 단계입니다.</p>
 <p>초록색 막은 질화막(Si3N4)으로, 게이트의 옆면과 윗면을 덮습니다. 게이트 옆면에 붙은 이 막을 gate spacer라고 합니다.</p>
 <p>보라색 덩어리(SiGe)가 PMOS의 소스·드레인입니다. 게이트 양쪽 fin에서 결정을 새로 키워 만듭니다. 이렇게 결정을 키우는 방법을 <b>epi growth(에피 성장)</b>라고 합니다.</p>
@@ -208,10 +227,9 @@
 </div>
 
 <div class="fig step">
-<img src="img/finfet-7b-nsd-v2.png" alt="보라색 덩어리 옆에 주황색 덩어리가 더해진 구조 그림">
+<div class="pic"><img src="img/finfet-7b-nsd-v2.png" alt="보라색 덩어리 옆에 주황색 덩어리가 더해진 구조 그림"><span>뒷면에서 본 모습</span></div>
 <div>
-<h3>⑰ NSD: NMOS의 소스·드레인</h3>
-<p><b>(뒷면에서 본 모습)</b></p>
+<h3>⑱ NSD: NMOS의 소스·드레인</h3>
 <p>NSD는 N형 소스·드레인(N-type Source/Drain)이라는 뜻으로, NMOS의 소스와 드레인을 만드는 단계입니다.</p>
 <p>주황색 덩어리(SiC)가 NMOS의 소스·드레인입니다. 앞 그림과 비교하면 주황색이 새로 생겼고, 보라색은 그대로입니다.</p>
 </div>
@@ -223,7 +241,7 @@
 <div class="fig step">
 <img src="img/finfet-8a-ild-cmp.png" alt="산화막 사이로 임시 게이트의 윗면이 어두운 빨간 줄로 드러난 구조 그림">
 <div>
-<h3>⑱ 임시 게이트 윗면 드러내기</h3>
+<h3>⑲ 임시 게이트 윗면 드러내기</h3>
 <p>먼저 전체를 산화막(ILD)으로 덮은 뒤 위쪽을 평평하게 깎습니다.</p>
 <p>그러면 그림처럼 임시 게이트의 윗면(어두운 빨간 줄)만 산화막 밖으로 드러납니다.</p>
 </div>
@@ -232,7 +250,7 @@
 <div class="fig step">
 <img src="img/finfet-8b-dummy-removed.png" alt="임시 게이트가 있던 자리가 비어 홈이 된 구조 그림">
 <div>
-<h3>⑲ 임시 게이트 제거</h3>
+<h3>⑳ 임시 게이트 제거</h3>
 <p>드러난 임시 게이트(dummy gate)를 식각해서 없앱니다.</p>
 <p>게이트가 있던 자리는 초록색 spacer 사이의 빈 홈이 됩니다. 이 홈에 high-k 절연막과 금속이 채워집니다.</p>
 </div>
@@ -242,7 +260,7 @@
 <img src="img/finfet-7-nwf.png" alt="금속 게이트가 채워진 구조 위에 보라색 감광액이 덮여 있는 그림">
 <div>
 <span class="tag">NWF 마스크 = NWell 마스크</span>
-<h3>⑳ NMOS 쪽 금속 고르기</h3>
+<h3>㉑ NMOS 쪽 금속 고르기</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-7-nwf-layout-v3.png" alt="초록색 빗금 영역과 분홍색 네모가 함께 보이는 마스크 레이아웃"><figcaption>마스크 레이아웃: 초록색 빗금 = NWell 레이어</figcaption></figure>
 <p>NMOS와 PMOS는 게이트 금속이 서로 다릅니다.</p>
 <p>NWF 단계에는 ⑥의 NWell 마스크와 같은 마스크를 씁니다. 웰의 위치와 NMOS, PMOS 게이트 금속의 위치가 겹치기 때문입니다.</p>
@@ -257,7 +275,7 @@
 <img src="img/finfet-8-contact.png" alt="맨 위 보라색 감광액에 길쭉한 홈이 열려 있는 그림">
 <div>
 <span class="tag">Contact·LI 마스크</span>
-<h3>㉑ 위쪽 배선과 잇는 구멍과 홈</h3>
+<h3>㉒ 위쪽 배선과 잇는 구멍과 홈</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-8-contact-layout-v3.png" alt="회색 가로 막대와 파란 점이 보이는 마스크 레이아웃"><figcaption>마스크 레이아웃: 회색 막대 = LI 레이어, 파란 점 = Contact 레이어</figcaption></figure>
 <p>트랜지스터를 다 만들고 나면, 위쪽 배선과 잇기 위해 절연막에 구멍(Contact)과 길쭉한 홈(LI)을 팝니다.</p>
 <p>Contact 마스크가 구멍의 위치를, LI 마스크가 홈의 위치를 정합니다. 그림에서는 맨 위 감광액에 길쭉한 홈이 열려 있습니다.</p>
@@ -283,11 +301,11 @@
 <tr><td>Mand</td><td>fin의 틀이 되는 기둥 모양</td><td>①</td></tr>
 <tr><td>FinCut</td><td>필요 없는 fin 잘라 내기</td><td>③</td></tr>
 <tr><td>NWell</td><td>PMOS가 들어갈 n형 웰 영역</td><td>⑥</td></tr>
-<tr><td>Gate</td><td>게이트 선 모양</td><td>⑪</td></tr>
-<tr><td>GateCut</td><td>게이트 선 끊기</td><td>⑬</td></tr>
-<tr><td>NWF</td><td>NMOS 쪽 게이트 금속 영역 (NWell과 같은 마스크)</td><td>⑳</td></tr>
-<tr><td>Contact</td><td>위 배선과 잇는 구멍</td><td>㉑</td></tr>
-<tr><td>LI</td><td>짧은 국소 배선</td><td>㉑</td></tr>
+<tr><td>Gate</td><td>게이트 선 모양</td><td>⑫</td></tr>
+<tr><td>GateCut</td><td>게이트 선 끊기</td><td>⑭</td></tr>
+<tr><td>NWF</td><td>NMOS 쪽 게이트 금속 영역 (NWell과 같은 마스크)</td><td>㉑</td></tr>
+<tr><td>Contact</td><td>위 배선과 잇는 구멍</td><td>㉒</td></tr>
+<tr><td>LI</td><td>짧은 국소 배선</td><td>㉒</td></tr>
 </table>
 <p class="src">그림은 Coventor 공정 시뮬레이터로 만든 FinFET 모델의 단계별 3D 화면입니다.</p>
 </main>
