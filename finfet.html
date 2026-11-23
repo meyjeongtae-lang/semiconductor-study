@@ -163,14 +163,45 @@
 </div>
 </div>
 
-<h2>3. 금속 게이트로 바꾸기</h2>
+<h2>3. 소스·드레인 만들기</h2>
+<p>트랜지스터에서 전류가 들어오고 나가는 양쪽 끝이 소스와 드레인입니다. 게이트가 덮지 않은 fin의 양쪽 끝에 만듭니다.</p>
+
+<div class="fig step">
+<img src="img/finfet-7a-sd.png" alt="초록색 막이 게이트를 덮고 있고 fin 끝에 주황색 덩어리가 붙어 있는 구조 그림">
+<div>
+<h3>⑬ 게이트 옆면 보호막과 소스·드레인</h3>
+<p>초록색 막은 질화막(Si3N4)으로, 게이트의 옆면과 윗면을 덮습니다. 게이트 옆면에 붙은 이 막을 gate spacer라고 합니다.</p>
+<p>이 막이 게이트와 소스·드레인 사이를 띄워 줍니다. 그래서 소스·드레인을 만들 때 게이트 바로 아래까지 번지지 않습니다.</p>
+<p>주황색 덩어리가 소스·드레인입니다. 게이트 양쪽 fin에서 결정을 새로 키워 만듭니다.</p>
+</div>
+</div>
+
+<h2>4. 금속 게이트로 바꾸기</h2>
 <p>임시 게이트는 나중에 제거되고, 그 자리에 high-k 절연막(HfOx)과 금속이 들어갑니다. 이 방식을 <b>RMG(Replacement Metal Gate)</b>라고 합니다.</p>
+
+<div class="fig step">
+<img src="img/finfet-8a-ild-cmp.png" alt="산화막 사이로 임시 게이트의 윗면이 어두운 빨간 줄로 드러난 구조 그림">
+<div>
+<h3>⑭ 임시 게이트 윗면 드러내기</h3>
+<p>먼저 전체를 산화막(ILD)으로 덮은 뒤 위쪽을 평평하게 깎습니다.</p>
+<p>그러면 그림처럼 임시 게이트의 윗면(어두운 빨간 줄)만 산화막 밖으로 드러납니다.</p>
+</div>
+</div>
+
+<div class="fig step">
+<img src="img/finfet-8b-dummy-removed.png" alt="임시 게이트가 있던 자리가 비어 홈이 된 구조 그림">
+<div>
+<h3>⑮ 임시 게이트 제거</h3>
+<p>드러난 임시 게이트(dummy gate)를 식각해서 없앱니다.</p>
+<p>게이트가 있던 자리는 초록색 spacer 사이의 빈 홈이 됩니다. 이 홈에 high-k 절연막과 금속이 채워집니다.</p>
+</div>
+</div>
 
 <div class="fig step">
 <img src="img/finfet-7-nwf.png" alt="금속 게이트가 채워진 구조 위에 보라색 감광액이 덮여 있는 그림">
 <div>
 <span class="tag">NWF 마스크</span>
-<h3>⑬ NMOS 쪽 금속 고르기</h3>
+<h3>⑯ NMOS 쪽 금속 고르기</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-7-nwf-layout-v3.png" alt="초록색 빗금 영역과 분홍색 네모가 함께 보이는 마스크 레이아웃"><figcaption>마스크 레이아웃: 초록색 빗금 = NWell 레이어</figcaption></figure>
 <p>NMOS와 PMOS는 게이트 금속이 서로 다릅니다.</p>
 <p>PMOS용 금속(TiN, TaN)을 입히고, NWF 마스크로 식각하고, NMOS용 금속(TiAl)을 입히는 순서입니다.</p>
@@ -178,13 +209,13 @@
 </div>
 </div>
 
-<h2>4. 위쪽 배선과 연결하기</h2>
+<h2>5. 위쪽 배선과 연결하기</h2>
 
 <div class="fig step">
 <img src="img/finfet-8-contact.png" alt="맨 위 보라색 감광액에 길쭉한 홈이 열려 있는 그림">
 <div>
 <span class="tag">Contact·LI 마스크</span>
-<h3>⑭ 위쪽 배선과 잇는 구멍과 홈</h3>
+<h3>⑰ 위쪽 배선과 잇는 구멍과 홈</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-8-contact-layout-v3.png" alt="회색 가로 막대와 파란 점이 보이는 마스크 레이아웃"><figcaption>마스크 레이아웃: 회색 막대 = LI 레이어, 파란 점 = Contact 레이어</figcaption></figure>
 <p>트랜지스터를 다 만들고 나면, 위쪽 배선과 잇기 위해 절연막에 구멍(Contact)과 길쭉한 홈(LI)을 팝니다.</p>
 <p>Contact 마스크가 구멍의 위치를, LI 마스크가 홈의 위치를 정합니다. 그림에서는 맨 위 감광액에 길쭉한 홈이 열려 있습니다.</p>
@@ -213,9 +244,9 @@
 <tr><td>NWell</td><td>PMOS가 들어갈 n형 웰 영역</td><td>없음</td></tr>
 <tr><td>Gate</td><td>게이트 선 모양</td><td>⑧</td></tr>
 <tr><td>GateCut</td><td>게이트 선 끊기</td><td>⑩</td></tr>
-<tr><td>NWF</td><td>NMOS 쪽 게이트 금속 영역</td><td>⑬</td></tr>
-<tr><td>Contact</td><td>위 배선과 잇는 구멍</td><td>⑭</td></tr>
-<tr><td>LI</td><td>짧은 국소 배선</td><td>⑭</td></tr>
+<tr><td>NWF</td><td>NMOS 쪽 게이트 금속 영역</td><td>⑯</td></tr>
+<tr><td>Contact</td><td>위 배선과 잇는 구멍</td><td>⑰</td></tr>
+<tr><td>LI</td><td>짧은 국소 배선</td><td>⑰</td></tr>
 </table>
 <p class="src">그림은 Coventor 공정 시뮬레이터로 만든 FinFET 모델의 단계별 3D 화면입니다.</p>
 </main>
