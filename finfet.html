@@ -155,7 +155,7 @@
 <h3>⑪ NMOS 쪽 금속 고르기</h3>
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-7-nwf-layout-v3.png" alt="초록색 빗금 영역과 분홍색 네모가 함께 보이는 마스크 레이아웃"><figcaption>마스크 레이아웃: 초록색 빗금 = NWell 레이어</figcaption></figure>
 <p>NMOS와 PMOS는 게이트 금속이 서로 다릅니다.</p>
-<p>공정 목록에는 PMOS용 금속(TiN, TaN)을 입힌 뒤, NWF 마스크로 식각하고, NMOS용 금속(TiAl)을 입히는 순서로 적혀 있습니다.</p>
+<p>시뮬레이터의 공정 단계 이름을 보면 PMOS용 금속(TiN, TaN)을 입히고, NWF 마스크로 식각하고, NMOS용 금속(TiAl)을 입히는 순서입니다.</p>
 <p>그림에서 보라색 감광액이 덮지 않은 곳(올리브색 금속이 드러난 곳)이 식각되는 자리입니다.</p>
 </div>
 </div>
@@ -170,7 +170,7 @@
 <figure class="lay" style="margin-left:0;margin-right:0"><img src="img/finfet-8-contact-layout-v3.png" alt="회색 가로 막대와 파란 점이 보이는 마스크 레이아웃"><figcaption>마스크 레이아웃: 회색 막대 = LI 레이어, 파란 점 = Contact 레이어</figcaption></figure>
 <p>트랜지스터를 다 만들고 나면, 위쪽 배선과 잇기 위해 절연막에 구멍(Contact)과 길쭉한 홈(LI)을 팝니다.</p>
 <p>Contact 마스크가 구멍의 위치를, LI 마스크가 홈의 위치를 정합니다. 그림에서는 맨 위 감광액에 길쭉한 홈이 열려 있습니다.</p>
-<p>LI(local interconnect)는 짧은 국소 배선입니다. 공정 목록에는 홈을 판 뒤 LI용 Ti를 입히는 단계가 이어집니다.</p>
+<p>LI(local interconnect)는 짧은 국소 배선입니다. 시뮬레이터에서는 홈을 판 뒤 LI용 Ti를 입히는 단계가 이어집니다.</p>
 </div>
 </div>
 
@@ -187,7 +187,7 @@
 </table>
 
 <h2>마스크 정리</h2>
-<p>공정 목록에서 LTH(리소그래피)라고 적힌 단계마다 마스크가 쓰입니다. fin부터 LI까지의 마스크는 다음과 같습니다.</p>
+<p>시뮬레이터의 공정 단계 중 LTH(리소그래피)라고 적힌 단계마다 마스크가 쓰입니다. fin부터 LI까지의 마스크는 다음과 같습니다.</p>
 <table>
 <tr><th>마스크</th><th>하는 일</th><th>위 그림</th></tr>
 <tr><td>Mand</td><td>fin의 틀이 되는 기둥 모양</td><td>①</td></tr>
