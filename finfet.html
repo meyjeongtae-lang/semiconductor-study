@@ -26,6 +26,9 @@
 .tag{display:inline-block;font-size:13px;color:var(--accent);background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:6px;padding:0 8px;margin-bottom:4px}
 .src{font-size:13px;color:var(--muted)}
 @media (max-width:560px){.step>.pic{max-width:100%}.step{flex-direction:column}.step>img{max-width:100%}.step>div{width:100%}}
+.ref{margin:12px 0;padding:10px 14px;background:#f3f6fa;border-left:4px solid #9bb3cc;border-radius:6px;font-size:.93em}
+.ref p{margin:5px 0}
+.ref .rt{font-weight:700;color:#456}
 </style>
 </head>
 <body>
@@ -107,10 +110,12 @@
 <p>웰(well)은 트랜지스터 아래쪽 실리콘에 불순물을 넣어 만든 영역입니다. NMOS는 P형 웰에, PMOS는 N형 웰에 만듭니다.</p>
 <p>먼저 P형 불순물을 공급하는 폴리실리콘막(PSPD poly)을 fin 전체에 입히고, 그 위에 감광액을 덮습니다.</p>
 <p>NWell 마스크로 감광액 한쪽을 열면, 그림처럼 한쪽 fin 둘레가 드러납니다. 드러난 쪽이 N웰이 될 자리입니다.</p>
+<div class="ref"><p class="rt">참고: clear-field와 dark-field</p>
 <p>포지티브 감광액은 빛을 받은 곳이 녹아서 열립니다. 마스크는 레이아웃이 그려진 곳을 어떻게 하느냐에 따라 둘로 나뉩니다.</p>
 <p><b>clear-field</b>: 그려진 곳은 빛이 막혀서 감광액이 남습니다. 그려진 곳이 열리지 않습니다.</p>
 <p><b>dark-field</b>: 그려진 곳으로 빛이 들어가서 감광액이 녹습니다. 그려진 곳이 열립니다.</p>
 <p>여기서는 NWell로 그려진 곳(N웰 쪽)이 열리므로 dark-field 마스크입니다.</p>
+</div>
 </div>
 </div>
 
@@ -274,7 +279,9 @@
 <p>NMOS와 PMOS는 게이트 금속이 서로 다릅니다.</p>
 <p>NWF 마스크는 ⑥의 NWell 마스크와 같은 레이아웃으로 만듭니다. 웰의 위치와 NMOS, PMOS 게이트 금속의 위치가 겹치기 때문입니다.</p>
 <p>다만 감광액이 덮는 쪽은 반대여서, 같은 레이아웃을 반전한 별도의 마스크를 씁니다. ⑥에서는 P웰 쪽(왼쪽)을 덮고 N웰 쪽을 열었지만, 여기서는 N웰 쪽(오른쪽)을 덮고 NMOS 쪽을 엽니다.</p>
+<div class="ref"><p class="rt">참고: clear-field와 dark-field</p>
 <p>여기서는 NWell로 그려진 곳(N웰 쪽)이 열리지 않고 감광액이 남으므로 clear-field 마스크입니다.</p>
+<p>(두 마스크의 차이는 ⑥의 참고 설명을 보세요.)</p></div>
 <p>PMOS용 금속(TiN, TaN)을 입히고, 이 마스크로 식각하고, NMOS용 금속(TiAl)을 입히는 순서입니다.</p>
 <p>그림에서 보라색 감광액이 덮지 않은 곳(올리브색 금속이 드러난 곳)이 식각되는 자리입니다.</p>
 </div>
