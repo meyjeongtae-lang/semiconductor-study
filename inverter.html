@@ -88,9 +88,10 @@
 </ul>
 
 <h2>마스크 레이아웃으로 보면</h2>
-<p>지금까지 본 것은 <b>회로도</b>입니다. 아래 그림은 왼쪽이 회로도, 오른쪽이 같은 인버터를 위에서 본 <b>마스크 레이아웃</b>입니다. 도형이나 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조되고, 레이아웃과 단면 사이의 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다.</p>
+<p>지금까지 본 것은 <b>회로도</b>입니다. 아래 그림은 왼쪽이 회로도, 오른쪽이 같은 인버터를 위에서 본 <b>마스크 레이아웃</b>입니다. 도형이나 회로 부분에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조되고, 위쪽 버튼 1~5는 마스크를 한 층씩 쌓는 순서입니다.</p>
 
 <div class="fig" id="lay">
+<div class="row"><span class="lab">마스크 순서</span><button data-s="1">1 N-well</button><button data-s="2">2 Active</button><button data-s="3">3 Poly</button><button data-s="4">4 Contact</button><button data-s="5">5 Metal 1</button></div>
 <svg viewBox="0 0 680 380" role="img" aria-label="CMOS 인버터의 회로도와 마스크 레이아웃을 나란히 보여 주는 그림">
 <text class="ts" x="40" y="24">회로도</text>
 <text class="ts" x="340" y="24">레이아웃 (위에서 본 모습)</text>
@@ -135,8 +136,7 @@
 <rect data-k="in" x="472" y="96" width="36" height="60"/>
 </g>
 </svg>
-<div class="row" style="margin:10px 0 2px"><span class="lab">마스크 순서</span><button data-s="1">1 N-well</button><button data-s="2">2 Active</button><button data-s="3">3 Poly</button><button data-s="4">4 Contact</button><button data-s="5">5 Metal 1</button></div>
-<div class="lab" style="margin:6px 0 2px">단면 (위 레이아웃의 점선 A–A′을 따라 자른 모습) · 버튼을 누르면 위 레이아웃과 이 단면에 한 층씩 쌓입니다</div>
+<div class="lab" style="margin:10px 0 2px">단면 (위 레이아웃의 점선 A–A′을 따라 자른 모습) · 위의 마스크 버튼을 누르면 한 층씩 쌓입니다</div>
 <svg viewBox="0 50 680 200" role="img" aria-label="레이아웃의 A-A 선을 따라 자른 PMOS와 NMOS 단면. 마스크 층이 추가될 때마다 well, STI, 게이트, contact, 금속 배선이 한 겹씩 쌓인다.">
 <rect x="20" y="140" width="640" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
 <text class="ts" x="30" y="232">p-substrate</text>
