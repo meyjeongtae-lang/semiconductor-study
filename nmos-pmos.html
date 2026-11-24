@@ -96,11 +96,10 @@
 
 <h2>회로도와 마스크 레이아웃으로 보면</h2>
 <p>같은 트랜지스터 하나를 <b>회로도 기호</b>와 <b>마스크 레이아웃</b>(칩을 위에서 본 도형)으로 나란히 그렸습니다. 회로도는 "무엇이 어디에 연결됐는지"만 알려 주고, 레이아웃은 실제 칩 위의 위치와 크기를 가진 도형입니다. 이 도형 하나하나가 포토마스크의 패턴이 됩니다.</p>
-<p>도형에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조됩니다. 아래 버튼은 마스크를 한 층씩 쌓는 순서입니다.</p>
+<p>도형에 <b>마우스를 올리면</b>(휴대폰에서는 <b>눌러 보면</b>) 서로 대응되는 곳이 주황색으로 강조됩니다. 레이아웃과 단면 사이의 버튼은 마스크를 한 층씩 쌓는 순서입니다.</p>
 
 <div class="fig" id="lay2">
 <div class="row"><span class="lab">종류</span><button data-t="n">NMOS</button><button data-t="p">PMOS</button></div>
-<div class="row"><span class="lab">마스크 순서</span><span id="lyBtns" style="display:contents"></span></div>
 <svg viewBox="0 0 680 400" role="img" aria-label="트랜지스터 하나의 회로도 기호와 마스크 레이아웃을 나란히 보여 주는 그림">
 <text class="ts" x="60" y="24">회로도</text>
 <text class="ts" x="340" y="24">레이아웃 (위에서 본 모습)</text>
@@ -143,7 +142,8 @@
 <path data-k="g" d="M477 97H503V237H513V267H463V237H477Z"/><rect data-k="ch" x="477" y="127" width="26" height="96"/>
 </g>
 </svg>
-<div class="lab" style="margin:10px 0 2px">단면 (위 레이아웃의 점선 A–A'을 따라 자른 모습) · 위의 마스크 버튼을 누르면 한 층씩 쌓입니다</div>
+<div class="row" style="margin:10px 0 2px"><span class="lab">마스크 순서</span><span id="lyBtns" style="display:contents"></span></div>
+<div class="lab" style="margin:6px 0 2px">단면 (위 레이아웃의 점선 A–A'을 따라 자른 모습) · 버튼을 누르면 위 레이아웃과 이 단면에 한 층씩 쌓입니다</div>
 <svg viewBox="0 64 680 186" role="img" aria-label="레이아웃의 A-A' 선을 따라 자른 단면. 마스크 층이 추가될 때마다 well, STI, 게이트, contact, 금속 배선이 한 겹씩 쌓인다.">
 <rect id="xsBody" x="60" y="140" width="560" height="100" fill="#EF9F27" fill-opacity="0.22" stroke="#854F0B" stroke-width="1"/>
 <text class="ts" x="70" y="232">p-substrate</text>
