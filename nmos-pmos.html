@@ -226,7 +226,8 @@ $('arr').style.display=s.fl?'':'none';
 $('arrT').style.display=s.fl?'':'none';
 [['cS','nS',s.s],['cG','nG',s.g],['cD','nD',s.d],['cB','nB',c.bv]].forEach(function(p){var e=$(p[0]);e.setAttribute('fill',HI);e.setAttribute('stroke',HI);e.setAttribute('stroke-width','1.5');$(p[1]).textContent=p[2]});
 function vl(v){return v?'VDD (1)':'GND (0)'}
-$('lS').textContent=vl(s.s);$('lG').textContent=vl(s.g);$('lD').textContent=vl(s.d);$('tBw').textContent='웰 B · '+vl(c.bv);
+function lv(v){return v?'1 (높은 전압)':'0 (낮은 전압)'}
+$('lS').textContent=vl(s.s);$('lG').textContent=lv(s.g);$('lD').textContent=lv(s.d);$('tBw').textContent='웰 B · '+vl(c.bv);
 var g=$('gate');g.setAttribute('stroke','#A32D2D');g.setAttribute('stroke-width','1');
 $('ch').setAttribute('stroke','#185FA5');$('ch').setAttribute('stroke-width','1');
 var a=$('arr');a.setAttribute('fill',AR);a.setAttribute('stroke',AR);a.setAttribute('stroke-width','2');
